@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Коммерческое предложение · SolutionCRM</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: одна колонка до 760px, фирменные цвета SolutionCRM, крупные блоки «что получаете» */
+:root{
+  --brand:#044d65;      /* SOLUTION */
+  --green:#2cb662;      /* CRM */
+  --blue:#028db8;       /* треугольник */
+  --bg:#f5f8f9;
+  --card:#ffffff;
+  --fg:#0f2730;
+  --mute:#5a6f77;
+  --line:#dbe5e8;
+  --green-soft:#e5f6ec;
+  --blue-soft:#e3f2f8;
+  --no:#a8551f;
+  --no-soft:#fbefe6;
+  --hero-fg:#ffffff;
+  --display:"Montserrat",-apple-system,"Segoe UI",Arial,sans-serif;
+  --text:"Inter",-apple-system,"Segoe UI",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --brand:#0a5f7c;--green:#3fcb76;--blue:#2fb0db;--bg:#0b1a20;--card:#12262e;--fg:#e6eff2;--mute:#94aab2;--line:#21414c;
+  --green-soft:#133a28;--blue-soft:#0f3442;--no:#f0a370;--no-soft:#3a2518;--hero-fg:#ffffff;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --brand:#0a5f7c;--green:#3fcb76;--blue:#2fb0db;--bg:#0b1a20;--card:#12262e;--fg:#e6eff2;--mute:#94aab2;--line:#21414c;
+  --green-soft:#133a28;--blue-soft:#0f3442;--no:#f0a370;--no-soft:#3a2518;--hero-fg:#ffffff;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--text);margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+h2{font-size:clamp(22px,4.6vw,28px);color:var(--fg)}
+h3{font-size:18px}
+p{margin:0}
+.muted{color:var(--mute)}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* HERO */
+.hero{background:var(--brand);color:var(--hero-fg)}
+.hero .wrap{padding-block:28px 36px;display:grid;gap:22px}
+.logo{display:flex;align-items:center;gap:10px;font:800 15px/1 var(--display);letter-spacing:.06em}
+.logo b{color:var(--green);font-weight:800}
+.hero h1{font-size:clamp(28px,6.4vw,42px);font-weight:800}
+.hero .sub{opacity:.85;font-size:15px}
+.total{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.total .sum{font:800 clamp(34px,8vw,48px)/1 var(--display);color:var(--green)}
+.total .lbl{opacity:.85}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:14px;display:grid;gap:4px;min-width:0}
+.pill .k{font-size:13px;opacity:.8}
+.pill .t{font-weight:600;font-family:var(--display)}
+.pill .p{font:700 20px/1.2 var(--display);color:var(--green)}
+@media (max-width:480px){.pair{grid-template-columns:1fr}}
+
+/* SECTIONS */
+section{padding-block:36px 0}
+.sec-head{display:grid;gap:8px;margin-bottom:18px}
+.eyebrow{font:700 12px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.lead{font-size:17px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+
+/* Вы просили → делаем */
+.asks{display:grid;gap:10px}
+.ask{display:grid;grid-template-columns:1fr auto 1.3fr;gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.ask .q{color:var(--mute);font-size:15px;min-width:0}
+.ask .a{min-width:0}
+.ask .arr{color:var(--green);font-weight:700;padding-top:1px}
+@media (max-width:560px){.ask{grid-template-columns:1fr}.ask .arr{display:none}.ask .q::after{content:" →";color:var(--green);font-weight:700}}
+
+/* Блок-шапка */
+.block{border-radius:18px;padding:20px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 16px;color:#fff}
+.block.amo{background:var(--blue)}
+.block.tg{background:var(--green)}
+.block .nm{font:800 20px/1.2 var(--display)}
+.block .meta{font-size:14px;opacity:.92}
+.block .pr{font:800 26px/1 var(--display)}
+
+.idea{margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--blue-soft);font-weight:500}
+.idea.g{background:var(--green-soft)}
+
+/* Воронки — схема */
+.flow{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;position:relative}
+.stage{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:6px;min-width:0}
+.stage .dot{width:10px;height:10px;border-radius:50%}
+.stage h3{font-size:16px}
+.stage p{font-size:14px;color:var(--mute)}
+.loop{margin-top:10px;font-size:14px;color:var(--mute);display:flex;gap:8px;align-items:flex-start}
+.loop svg{flex:none;margin-top:2px}
+@media (max-width:560px){.flow{grid-template-columns:1fr}}
+
+/* Список работ */
+.works{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.works li{display:grid;grid-template-columns:36px 1fr;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.works .n{width:32px;height:32px;border-radius:10px;background:var(--blue-soft);color:var(--blue);font:800 15px/32px var(--display);text-align:center}
+.tg-list .n{background:var(--green-soft);color:var(--green)}
+.works h3{font-size:16px;margin-bottom:2px}
+.works p{font-size:15px;color:var(--mute)}
+.works li>div{min-width:0}
+
+/* Не входит */
+.no{margin-top:14px;border-radius:16px;background:var(--no-soft);padding:18px;display:grid;gap:10px}
+.no h3{color:var(--no);font-size:16px}
+.no ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.no li{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:15px}
+.no li::before{content:"—";color:var(--no);font-weight:700}
+.no .hint{font-size:14px;color:var(--mute)}
+
+.note{margin-top:14px;border-left:4px solid var(--blue);padding:4px 0 4px 14px;font-size:15px}
+.note b{display:block;margin-bottom:2px}
+
+/* Телефон-макет */
+.demo{margin-top:16px;display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:20px;align-items:center}
+@media (max-width:620px){.demo{grid-template-columns:1fr;justify-items:center}}
+.phone{width:100%;max-width:300px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:14px;box-shadow:0 10px 30px rgba(4,77,101,.12)}
+.chat-top{display:flex;align-items:center;gap:10px;padding:4px 4px 12px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600}
+.ava{width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font:800 12px var(--display)}
+.chat{display:grid;gap:10px;padding-top:12px;font-size:14px}
+.msg{padding:9px 12px;border-radius:14px;max-width:88%}
+.me{justify-self:end;background:var(--blue);color:#fff;border-bottom-right-radius:4px}
+.bot{background:var(--bg);border:1px solid var(--line);border-bottom-left-radius:4px}
+.bot dl{margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:2px 8px;font-size:13px}
+.bot dt{color:var(--mute)}
+.bot dd{margin:0;font-weight:600}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.btns span{text-align:center;padding:7px;border-radius:10px;border:1px solid var(--green);color:var(--green);font-weight:600;font-size:13px}
+.demo-txt{display:grid;gap:10px;font-size:15px}
+.demo-txt .step{display:grid;grid-template-columns:26px 1fr;gap:8px}
+.demo-txt .step i{font-style:normal;width:24px;height:24px;border-radius:50%;background:var(--green-soft);color:var(--green);font:800 12px/24px var(--display);text-align:center}
+
+/* Где какие задачи */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.split .card h3{font-size:16px;margin-bottom:6px}
+.split .card p{font-size:15px;color:var(--mute)}
+.tag{display:inline-block;font:700 12px/1 var(--display);padding:6px 8px;border-radius:8px;margin-bottom:10px}
+.tag.b{background:var(--blue-soft);color:var(--blue)}
+.tag.g{background:var(--green-soft);color:var(--green)}
+@media (max-width:520px){.split{grid-template-columns:1fr}}
+
+/* Сроки */
+.tl{display:grid;gap:10px}
+.tl-row{display:grid;grid-template-columns:130px 1fr;gap:12px;align-items:center;font-size:14px}
+.tl-bar{position:relative;height:30px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tl-bar span{position:absolute;top:3px;bottom:3px;border-radius:7px;color:#fff;font:700 12px/24px var(--display);padding-left:8px;white-space:nowrap;overflow:hidden}
+.tl-weeks{display:grid;grid-template-columns:130px repeat(4,1fr);gap:0 12px;font-size:12px;color:var(--mute)}
+.tl-weeks span:first-child{grid-column:1}
+@media (max-width:480px){.tl-row,.tl-weeks{grid-template-columns:96px 1fr}.tl-weeks{grid-template-columns:96px repeat(4,1fr)}}
+
+/* Расходы */
+.costs{display:grid;gap:8px}
+.cost{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+.cost .w{font-weight:600}
+.cost .d{grid-column:1;font-size:14px;color:var(--mute)}
+.cost .v{grid-row:1/span 2;grid-column:2;align-self:center;font-weight:600;text-align:right}
+
+/* Итого */
+.sum-card{background:var(--brand);color:#fff;border-radius:18px;padding:22px;display:grid;gap:12px}
+.sum-row{display:flex;justify-content:space-between;gap:12px;font-size:16px;border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:10px}
+.sum-row.t{border:0;padding:0;font:800 22px var(--display)}
+.sum-row.t .num{color:var(--green)}
+.sum-card .s{font-size:14px;opacity:.85}
+
+.later{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.later .card{padding:14px 16px;font-size:15px}
+.later .card b{display:block;font-family:var(--display);margin-bottom:4px}
+.later .card span{color:var(--mute)}
+@media (max-width:520px){.later{grid-template-columns:1fr}}
+
+.need{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.need li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:15px}
+.need li::before{content:"";width:18px;height:18px;border-radius:5px;border:2px solid var(--green);margin-top:2px}
+
+.cta{margin-block:36px 12px;background:var(--green-soft);border-radius:18px;padding:22px;display:grid;gap:8px}
+.cta h2{color:var(--fg)}
+footer{padding-block:12px 40px;font-size:13px;color:var(--mute)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="logo">
+      <svg width="30" height="22" viewBox="0 0 164 112" aria-hidden="true"><path d="M0 35h77v75z" fill="#028db8"/><path d="M86 0h77L86 76z" fill="#2cb662"/></svg>
+      <span>SOLUTION <b>CRM</b></span>
+    </div>
+    <div style="display:grid;gap:10px">
+      <h1>Продажи в amoCRM и задачи команды в Telegram</h1>
+      <p class="sub">Коммерческое предложение для Умара · оптовые продажи БАДов · 18 ноября 2026</p>
+    </div>
+    <div class="total"><span class="sum num">70 000 ₽</span><span class="lbl">первый этап, разово · без интеграции с 1С</span></div>
+    <div class="pair">
+      <div class="pill"><span class="k">Блок 1 · около 4 недель</span><span class="t">amoCRM для отдела продаж</span><span class="p num">50 000 ₽</span></div>
+      <div class="pill"><span class="k">Блок 2 · 2–3 недели, параллельно</span><span class="t">Задачи команды в Telegram</span><span class="p num">20 000 ₽</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">С чего начали</span>
+      <h2>Что вы просили и что мы делаем</h2>
+      <p class="muted">На встрече 5 ноября вы рассказали: база клиентов живёт в телефонах менеджеров, CRM почти не используют, постоянные клиенты покупают в разном ритме и ждут напоминания. И нужен простой способ ставить задачи команде.</p>
+    </div>
+    <div class="asks">
+      <div class="ask"><p class="q">Видеть всю базу: кто покупает, кто перестал, кто потенциальный</p><span class="arr">→</span><p class="a">Переносим базу в amoCRM и сразу раскладываем по воронкам. Сегменты видны готовыми фильтрами.</p></div>
+      <div class="ask"><p class="q">Работать с постоянными клиентами в их ритме</p><span class="arr">→</span><p class="a">У клиента указана частота закупок. За 2–3 дня до закупки робот ставит менеджеру задачу.</p></div>
+      <div class="ask"><p class="q">Возвращать тех, кто перестал покупать</p><span class="arr">→</span><p class="a">Отдельная воронка возврата: серия касаний и обязательная причина паузы.</p></div>
+      <div class="ask"><p class="q">Видеть звонки и переписки менеджеров</p><span class="arr">→</span><p class="a">Телефония, WhatsApp и Telegram в amoCRM. Переписка хранится в карточке клиента, а не в телефоне.</p></div>
+      <div class="ask"><p class="q">Чтобы менеджеры пользовались системой</p><span class="arr">→</span><p class="a">Минимум полей. День менеджера начинается со списка «кому сегодня написать».</p></div>
+      <div class="ask"><p class="q">Ставить задачи сотрудникам и видеть выполнение</p><span class="arr">→</span><p class="a">Telegram-бот: задача ставится фразой или голосом, вы видите все задачи в панели.</p></div>
+    </div>
+  </section>
+
+  <!-- БЛОК 1 -->
+  <section id="amo">
+    <div class="block amo">
+      <div><div class="nm">Блок 1. amoCRM для отдела продаж</div><div class="meta">около 4 недель</div></div>
+      <div class="pr num">50 000 ₽</div>
+    </div>
+    <p class="idea">Главная идея: CRM сама подсказывает менеджеру, кому и когда написать. Тогда ей пользуются, потому что она экономит время, а не требует отчётов.</p>
+
+    <div class="flow" aria-label="Три воронки">
+      <div class="stage"><span class="dot" style="background:var(--blue)"></span><h3>Привлечение</h3><p>Новые клиенты и обращения</p></div>
+      <div class="stage"><span class="dot" style="background:var(--green)"></span><h3>Повторные продажи</h3><p>Короткая воронка для тех, кто уже покупает</p></div>
+      <div class="stage"><span class="dot" style="background:var(--no)"></span><h3>Возврат</h3><p>Те, кто перестал покупать</p></div>
+    </div>
+    <p class="loop"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8a5 5 0 0 1 9-3M13 8a5 5 0 0 1-9 3" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round"/><path d="M12 2v3H9M4 14v-3h3" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round"/></svg>Сделка закрыта успешно → в карточке обновляется дата закупки → к следующей закупке робот снова ставит задачу. Пропустил срок сильно → клиент уходит в возврат.</p>
+
+    <h3 style="margin-top:26px">Что делаем за 50 000 ₽</h3>
+    <ol class="works">
+      <li><span class="n">1</span><div><h3>Воронки</h3><p>Три воронки: привлечение, повторные продажи, возврат. Этапы согласуем на установочной встрече.</p></div></li>
+      <li><span class="n">2</span><div><h3>Поля и карточка клиента</h3><p>Клиент — компания, внутри контакты. Поля: частота закупок, дата последней закупки, ответственный, канал связи. Лишнее скрываем.</p></div></li>
+      <li><span class="n">3</span><div><h3>Автоматизации</h3><p>Штатные роботы amoCRM: задача за 2–3 дня до закупки (3–4 варианта частоты), задачи на новые обращения, перевод в возврат, напоминания о касаниях.</p></div></li>
+      <li><span class="n">4</span><div><h3>Телефония</h3><p>Проверяем текущую интеграцию и при необходимости переподключаем. Звонки и записи попадают в карточку клиента.</p></div></li>
+      <li><span class="n">5</span><div><h3>Мессенджеры</h3><p>WhatsApp и Telegram (при необходимости MAX) на рабочих номерах менеджеров. Переписка — в карточке клиента.</p></div></li>
+      <li><span class="n">6</span><div><h3>Перенос базы</h3><p>Выгружаем клиентов из текущей CRM и таблиц, чистим дубли по телефону и ИНН, загружаем в нужные воронки: покупают — в повторные, перестали — в возврат, остальные — в привлечение.</p></div></li>
+      <li><span class="n">7</span><div><h3>Запуск</h3><p>Обучение менеджеров и РОПа, инструкция «день менеджера в CRM» и месяц поддержки после запуска.</p></div></li>
+    </ol>
+
+    <div class="no">
+      <h3>Не входит в 50 000 ₽</h3>
+      <ul>
+        <li>Собственные дашборды и отчёты. В этапе — стандартная аналитика amoCRM по воронкам, звонкам и задачам.</li>
+        <li>Виджеты, программирование, Salesbot и автоматические рассылки клиентам.</li>
+        <li>Воронки и автоматизации сверх согласованных на установочной встрече.</li>
+        <li>Ручной разбор контактов из телефонов менеджеров. Эти клиенты попадут в CRM, когда напишут на подключённые номера, или менеджеры выгрузят их по нашему шаблону.</li>
+        <li>Новый номер или смена оператора, если текущая телефония не подключается к amoCRM.</li>
+      </ul>
+      <p class="hint">Называем это заранее, чтобы ожидания совпадали с результатом. Всё это можно сделать следующим этапом по отдельной оценке.</p>
+    </div>
+
+    <p class="note"><b>Что важно понимать</b>Пока нет связи с 1С, дату закупки фиксирует менеджер, когда закрывает сделку. Не закрыл — напоминание не придёт. Поэтому на обучении отрабатываем это отдельно, а зависшие сделки видны в отчёте.</p>
+  </section>
+
+  <!-- БЛОК 2 -->
+  <section id="tg">
+    <div class="block tg">
+      <div><div class="nm">Блок 2. Задачи команды в Telegram</div><div class="meta">2–3 недели, параллельно с блоком 1</div></div>
+      <div class="pr num">20 000 ₽</div>
+    </div>
+    <p class="idea g">Отдельный инструмент для поручений команде: логистике, офису, сотрудникам. В Telegram, потому что команда уже пользуется им каждый день.</p>
+
+    <div class="demo">
+      <div class="phone" aria-label="Пример: как ставится задача">
+        <div class="chat-top"><span class="ava">✓</span>Задачи команды</div>
+        <div class="chat">
+          <div class="msg me">Ахмеду до пятницы отгрузить заказ аптеке на Ленина</div>
+          <div class="msg bot">Задача создана
+            <dl><dt>Кому</dt><dd>Ахмед</dd><dt>Срок</dt><dd>пятница, 21.11</dd><dt>Что</dt><dd>Отгрузить заказ аптеке на Ленина</dd></dl>
+          </div>
+          <div class="btns"><span>Сделал</span><span>Перенести</span></div>
+        </div>
+      </div>
+      <div class="demo-txt">
+        <p class="muted" style="font-size:13px">Пример, как это будет выглядеть</p>
+        <div class="step"><i>1</i><p>Вы пишете или наговариваете задачу обычной фразой.</p></div>
+        <div class="step"><i>2</i><p>ИИ сам находит исполнителя, срок и суть.</p></div>
+        <div class="step"><i>3</i><p>Исполнитель получает задачу в Telegram и отвечает кнопкой или отчётом с фото.</p></div>
+        <div class="step"><i>4</i><p>Вы видите все задачи в панели: по сотрудникам, просроченные, выполненные.</p></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:26px">Что входит</h3>
+    <ol class="works tg-list">
+      <li><span class="n">1</span><div><h3>Постановка фразой или голосом</h3><p>Вы и администраторы ставите задачи сотрудникам, сотрудники — себе. У задачи может быть несколько исполнителей.</p></div></li>
+      <li><span class="n">2</span><div><h3>Уведомления и напоминания</h3><p>Кнопки «Сделал» и «Перенести», напоминания о сроке и просрочке. Постановщик узнаёт, когда задачу выполнили.</p></div></li>
+      <li><span class="n">3</span><div><h3>Отчёт по задаче</h3><p>Текст или фото из Telegram сохраняются в задаче. Если сотрудник уйдёт, история и отчёты останутся у компании.</p></div></li>
+      <li><span class="n">4</span><div><h3>Панель задач</h3><p>Открывается кнопкой в Telegram, на компьютере — в браузере.</p></div></li>
+      <li><span class="n">5</span><div><h3>Запуск</h3><p>Сервер, подключение сотрудников, короткая инструкция и месяц поддержки.</p></div></li>
+    </ol>
+
+    <div class="no">
+      <h3>Не входит в 20 000 ₽</h3>
+      <ul>
+        <li>Стратегические цели на 5 лет, 3 года и год с подзадачами и разбором по средам.</li>
+        <li>ИИ-поиск по архиву: похожие прошлые задачи, результаты и контакты.</li>
+        <li>Оформление отчёта силами ИИ. В первой версии отчёт сохраняется, как его прислал сотрудник.</li>
+        <li>Доставки и водители: напоминания водителю, история адресов и направлений.</li>
+        <li>План-факт по направлениям и неделям.</li>
+        <li>Повторяющиеся напоминания бухгалтерии: зарплата, выплаты инвесторам.</li>
+      </ul>
+      <p class="hint">На встрече 11 ноября вы описали систему шире. Эти пункты делаем следующими версиями, когда команда привыкнет ставить и закрывать задачи в Telegram.</p>
+    </div>
+
+    <div class="split">
+      <div class="card"><span class="tag b">amoCRM</span><h3>Задачи по клиентам</h3><p>Позвонить, напомнить о закупке, ответить на обращение. Их ставят роботы.</p></div>
+      <div class="card"><span class="tag g">Telegram</span><h3>Поручения команде</h3><p>Отгрузить, купить, подготовить, проверить. Их ставите вы и сотрудники.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Сроки</span><h2>Как идём по неделям</h2></div>
+    <div class="card tl">
+      <div class="tl-weeks"><span></span><span>1 нед.</span><span>2 нед.</span><span>3 нед.</span><span>4 нед.</span></div>
+      <div class="tl-row"><span>amoCRM</span><div class="tl-bar"><span style="left:3px;right:3px;background:var(--blue)">воронки → база → обучение</span></div></div>
+      <div class="tl-row"><span>Задачи в Telegram</span><div class="tl-bar"><span style="left:25%;right:25%;background:var(--green)">бот и панель</span></div></div>
+      <p class="muted" style="font-size:14px">Сроки ориентировочные. Зависят от того, как быстро получим доступы и согласуем воронки.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Ежемесячно</span>
+      <h2>Подписки на сервисы</h2>
+      <p class="muted">Это не наши услуги. Оформляем на вашу компанию, чтобы всё оставалось у вас. Суммы ориентировочные.</p>
+    </div>
+    <div class="costs">
+      <div class="cost"><span class="w">Лицензии amoCRM</span><span class="d">на каждого пользователя</span><span class="v">по тарифу</span></div>
+      <div class="cost"><span class="w">Коннектор мессенджеров</span><span class="d">WhatsApp + Telegram на номер; с MAX — 6 500 ₽</span><span class="v num">от 4 000 ₽</span></div>
+      <div class="cost"><span class="w">Сервер</span><span class="d">для Telegram-бота и панели задач</span><span class="v num">≈ 1 000 ₽</span></div>
+      <div class="cost"><span class="w">ИИ-модель</span><span class="d">разбор задач из текста и голосовых</span><span class="v">по использованию</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sum-card">
+      <div class="sum-row"><span>Блок 1. amoCRM</span><span class="num">50 000 ₽</span></div>
+      <div class="sum-row"><span>Блок 2. Задачи в Telegram</span><span class="num">20 000 ₽</span></div>
+      <div class="sum-row t"><span>Итого, разово</span><span class="num">70 000 ₽</span></div>
+      <p class="s">Порядок оплаты закрепим в договоре.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Потом</span>
+      <h2>Следующие этапы</h2>
+      <p class="muted">Подключаем, когда система заработает и в ней накопятся данные. 1С выносим намеренно: она заметно увеличивает проект, а пользу даёт, когда в CRM уже порядок.</p>
+    </div>
+    <div class="later">
+      <div class="card"><b>Интеграция с 1С</b><span>Заказы, отгрузки, оплаты и автоматическая дата закупки</span></div>
+      <div class="card"><b>Цикл по истории</b><span>Частота закупки каждого клиента по реальным отгрузкам</span></div>
+      <div class="card"><b>Дашборд и ИИ-контроль</b><span>Свой дашборд для вас и РОПа, анализ звонков и переписок</span></div>
+      <div class="card"><b>Развитие задачника</b><span>Цели, ИИ-поиск, водители, план-факт, связка с amoCRM</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Для старта</span><h2>Что нужно от вас</h2></div>
+    <ul class="need">
+      <li>Установочная встреча на 1–1,5 часа: этапы воронок, варианты частоты, список сотрудников.</li>
+      <li>Выгрузка клиентов из текущей CRM или таблиц, список менеджеров и их рабочие номера.</li>
+      <li>Доступы к телефонии и аккаунтам мессенджеров.</li>
+      <li>Ответственный с вашей стороны, 1–2 часа в неделю на время запуска.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <h2>Следующий шаг</h2>
+    <p>Обсудить предложение, при необходимости поправить состав и назначить установочную встречу. До старта в ваших системах ничего не меняется.</p>
+  </div>
+
+  <footer>SolutionCRM · ноябрь 2026. Этапы воронок, варианты частоты и формулировки задач — примеры, уточняем на установочной встрече.</footer>
+</main>
+</body>
+</html>
