@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Панели ECOCARS</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: верхняя полоса-переключатель → вид «Собственники» (сводка сверху, детали ниже) или «Кабинет подборщика» (очередь слева, карточка с расчётом справа) */
+:root{
+  --bg:#f3f5f2; --card:#ffffff; --ink:#18201b; --sub:#5a665f; --faint:#8b968f; --rule:#dde3dc; --soft:#eef2ed;
+  --acc:#1f6b4a; --acc-soft:#e1efe7; --acc-ink:#0f3d29;
+  --cn:#b8321f; --cn-soft:#f9e7e2; --cn-ink:#6e1a0e; --on-cn:#ffffff;
+  --ok:#2c7a4b; --ok-soft:#e3f2e8; --warn:#a86a0c; --warn-soft:#fbefd9; --bad:#b4321f; --bad-soft:#fbe6e1;
+  --sans:"Onest","Noto Sans SC",system-ui,-apple-system,sans-serif;
+  --zh:"Noto Sans SC","PingFang SC","Microsoft YaHei","Onest",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121614; --card:#1a1f1c; --ink:#e7ece8; --sub:#a2ada6; --faint:#76817a; --rule:#2b322e; --soft:#202622;
+  --acc:#62c093; --acc-soft:#1d3428; --acc-ink:#cdeedc;
+  --cn:#ff8a73; --cn-soft:#3a201a; --cn-ink:#ffd6cc; --on-cn:#2a0e08;
+  --ok:#6fcf97; --ok-soft:#1b3326; --warn:#f0b24a; --warn-soft:#382a12; --bad:#ff8a73; --bad-soft:#3a201a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --card:#1a1f1c; --ink:#e7ece8; --sub:#a2ada6; --faint:#76817a; --rule:#2b322e; --soft:#202622;
+  --acc:#62c093; --acc-soft:#1d3428; --acc-ink:#cdeedc;
+  --cn:#ff8a73; --cn-soft:#3a201a; --cn-ink:#ffd6cc; --on-cn:#2a0e08;
+  --ok:#6fcf97; --ok-soft:#1b3326; --warn:#f0b24a; --warn-soft:#382a12; --bad:#ff8a73; --bad-soft:#3a201a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+.wrap{max-width:1320px;margin:0 auto;padding-block:16px 48px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:16px}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand b{font-weight:700;font-size:17px;letter-spacing:.02em}
+.brand span{color:var(--faint);font-size:12px}
+.switch{display:flex;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:3px;gap:3px}
+.switch a{padding:7px 14px;border-radius:7px;color:var(--sub);text-decoration:none;font-weight:500}
+.switch a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.switch a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.req:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.demo{font-size:12px;color:var(--warn);background:var(--warn-soft);padding:4px 10px;border-radius:6px}
+h1{font-size:22px;font-weight:600;margin:0;text-wrap:balance}
+h2{font-size:15px;font-weight:600;margin:0}
+.hrow{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px}
+.muted{color:var(--sub)} .faint{color:var(--faint);font-size:12px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--rule);background:var(--card);color:var(--sub);border-radius:999px;padding:4px 12px;font:500 13px var(--sans);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--acc-soft);color:var(--acc-ink);border-color:var(--acc)}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:16px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.kpi{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;border-top:3px solid var(--rule)}
+.kpi.ok{border-top-color:var(--ok)} .kpi.warn{border-top-color:var(--warn)} .kpi.bad{border-top-color:var(--bad)}
+.kpi .l{color:var(--sub);font-size:12.5px}
+.kpi .v{font:500 26px var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kpi .n{font-size:12px;color:var(--faint)}
+.g2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px}
+.g2b{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.g2,.g2b{grid-template-columns:minmax(0,1fr)}}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-weight:500;color:var(--faint);font-size:12px;text-align:left;padding:6px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--soft);vertical-align:middle;white-space:nowrap}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+tr:last-child td{border-bottom:0}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-ok{background:var(--ok-soft);color:var(--ok)} .p-warn{background:var(--warn-soft);color:var(--warn)} .p-bad{background:var(--bad-soft);color:var(--bad)} .p-n{background:var(--soft);color:var(--sub)}
+.timer{font-family:var(--mono);font-size:12.5px}
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar{display:grid;grid-template-columns:150px minmax(0,1fr) 64px;gap:10px;align-items:center;font-size:13px}
+.bar .t{height:10px;background:var(--soft);border-radius:5px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--acc);border-radius:5px}
+.bar .val{font-family:var(--mono);text-align:right;font-size:12.5px}
+@media (max-width:480px){.bar{grid-template-columns:100px minmax(0,1fr) 56px}}
+.sel{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.who{border:1px solid var(--rule);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.who .nm{font-weight:600} .who .nm span{font-family:var(--zh);font-weight:500;color:var(--sub);margin-left:4px}
+.who .row{display:flex;justify-content:space-between;font-size:12.5px;color:var(--sub)}
+.who .row b{font-family:var(--mono);font-weight:500;color:var(--ink)}
+.stages{display:flex;gap:3px}
+.stages i{width:18px;height:6px;border-radius:3px;background:var(--soft)}
+.stages i.on{background:var(--acc)} .stages.late i.on{background:var(--bad)}
+.alert{display:flex;gap:10px;align-items:flex-start;background:var(--warn-soft);color:var(--ink);border-radius:10px;padding:10px 14px;font-size:13px}
+.alert b{color:var(--warn)}
+/* selector view */
+.zh{font-family:var(--zh)}
+.ru{display:block;font-size:11.5px;color:var(--faint);font-weight:400;font-family:var(--sans);line-height:1.35}
+.cn-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-end}
+.cn-head h1{font-family:var(--zh)}
+.stats{display:flex;gap:10px;flex-wrap:wrap}
+.stat{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:8px 14px;min-width:120px}
+.stat .v{font:500 20px var(--mono)}
+.stat .l{font-family:var(--zh);font-size:12.5px;color:var(--sub)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--rule)}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;color:var(--sub);font:500 14px var(--zh);text-align:left}
+.tabs button[aria-selected="true"]{color:var(--cn);border-bottom-color:var(--cn)}
+.work{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:12px;align-items:start}
+@media (max-width:860px){.work{grid-template-columns:minmax(0,1fr)}}
+.queue{display:flex;flex-direction:column;gap:8px}
+.req{background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--rule);border-radius:0;padding:10px 12px;cursor:pointer;display:flex;flex-direction:column;gap:4px;text-align:left;font:inherit;color:inherit;width:100%}
+.req.urgent{border-left-color:var(--warn)} .req.late{border-left-color:var(--bad)} .req.done{border-left-color:var(--ok);opacity:.75}
+.req[aria-current="true"]{background:var(--cn-soft);border-color:var(--cn);border-left-color:var(--cn)}
+.req .m{font:600 15px var(--zh)}
+.req .meta{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--sub)}
+.detail{display:flex;flex-direction:column;gap:12px}
+.msg{background:var(--soft);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.msg .orig{font-size:13px;color:var(--sub)}
+.msg .tr{font:500 15px var(--zh)}
+.tag{font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.f{border:1px solid var(--rule);border-radius:8px;padding:6px 10px}
+.f .k{font:500 12px var(--zh);color:var(--sub)}
+.f .k .ru{display:inline;margin-left:4px}
+.f .v{font:500 14px var(--zh)}
+form{display:flex;flex-direction:column;gap:12px}
+.inrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+label.in{display:flex;flex-direction:column;gap:4px;font:500 13px var(--zh)}
+label.in input,label.in select{font:500 15px var(--mono);padding:8px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--card);color:var(--ink);width:100%}
+label.in input[readonly]{background:var(--soft);color:var(--sub)}
+.calc{border:1px dashed var(--rule);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:5px;font-size:13px}
+.calc .r{display:flex;justify-content:space-between;gap:10px}
+.calc .r span:last-child{font-family:var(--mono)}
+.calc .tot{border-top:1px solid var(--rule);padding-top:6px;font-weight:600;font-size:15px}
+.calc .tot span:last-child{color:var(--cn)}
+.files{display:flex;gap:8px;flex-wrap:wrap}
+.thumb{width:72px;height:54px;border-radius:6px;background:repeating-linear-gradient(135deg,var(--soft) 0 6px,var(--card) 6px 12px);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--faint)}
+.preview{border:1px solid var(--acc);background:var(--acc-soft);color:var(--acc-ink);border-radius:10px;padding:10px 12px;font-size:13.5px;white-space:pre-line}
+.btn{background:var(--cn);color:var(--on-cn);border:0;border-radius:9px;padding:11px 18px;font:600 15px var(--zh);cursor:pointer;align-self:flex-start}
+.btn .ru{color:inherit;opacity:.85;display:inline;margin-left:6px}
+.btn[disabled]{opacity:.5;cursor:default}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font:500 14px var(--zh)}
+.price td input{font:500 13px var(--mono);width:96px;padding:4px 6px;border:1px solid var(--rule);border-radius:6px;background:var(--card);color:var(--ink);text-align:right}
+.stale{color:var(--warn);font-size:11.5px;display:block}
+.note{font-size:12.5px;color:var(--faint)}
+@media (prefers-reduced-motion: no-preference){.req,.chip,.switch a{transition:background .15s,border-color .15s}}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><a href="index.html" style="color:var(--sub);font-size:13px;margin-right:6px">← к предложению</a><b>ECOCARS</b><span>своя система без CRM · прототип</span></div>
+    <nav class="switch" aria-label="Раздел">
+      <a href="#owners" id="lnkOwners">Собственники</a>
+      <a href="#selector" id="lnkSel"><span class="zh">选车员工作台</span> · подборщик</a>
+    </nav>
+    <span class="demo">Все цифры и имена — пример</span>
+  </div>
+
+  <!-- ===== ВИД 1. СОБСТВЕННИКИ ===== -->
+  <main id="vOwners">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="hrow">
+        <div><h1>Сводка на сегодня</h1><div class="muted">понедельник, 9 ноября · обновлено в 14:20</div></div>
+        <div class="chips" role="group" aria-label="Период">
+          <button class="chip" type="button" aria-pressed="true">Сегодня</button>
+          <button class="chip" type="button" aria-pressed="false">Неделя</button>
+          <button class="chip" type="button" aria-pressed="false">Ноябрь</button>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><span class="l">Запросов сегодня</span><span class="v">34</span><span class="n">вчера 29</span></div>
+        <div class="kpi warn"><span class="l">Ждут цены сейчас</span><span class="v">5</span><span class="n">норма — не больше 5</span></div>
+        <div class="kpi bad"><span class="l">Просрочено (больше 2 ч)</span><span class="v">1</span><span class="n">Toyota bZ3 · подборщик Чжан</span></div>
+        <div class="kpi ok"><span class="l">Цена в среднем за</span><span class="v">1:52</span><span class="n">цель — до 2 часов</span></div>
+        <div class="kpi"><span class="l">Задатков в ноябре</span><span class="v">41</span><span class="n">из 286 запросов · 14%</span></div>
+        <div class="kpi bad"><span class="l">Машин в пути</span><span class="v">58</span><span class="n">2 дольше 30 дней</span></div>
+      </div>
+
+      <div class="alert"><b>Прайс</b><span>3 цены из 46 устарели: дистрибьютор Li Auto (2) и BYD (1) не ответили утром. Бот даёт по ним вчерашнюю цену с пометкой.</span></div>
+
+      <div class="g2">
+        <section class="card">
+          <div class="hrow"><h2>Запросы в работе</h2><span class="faint">цена должна уйти агенту за 2 часа</span></div>
+          <div class="tw"><table id="tblReq"><thead><tr><th>Пришёл</th><th>Агент</th><th>Запрос</th><th>Подборщик</th><th>Статус</th><th class="num">Осталось</th></tr></thead><tbody></tbody></table></div>
+        </section>
+        <section class="card">
+          <h2>Подборщики сегодня</h2>
+          <div class="sel" id="selCards"></div>
+        </section>
+      </div>
+
+      <div class="g2b">
+        <section class="card">
+          <div class="hrow"><h2>Воронка за ноябрь</h2><span class="faint">1–9 ноября</span></div>
+          <div class="bars" id="funnel"></div>
+        </section>
+        <section class="card">
+          <div class="hrow"><h2>Откуда клиенты</h2><span class="faint">доля сделок с задатком</span></div>
+          <div class="bars" id="sources"></div>
+        </section>
+      </div>
+
+      <section class="card">
+        <div class="hrow"><h2>Машины после оплаты</h2><span class="faint">склад → экспорт → граница → Таджикистан → выдача · красным — дольше 30 дней</span></div>
+        <div class="tw"><table id="tblCars"><thead><tr><th>Машина</th><th>Клиент / город</th><th>Ведёт</th><th>Этап</th><th></th><th class="num">Дней</th><th>Логист</th></tr></thead><tbody></tbody></table></div>
+      </section>
+
+      <section class="card">
+        <div class="hrow"><h2>Торговые агенты · ноябрь</h2><span class="faint">комиссия считается сама по цене машины</span></div>
+        <div class="tw"><table id="tblAg"><thead><tr><th>Агент</th><th class="num">Запросов</th><th class="num">Сделок</th><th class="num">Конверсия</th><th class="num">Ответ ему, ср.</th><th class="num">К выплате</th></tr></thead><tbody></tbody></table></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ===== ВИД 2. ПОДБОРЩИК (китайский + русский) ===== -->
+  <main id="vSel" hidden>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="cn-head">
+        <div><h1>你好，李</h1><span class="ru">Здравствуйте, Ли · кабинет подборщика</span></div>
+        <div class="stats">
+          <div class="stat"><div class="v" id="stWait">3</div><div class="l">待报价<span class="ru">ждут цены</span></div></div>
+          <div class="stat"><div class="v" id="stDone">9</div><div class="l">今日已报价<span class="ru">цен отправлено сегодня</span></div></div>
+          <div class="stat"><div class="v">1:35</div><div class="l">平均响应时间<span class="ru">среднее время ответа</span></div></div>
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tabReq" aria-selected="true" aria-controls="paneReq">请求<span class="ru">Запросы</span></button>
+        <button role="tab" id="tabPrice" aria-selected="false" aria-controls="panePrice">今日价格表<span class="ru">Прайс на сегодня</span></button>
+      </div>
+
+      <div id="paneReq" role="tabpanel" aria-labelledby="tabReq">
+        <div class="work">
+          <div class="queue" id="queue"></div>
+          <section class="card detail" id="detail"></section>
+        </div>
+      </div>
+
+      <div id="panePrice" role="tabpanel" aria-labelledby="tabPrice" hidden>
+        <section class="card">
+          <div class="hrow"><div><h2 class="zh">每天上午10点前更新<span class="ru">Обновить до 10:00 каждое утро · около 10 минут</span></h2></div><span class="faint">没回复的经销商保留昨天价格 · если дистрибьютор не ответил, остаётся вчерашняя цена</span></div>
+          <div class="tw"><table class="price" id="tblPrice"><thead><tr><th class="zh">车型<span class="ru">Модель</span></th><th class="zh">经销商 A<span class="ru">Дистрибьютор A, ¥</span></th><th class="zh">经销商 B<span class="ru">Дистрибьютор B, ¥</span></th><th class="zh">经销商 C<span class="ru">Дистрибьютор C, ¥</span></th><th class="zh">库存<span class="ru">Наличие</span></th></tr></thead><tbody></tbody></table></div>
+          <p class="note">Цены в юанях без доставки. Бот для агентов и Instagram пересчитывает их в доллары сам и добавляет оговорку «±$300–500».</p>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  function h(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.innerHTML=x;return e}
+  var RATE=7.10, LOG=2100, MARKUP=1800;
+  function usd(n){return "$"+Math.round(n).toLocaleString("en-US")}
+
+  /* ---------- данные-пример ---------- */
+  var REQ=[
+    {id:1,t:"12:05",agent:"Уят",sel:"Ли",m:"Zeekr 9X",zh:"极氪9X",color:["黑色","чёрный, салон чёрный"],cond:["新车","новая"],budget:["—","не указан"],left:48,st:"wait",
+     orig:"Нужен Zeekr 9X чёрный на чёрном, новый. Клиент готов внести задаток сегодня",tr:"需要极氪9X，黑色外观黑色内饰，新车。客户今天可以付定金。",price:398000},
+    {id:2,t:"11:40",agent:"Далер",sel:"Ли",m:"Lixiang L7 Max 2024",zh:"理想L7 Max 2024款",color:["白色","белый"],cond:["2万公里以内","пробег до 20 000 км"],budget:["3万美元以内","до $30 000"],left:23,st:"wait",
+     orig:"Li L7 Max 2024 белый, пробег до 20 тыс, бюджет до 30 000$",tr:"理想L7 Max 2024款，白色，里程2万公里以内，预算3万美元以内。",price:186000},
+    {id:3,t:"13:10",agent:"Фарход",sel:"Ли",m:"BYD Song Plus DM-i ×2",zh:"比亚迪宋PLUS DM-i ×2",color:["灰色","серый"],cond:["新车","новые"],budget:["—","не указан"],left:112,st:"wait",
+     orig:"Song Plus DM-i серый новый, 2 штуки",tr:"宋PLUS DM-i，灰色，新车，两台。",price:139800},
+    {id:4,t:"10:15",agent:"Шерзод",sel:"Чжан",m:"Toyota bZ3",zh:"丰田bZ3",color:["白色","белый"],cond:["新车","новая"],budget:["—","не указан"],left:-35,st:"late"},
+    {id:5,t:"13:42",agent:"Уят",sel:"Чэнь",m:"Zeekr 001 YOU",zh:"极氪001 YOU版",color:["绿色","зелёный"],cond:["新车","новая"],budget:["—","не указан"],left:118,st:"work"},
+    {id:6,t:"09:30",agent:"Исмаил (B2B)",sel:"Чэнь",m:"Foton, рефрижератор 3 т",zh:"福田 3吨冷藏车",color:["—","—"],cond:["新车","новый"],budget:["—","не указан"],left:0,st:"sent"}
+  ];
+  var SEL=[{n:"Ли",zh:"李",got:14,ans:13,avg:"1:35",late:0},{n:"Чжан",zh:"张",got:12,ans:10,avg:"2:10",late:1},{n:"Чэнь",zh:"陈",got:8,ans:8,avg:"1:20",late:0}];
+  var FUN=[["Запросов",286],["Цена отправлена",268],["Задаток",41],["Полная оплата",33],["Доставлено",29]];
+  var SRC=[["Повторные и рекомендации",54],["Торговые агенты",37],["Instagram",6],["B2B",3]];
+  var CARS=[
+    ["Zeekr 001","Душанбе","Фируз",3,34],["Lixiang L9","Худжанд","Фаррух",3,31],["Lixiang L7","Душанбе","Ману",3,22],
+    ["Zeekr 9X","Душанбе","Фируз",4,26],["BYD Han","Бохтар","Фаррух",2,12],["Toyota bZ4X","Куляб","Ману",1,5]];
+  var STG=["Склад","Экспорт","Граница","Таджикистан","Выдача"];
+  var AG=[["Уят",31,9,"1:41",4100],["Далер",24,6,"1:58",2800],["Фарход",19,4,"2:05",1700],["Шерзод",12,2,"2:30",800],["Исмаил (B2B)",6,2,"1:15",1500]];
+  var PRICE=[
+    ["Zeekr 9X","极氪9X",[398000,401000,null],"有"],["Zeekr 001 YOU","极氪001 YOU版",[269000,272000,null],"有"],
+    ["Lixiang L7 Max","理想L7 Max",[279000,"s:281000",null],"订"],["Lixiang L9 Ultra","理想L9 Ultra",["s:399000",398000,null],"有"],
+    ["BYD Song Plus DM-i","比亚迪宋PLUS DM-i",[139800,141000,"s:138500"],"有"],["BYD Han EV","比亚迪汉EV",[209800,null,210500],"有"],
+    ["Toyota bZ3","丰田bZ3",[159800,161000,null],"订"]];
+
+  /* ---------- собственники ---------- */
+  function stPill(r){
+    if(r.st==="late")return '<span class="pill p-bad">просрочен</span>';
+    if(r.st==="sent")return '<span class="pill p-ok">цена у агента</span>';
+    if(r.st==="work")return '<span class="pill p-n">в работе</span>';
+    return r.left<30?'<span class="pill p-warn">ждёт цены</span>':'<span class="pill p-n">ждёт цены</span>';
+  }
+  function tLeft(m){if(m<=0&&m!==0)return '<span class="timer" style="color:var(--bad)">−'+fmt(-m)+'</span>';if(m===0)return '<span class="faint">—</span>';return '<span class="timer"'+(m<30?' style="color:var(--warn)"':'')+'>'+fmt(m)+'</span>'}
+  function fmt(m){return Math.floor(m/60)+":"+String(m%60).padStart(2,"0")}
+  function renderOwners(){
+    var tb=$("#tblReq tbody");tb.innerHTML="";
+    REQ.slice().sort(function(a,b){return (a.st==="sent")-(b.st==="sent")||a.left-b.left}).forEach(function(r){
+      var tr=h("tr");tr.innerHTML="<td class='num'>"+r.t+"</td><td>"+r.agent+"</td><td>"+r.m+"</td><td>"+r.sel+"</td><td>"+stPill(r)+"</td><td class='num'>"+tLeft(r.st==="sent"?0:r.left)+"</td>";tb.appendChild(tr)});
+    var sc=$("#selCards");sc.innerHTML="";
+    SEL.forEach(function(s){var p=Math.round(s.ans/s.got*100);
+      sc.appendChild(h("div","who","<div class='nm'>"+s.n+"<span>"+s.zh+"</span></div>"+
+      "<div class='row'><span>получено / ответила</span><b>"+s.got+" / "+s.ans+"</b></div>"+
+      "<div class='bar' style='grid-template-columns:minmax(0,1fr) 40px'><div class='t'><i style='width:"+p+"%;"+(p<90?"background:var(--warn)":"")+"'></i></div><span class='val'>"+p+"%</span></div>"+
+      "<div class='row'><span>среднее время</span><b>"+s.avg+"</b></div>"+
+      "<div class='row'><span>просрочек</span><b style='color:"+(s.late?"var(--bad)":"inherit")+"'>"+s.late+"</b></div>"))});
+    var fu=$("#funnel");fu.innerHTML="";FUN.forEach(function(f){fu.appendChild(h("div","bar","<span>"+f[0]+"</span><div class='t'><i style='width:"+(f[1]/FUN[0][1]*100)+"%'></i></div><span class='val'>"+f[1]+"</span>"))});
+    var so=$("#sources");so.innerHTML="";SRC.forEach(function(f){so.appendChild(h("div","bar","<span>"+f[0]+"</span><div class='t'><i style='width:"+f[1]+"%'></i></div><span class='val'>"+f[1]+"%</span>"))});
+    var tc=$("#tblCars tbody");tc.innerHTML="";
+    CARS.sort(function(a,b){return b[4]-a[4]}).forEach(function(c){var late=c[4]>30,st="";for(var i=0;i<5;i++)st+="<i"+(i<=c[3]-1?" class='on'":"")+"></i>";
+      var tr=h("tr");tr.innerHTML="<td>"+c[0]+"</td><td>"+c[1]+"</td><td>"+c[2]+"</td><td>"+STG[c[3]-1]+"</td><td><span class='stages"+(late?" late":"")+"'>"+st+"</span></td><td class='num' style='color:"+(late?"var(--bad)":"inherit")+"'>"+c[4]+"</td><td>"+(late?"<span class='pill p-bad'>позвонить</span>":"<span class='faint'>в норме</span>")+"</td>";tc.appendChild(tr)});
+    var ta=$("#tblAg tbody");ta.innerHTML="";
+    AG.forEach(function(a){var tr=h("tr");tr.innerHTML="<td>"+a[0]+"</td><td class='num'>"+a[1]+"</td><td class='num'>"+a[2]+"</td><td class='num'>"+Math.round(a[2]/a[1]*100)+"%</td><td class='num'>"+a[3]+"</td><td class='num'>"+usd(a[4])+"</td>";ta.appendChild(tr)});
+  }
+  document.querySelectorAll(".chip").forEach(function(c){c.addEventListener("click",function(){document.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed",x===c)})})});
+
+  /* ---------- подборщик ---------- */
+  var mine=REQ.filter(function(r){return r.sel==="Ли"}), cur=mine[0].id, sent=9;
+  function renderQueue(){
+    var q=$("#queue");q.innerHTML="";
+    mine.forEach(function(r){
+      var cls="req"+(r.st==="sent"?" done":r.left<30?" urgent":"");
+      var b=h("button",cls);b.type="button";b.setAttribute("aria-current",r.id===cur);
+      b.innerHTML="<span class='m'>"+r.zh+"</span><span class='ru'>"+r.m+"</span>"+
+        "<span class='meta'><span>代理 "+r.agent+" · "+r.t+"</span><span>"+(r.st==="sent"?"<span class='pill p-ok zh'>已报价 · отправлено</span>":"<span class='timer'"+(r.left<30?" style='color:var(--warn)'":"")+">剩余 "+fmt(r.left)+"</span>")+"</span></span>";
+      b.addEventListener("click",function(){cur=r.id;renderQueue();renderDetail()});q.appendChild(b)});
+    $("#stWait").textContent=mine.filter(function(r){return r.st!=="sent"}).length;$("#stDone").textContent=sent;
+  }
+  function fld(k,ru,v){return "<div class='f'><div class='k'>"+k+"<span class='ru'>"+ru+"</span></div><div class='v'>"+v[0]+"</div><span class='ru'>"+v[1]+"</span></div>"}
+  function renderDetail(){
+    var r=mine.filter(function(x){return x.id===cur})[0],d=$("#detail");
+    d.innerHTML=
+      "<div class='hrow'><div><h2 class='zh' style='font-size:18px'>"+r.zh+"</h2><span class='ru'>"+r.m+" · агент "+r.agent+" · пришёл в "+r.t+"</span></div>"+(r.st==="sent"?"<span class='pill p-ok'>已发送 · отправлено</span>":"<span class='timer' style='font-size:15px;color:"+(r.left<30?"var(--warn)":"var(--sub)")+"'>剩余 "+fmt(r.left)+"<span class='ru'>осталось до просрочки</span></span>")+"</div>"+
+      "<div class='msg'><span class='tag'>代理原话 · сообщение агента (WhatsApp)</span><span class='orig'>«"+r.orig+"»</span><span class='tag'>AI 翻译 · перевод ИИ</span><span class='tr'>"+r.tr+"</span></div>"+
+      "<div class='fields'>"+fld("品牌车型","марка, модель",[r.zh,r.m])+fld("颜色","цвет",r.color)+fld("车况","состояние",r.cond)+fld("预算","бюджет",r.budget)+"</div>"+
+      "<form id='frm' novalidate>"+
+        "<div class='inrow'>"+
+          "<label class='in'>经销商报价 (¥)<span class='ru'>цена дистрибьютора, юани</span><input id='inPrice' type='number' min='0' step='100' value='"+r.price+"'></label>"+
+          "<label class='in'>经销商<span class='ru'>дистрибьютор</span><select id='inDist'><option>经销商 A</option><option>经销商 B</option><option>经销商 C</option></select></label>"+
+          "<label class='in'>交车时间<span class='ru'>срок поставки</span><select id='inTerm'><option value='现车 3–5天|в наличии, 3–5 дней'>现车 3–5天</option><option value='7–14天|7–14 дней' selected>7–14天</option><option value='订车 30天|под заказ, ~30 дней'>订车 30天</option></select></label>"+
+          "<label class='in'>VIN<span class='ru'>можно позже, после задатка</span><input id='inVin' type='text' placeholder='LB37…' style='font-family:var(--mono)'></label>"+
+        "</div>"+
+        "<div class='calc' aria-live='polite'>"+
+          "<div class='r'><span class='zh'>车价 (汇率 "+RATE.toFixed(2)+")<span class='ru'>машина по курсу системы</span></span><span id='cCar'></span></div>"+
+          "<div class='r'><span class='zh'>物流到杜尚别<span class='ru'>доставка до Душанбе (тариф системы)</span></span><span>"+usd(LOG)+"</span></div>"+
+          "<div class='r'><span class='zh'>公司加价（老板设定）<span class='ru'>наценка задана собственниками</span></span><span class='faint'>已包含 · включена</span></div>"+
+          "<div class='r tot'><span class='zh'>给代理的价格<span class='ru'>цена для агента</span></span><span id='cTot'></span></div>"+
+        "</div>"+
+        "<div><div class='zh' style='font-weight:500;margin-bottom:6px'>照片 / 视频<span class='ru'>фото и видео с телефона</span></div><div class='files'><div class='thumb'>外观</div><div class='thumb'>内饰</div><div class='thumb'>铭牌</div><div class='thumb' style='border-style:dashed'>＋ 上传</div></div></div>"+
+        "<div><div class='tag' style='margin-bottom:6px'>代理会看到 · что получит агент в WhatsApp (по-русски)</div><div class='preview' id='prev'></div></div>"+
+        "<button class='btn' id='btnSend' type='submit'>发送给代理<span class='ru'>Отправить агенту</span></button>"+
+      "</form>";
+    var inP=$("#inPrice"),inT=$("#inTerm"),inV=$("#inVin");
+    function calc(){var p=parseFloat(inP.value)||0,car=p/RATE,tot=Math.round((car+LOG+MARKUP)/100)*100,term=inT.value.split("|")[1];
+      $("#cCar").textContent=usd(car);$("#cTot").textContent=usd(tot);
+      $("#prev").textContent=r.m+" — "+r.color[1]+", "+r.cond[1]+".\nЦена на сегодня: "+usd(tot)+" до Душанбе (±$300–500, зависит от курса).\nСрок: "+term+".\nФото: 3 шт."+(inV.value?"\nVIN: "+inV.value:"\nVIN и видео — после задатка $1000.");
+      $("#btnSend").disabled=!(p>0)||r.st==="sent";}
+    [inP,inT,inV].forEach(function(x){x.addEventListener("input",calc)});calc();
+    $("#frm").addEventListener("submit",function(e){e.preventDefault();if(r.st==="sent")return;r.st="sent";sent++;
+      var next=mine.filter(function(x){return x.st!=="sent"})[0];if(next)cur=next.id;renderQueue();renderDetail();renderOwners();toast("已发送给代理 "+r.agent+" · отправлено агенту")});
+  }
+  var tt;function toast(m){var t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(function(){t.hidden=true},2600)}
+
+  function renderPrice(){var tb=$("#tblPrice tbody");tb.innerHTML="";
+    PRICE.forEach(function(p,i){var tr=h("tr"),c="<td><span class='zh' style='font-weight:500'>"+p[1]+"</span><span class='ru'>"+p[0]+"</span></td>";
+      p[2].forEach(function(v,j){if(v===null){c+="<td class='faint'>—</td>";return}var s=typeof v==="string",n=s?+v.slice(2):v;
+        c+="<td><input id='pr"+i+"_"+j+"' type='number' step='100' value='"+n+"' aria-label='"+p[0]+" дистрибьютор "+"ABC"[j]+"'>"+(s?"<span class='stale zh'>昨天 · устарела</span>":"")+"</td>"});
+      c+="<td class='zh'>"+(p[3]==="有"?"<span class='pill p-ok'>有现车 · есть</span>":"<span class='pill p-n'>需订车 · под заказ</span>")+"</td>";tr.innerHTML=c;tb.appendChild(tr)});}
+
+  document.querySelectorAll('[role="tab"]').forEach(function(t){t.addEventListener("click",function(){
+    document.querySelectorAll('[role="tab"]').forEach(function(x){var on=x===t;x.setAttribute("aria-selected",on);$("#"+x.getAttribute("aria-controls")).hidden=!on})})});
+
+  function route(){var v=location.hash==="#selector"?"selector":"owners";
+    $("#vOwners").hidden=v!=="owners";$("#vSel").hidden=v!=="selector";
+    $("#lnkOwners").setAttribute("aria-current",v==="owners"?"page":"false");$("#lnkSel").setAttribute("aria-current",v==="selector"?"page":"false");}
+  window.addEventListener("hashchange",route);
+
+  renderOwners();renderQueue();renderDetail();renderPrice();route();
+})();
+</script>

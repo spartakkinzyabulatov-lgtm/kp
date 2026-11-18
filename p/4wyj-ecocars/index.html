@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>ECOCARS: партнёрство на полгода</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500&family=Onest:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: одна колонка для чтения (~70 знаков) + широкие визуальные вставки (до/после, макеты экранов, графики, оргструктура); разговор: что услышали → пример → устройство → деньги → роли → план → стоимость → риски → шаг */
+:root{
+  --bg:#f5f6f3; --paper:#ffffff; --ink:#18201b; --sub:#56625b; --faint:#87928b; --rule:#dfe4dd; --soft:#eef1ec;
+  --acc:#1f6b4a; --acc-soft:#e2efe7; --acc-ink:#0f3d29;
+  --kom:#3d4f9c; --kom-soft:#e7eaf7;
+  --cn:#b8321f; --cn-soft:#f9e7e2;
+  --warn:#9a630c; --warn-soft:#fbefd9;
+  --bad:#b4321f; --bad-soft:#fbe6e1;
+  --wa:#dcf8c6; --wa-ink:#1b3a17;
+  --display:"Unbounded","Onest",system-ui,sans-serif;
+  --body:"Onest",system-ui,-apple-system,sans-serif;
+  --zh:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121614; --paper:#1a1f1c; --ink:#e7ece8; --sub:#a3aea7; --faint:#77827b; --rule:#2c332f; --soft:#202622;
+  --acc:#66c497; --acc-soft:#1c3327; --acc-ink:#cfeedd; --kom:#9aaaf0; --kom-soft:#22284a; --cn:#ff8a73; --cn-soft:#3a201a; --warn:#f0b24a; --warn-soft:#382a12; --bad:#ff8a73; --bad-soft:#3a201a; --wa:#1f3a2a; --wa-ink:#d6f5dc; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --paper:#1a1f1c; --ink:#e7ece8; --sub:#a3aea7; --faint:#77827b; --rule:#2c332f; --soft:#202622;
+  --acc:#66c497; --acc-soft:#1c3327; --acc-ink:#cfeedd; --kom:#9aaaf0; --kom-soft:#22284a; --cn:#ff8a73; --cn-soft:#3a201a; --warn:#f0b24a; --warn-soft:#382a12; --bad:#ff8a73; --bad-soft:#3a201a; --wa:#1f3a2a; --wa-ink:#d6f5dc; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65}
+.wrap{max-width:1000px;margin:0 auto;padding-block:40px 72px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:60px}
+.read{max-width:70ch}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(28px,4.4vw,44px);line-height:1.15;margin:10px 0 16px;letter-spacing:-.015em;text-wrap:balance}
+h2{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.6vw,26px);line-height:1.25;margin:0 0 14px;text-wrap:balance}
+h3{font-size:17px;font-weight:600;margin:0 0 6px}
+p{margin:0 0 12px}
+.lead{font-size:18px;color:var(--sub)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--faint)}
+.ex{display:inline-block;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);border-radius:5px;padding:2px 7px;vertical-align:middle}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:18px;min-width:0}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:18px}
+.fact{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
+.fact b{display:block;font:500 22px var(--mono);font-variant-numeric:tabular-nums}
+.fact span{font-size:13px;color:var(--sub)}
+/* before/after hero strip */
+.ba{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:22px}
+@media (max-width:720px){.ba{grid-template-columns:minmax(0,1fr)}}
+.ba > div{border-radius:14px;padding:16px 18px}
+.ba .now{background:var(--bad-soft)} .ba .will{background:var(--acc-soft);color:var(--acc-ink)}
+.ba .k{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.ba .big{font:500 30px var(--display);margin:4px 0}
+.ba ul{margin:0;padding-left:18px;font-size:15px}
+/* asks */
+.asks{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.ask{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr);gap:18px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.ask div{min-width:0}
+.ask .k{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:4px}
+.ask .q{font-weight:600}
+@media (max-width:720px){.ask{grid-template-columns:minmax(0,1fr);gap:8px}}
+/* timelines */
+.tl2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media (max-width:760px){.tl2{grid-template-columns:minmax(0,1fr)}}
+.tl{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column}
+.tl li{display:grid;grid-template-columns:52px 14px minmax(0,1fr);gap:8px;font-size:14.5px;position:relative;padding-bottom:12px}
+.tl li .t{font:500 13px var(--mono);color:var(--sub);text-align:right}
+.tl li .d{width:10px;height:10px;border-radius:50%;margin-top:6px;background:var(--faint);position:relative}
+.tl li:not(:last-child) .d::after{content:"";position:absolute;left:4px;top:12px;width:2px;height:calc(100% + 16px);background:var(--rule)}
+.tl li.bad .d{background:var(--bad)} .tl li.ok .d{background:var(--acc)}
+.tl li.bad .x{color:var(--bad)}
+.sum{margin-top:6px;padding-top:10px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:10px;font-weight:600}
+.sum span:last-child{font-family:var(--mono)}
+/* phone mockups */
+.screens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+@media (max-width:860px){.screens{grid-template-columns:minmax(0,1fr)}}
+.phone{background:var(--paper);border:1px solid var(--rule);border-radius:22px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.phone .bar{font:500 12px var(--mono);color:var(--faint);display:flex;justify-content:space-between;padding:0 4px 6px;border-bottom:1px solid var(--soft)}
+.bub{max-width:88%;border-radius:12px;padding:8px 10px;font-size:14px;line-height:1.45}
+.bub.me{align-self:flex-end;background:var(--wa);color:var(--wa-ink);border-bottom-right-radius:3px}
+.bub.bot{align-self:flex-start;background:var(--soft);border-bottom-left-radius:3px}
+.bub .tm{display:block;text-align:right;font:400 11px var(--mono);opacity:.6;margin-top:2px}
+.zcard{border:1px solid var(--cn);background:var(--cn-soft);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.zcard .m{font:500 16px var(--zh)}
+.zh{font-family:var(--zh)}
+.ru{display:block;font-size:11.5px;color:var(--faint)}
+.zrow{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.zbtn{background:var(--cn);color:var(--paper);border-radius:8px;padding:7px 10px;text-align:center;font:500 14px var(--zh);margin-top:4px}
+.cap{font-size:13.5px;color:var(--sub);padding:0 4px}
+/* diagram */
+.diagram{overflow-x:auto;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:12px}
+.diagram svg{display:block;width:100%;min-width:660px;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--sub);margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:14px;height:10px;border-radius:3px;display:inline-block;border:1.5px solid}
+.why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:720px){.why{grid-template-columns:minmax(0,1fr)}}
+.why > div{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:16px 18px;min-width:0}
+.why ul{margin:0;padding-left:18px;font-size:15px;color:var(--sub);display:flex;flex-direction:column;gap:4px}
+/* money */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tile{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;border-top:3px solid var(--rule)}
+.tile.g{border-top-color:var(--acc)} .tile.y{border-top-color:var(--warn)} .tile.r{border-top-color:var(--bad)} .tile.b{border-top-color:var(--kom)}
+.tile .l{font-size:13px;color:var(--sub)}
+.tile .v{font:500 24px var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tile .n{font-size:12px;color:var(--faint)}
+.chart{overflow-x:auto}
+.chart svg{display:block;width:100%;min-width:600px;height:auto}
+.alert{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;background:var(--bad-soft);border-radius:12px;padding:14px 18px;margin-top:12px}
+@media (max-width:720px){.alert{grid-template-columns:minmax(0,1fr)}}
+.alert b{color:var(--bad)}
+.alert ul{margin:4px 0 0;padding-left:18px;font-size:15px}
+.causes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.cause{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:14px}
+.cause .h{font-weight:600;margin-bottom:4px}
+.cause p{font-size:14.5px;color:var(--sub);margin:0}
+.unit{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px}
+@media (max-width:760px){.unit{grid-template-columns:minmax(0,1fr)}}
+.wf{display:flex;flex-direction:column;gap:6px;font-size:15px}
+.wf .r{display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:10px;align-items:center}
+.wf .r span:last-child{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.wf .bar{height:8px;border-radius:4px;background:var(--soft);grid-column:1/-1;overflow:hidden}
+.wf .bar i{display:block;height:100%;border-radius:4px}
+.wf .tot{border-top:1px solid var(--rule);padding-top:8px;font-weight:600}
+/* logistics */
+.lg{display:flex;flex-direction:column;gap:8px}
+.lgrow{display:grid;grid-template-columns:150px minmax(0,1fr) 70px;gap:12px;align-items:center;font-size:14.5px}
+@media (max-width:600px){.lgrow{grid-template-columns:110px minmax(0,1fr) 54px}}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.steps i{height:8px;border-radius:4px;background:var(--soft)}
+.steps i.on{background:var(--acc)} .lgrow.late .steps i.on{background:var(--bad)}
+.lgrow .dd{font-family:var(--mono);text-align:right}
+.lgrow.late .dd{color:var(--bad);font-weight:600}
+.stepnames{display:grid;grid-template-columns:150px minmax(0,1fr) 70px;gap:12px;font-size:12px;color:var(--faint)}
+.stepnames div:nth-child(2){display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+@media (max-width:600px){.stepnames{grid-template-columns:110px minmax(0,1fr) 54px}.stepnames div:nth-child(2) span{font-size:10px}}
+/* org */
+.org{display:flex;flex-direction:column;gap:10px}
+.orow{display:grid;gap:10px}
+.o1{grid-template-columns:minmax(0,1fr)} .o3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:760px){.o3{grid-template-columns:minmax(0,1fr)}}
+.ob{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;min-width:0}
+.ob.new{border:1.5px dashed var(--acc)}
+.ob .w{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.ob .nm{font-weight:600}
+.ob .kpi{font-size:13.5px;color:var(--acc);margin-top:4px}
+.zone{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--sub);margin-top:6px}
+/* months */
+.months{display:flex;flex-direction:column;gap:10px}
+.mo{display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,1fr);gap:18px;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:16px 18px}
+.mo .n{font:500 13px var(--mono);color:var(--acc);letter-spacing:.04em}
+.mo .n b{display:block;font:500 28px var(--display);color:var(--ink);letter-spacing:0}
+.mo ul{margin:0;padding-left:18px;font-size:15px;color:var(--sub);display:flex;flex-direction:column;gap:3px}
+.mo .res{background:var(--acc-soft);color:var(--acc-ink);border-radius:8px;padding:10px 12px;font-size:14.5px;align-self:start}
+.mo .res .k{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:2px;opacity:.8}
+@media (max-width:760px){.mo{grid-template-columns:minmax(0,1fr);gap:10px}}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.lnk{display:flex;flex-direction:column;gap:4px;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:16px 18px;color:inherit;text-decoration:none}
+.lnk:hover{border-color:var(--acc)}
+.lnk b{font-weight:600;color:var(--acc)}
+.lnk span{font-size:14px;color:var(--sub)}
+a{color:var(--acc)}
+a:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:4px}
+.price{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:12px}
+@media (max-width:760px){.price{grid-template-columns:minmax(0,1fr)}}
+.bigp{background:var(--paper);border:2px solid var(--acc);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.bigp .s{font:500 40px var(--mono);letter-spacing:-.02em}
+.bigp .s small{font-size:16px;color:var(--sub)}
+.bigp ul{margin:0;padding-left:18px;font-size:15px;display:flex;flex-direction:column;gap:4px}
+.roi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+@media (max-width:720px){.roi{grid-template-columns:minmax(0,1fr)}}
+.roi > div{background:var(--acc-soft);color:var(--acc-ink);border-radius:12px;padding:14px}
+.roi b{display:block;font:500 22px var(--mono)}
+.note{background:var(--warn-soft);border-radius:10px;padding:12px 16px;font-size:14.5px}
+.note b{color:var(--warn)}
+.tw{overflow-x:auto;background:var(--paper);border:1px solid var(--rule);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;font-weight:500;font-size:13px;color:var(--faint);padding:10px 14px;border-bottom:1px solid var(--rule)}
+td{padding:11px 14px;border-bottom:1px solid var(--soft);vertical-align:top}
+td.num{font-family:var(--mono);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+th.num{text-align:right}
+tr:last-child td{border-bottom:0}
+.risks{display:flex;flex-direction:column;gap:12px}
+.risk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:14px 18px}
+@media (max-width:720px){.risk{grid-template-columns:minmax(0,1fr);gap:6px}}
+.risk .k{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:2px}
+.need{counter-reset:n;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.need li{counter-increment:n;display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px}
+.need li::before{content:counter(n);font:500 14px var(--mono);color:var(--acc);background:var(--acc-soft);border-radius:8px;height:28px;display:flex;align-items:center;justify-content:center}
+.next{background:var(--acc-soft);color:var(--acc-ink);border-radius:14px;padding:22px 24px}
+.next h2{color:var(--acc-ink)}
+footer{font-size:13px;color:var(--faint);border-top:1px solid var(--rule);padding-top:16px}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">SolutionCRM · предварительное предложение · 18 ноября 2026</div>
+    <h1>ECOCARS: операционный партнёр на полгода</h1>
+    <p class="lead read">Фируз, по итогам наших разговоров мы предлагаем не разовую разработку, а работу вместе с вами шесть месяцев. Мы наводим порядок в процессах и ролях, шаг за шагом собираем систему управления — от запроса агента до денег на счетах — и сопровождаем её, пока команда к ней не привыкнет.</p>
+    <div class="meta"><span>Для: Фируз, Фаррух, Ману</span><span>Подготовил: Спартак, SolutionCRM</span></div>
+    <div class="ba">
+      <div class="now"><span class="k">Сейчас</span><div class="big">полдня–день</div><ul><li>каждый запрос идёт через собственника</li><li>часть запросов теряется</li><li>деньги и прибыль — в Excel, после факта</li><li>машины «забывают» на границе</li></ul></div>
+      <div class="will"><span class="k">Через полгода</span><div class="big">~2 часа</div><ul><li>запрос сам идёт к подборщику и обратно</li><li>просрочки видны сразу</li><li>деньги и разрывы видны на 2 недели вперёд</li><li>у каждой машины есть ответственный</li></ul></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Что мы услышали</h2>
+    <div class="read"><p>Вы четыре года экспортируете китайские электромобили в Таджикистан и продали около 5000 машин. Бизнес вырос быстрее, чем управление: всё держится на вас троих, на ручной пересылке сообщений и на Excel. Вы хотите, чтобы компания не зависела от одного человека, чтобы каждый знал свою зону, и чтобы было видно, сколько компания на самом деле зарабатывает и где не хватит денег.</p></div>
+    <div class="facts">
+      <div class="fact"><b>~100</b><span>машин в месяц, от 30 до 200</span></div>
+      <div class="fact"><b>30–45</b><span>запросов цены в день</span></div>
+      <div class="fact"><b>~10</b><span>агентов, 30–40% продаж</span></div>
+      <div class="fact"><b>60%</b><span>продаж — повторные и рекомендации</span></div>
+      <div class="fact"><b>7</b><span>человек в офисе в Китае</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Вы просили → что за этим стоит → что делаем</h2>
+    <div class="asks">
+      <div class="ask"><div><span class="k">Вы просили</span><span class="q">Быстрее отвечать на запросы</span></div><div><span class="k">Что за этим стоит</span>Запрос идёт WhatsApp → вы → WeChat → подборщик → вы → агент. Забыли переслать — клиент ушёл.</div><div><span class="k">Что делаем</span>Запрос агента сам попадает подборщику, цена сама уходит агенту. Вы видите всё, но ничего не пересылаете.</div></div>
+      <div class="ask"><div><span class="k">Вы просили</span><span class="q">Видеть деньги и не попадать в кассовые разрывы</span></div><div><span class="k">Что за этим стоит</span>Деньги, долги и прибыль считаются в Excel после факта. Разрыв обнаруживается в день платежа.</div><div><span class="k">Что делаем</span>Финансы по вашему макету и платёжный календарь: система заранее показывает день, когда денег не хватит.</div></div>
+      <div class="ask"><div><span class="k">Вы просили</span><span class="q">Видеть, кто сколько сделал</span></div><div><span class="k">Что за этим стоит</span>«Дал пять машин, ответила на три» — видно, только если проверить переписку вручную.</div><div><span class="k">Что делаем</span>Нормативы и счётчики на каждого: получено, закрыто, просрочено, среднее время.</div></div>
+      <div class="ask"><div><span class="k">Вы просили</span><span class="q">Не терять машины в пути</span></div><div><span class="k">Что за этим стоит</span>После выкупа у машины нет хозяина — «стоит на границе, а мы забыли».</div><div><span class="k">Что делаем</span>Этапы доставки, логист, задержки подсвечиваются красным.</div></div>
+      <div class="ask"><div><span class="k">Вы просили</span><span class="q">Человека, который выстроит систему, пока вы занимаетесь стратегией</span></div><div><span class="k">Что за этим стоит</span>Нужна не программа, а порядок: роли, регламенты, мотивация — и кто-то, кто доведёт это до привычки.</div><div><span class="k">Что делаем</span>Работаем с вами полгода: еженедельные встречи, роли и мотивация, внедрение по шагам.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Один запрос: сейчас и после <span class="ex">пример</span></h2>
+    <p class="read">Агент утром пишет: «Нужен Zeekr 9X, чёрный на чёрном, новый, клиент готов на задаток». Вот как этот запрос проходит сейчас и как будет проходить.</p>
+    <div class="tl2">
+      <div class="card"><h3>Сейчас</h3>
+        <ol class="tl">
+          <li><span class="t">09:10</span><span class="d"></span><span>Агент пишет Фирузу в WhatsApp</span></li>
+          <li class="bad"><span class="t">11:30</span><span class="d"></span><span class="x">Фируз увидел между делами, копирует в WeChat Ли</span></li>
+          <li><span class="t">11:35</span><span class="d"></span><span>Ли спрашивает двух дистрибьюторов</span></li>
+          <li class="bad"><span class="t">16:40</span><span class="d"></span><span class="x">Ли отвечает Фирузу: цена, фото</span></li>
+          <li class="bad"><span class="t">18:05</span><span class="d"></span><span class="x">Фируз пересылает агенту — клиент уже спросил у другого продавца</span></li>
+        </ol>
+        <div class="sum"><span>Цена у агента через</span><span style="color:var(--bad)">~9 часов</span></div>
+      </div>
+      <div class="card"><h3>После</h3>
+        <ol class="tl">
+          <li class="ok"><span class="t">09:10</span><span class="d"></span><span>Агент пишет на номер компании, как обычно</span></li>
+          <li class="ok"><span class="t">09:10</span><span class="d"></span><span>ИИ разобрал запрос, Ли получила карточку на китайском</span></li>
+          <li class="ok"><span class="t">09:15</span><span class="d"></span><span>Ли спрашивает дистрибьюторов, как и раньше</span></li>
+          <li class="ok"><span class="t">10:55</span><span class="d"></span><span>Ли вносит цену в юанях, система считает доллары</span></li>
+          <li class="ok"><span class="t">10:55</span><span class="d"></span><span>Агент получает готовый ответ по-русски. Фируз видит это на экране</span></li>
+        </ol>
+        <div class="sum"><span>Цена у агента через</span><span style="color:var(--acc)">~1 ч 45 мин</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Что видит каждый участник <span class="ex">макет</span></h2>
+    <div class="screens">
+      <div class="phone">
+        <div class="bar"><span>WhatsApp · агент</span><span>09:10</span></div>
+        <div class="bub me">Нужен Zeekr 9X чёрный на чёрном, новый. Клиент готов внести задаток сегодня<span class="tm">09:10</span></div>
+        <div class="bub bot">Принял запрос №1284. Цену пришлю до 11:10<span class="tm">09:10</span></div>
+        <div class="bub bot">Zeekr 9X — чёрный, салон чёрный, новый.<br>Цена на сегодня: <b>$62 000</b> до Душанбе (±$300–500, зависит от курса).<br>Срок: 7–14 дней.<br>Фото: 3 шт. VIN и видео — после задатка $1000.<span class="tm">10:55</span></div>
+        <div class="bub me">Клиент согласен 👍<span class="tm">11:20</span></div>
+        <p class="cap">Агент пишет как обычно, только на номер компании, а не в личку собственнику.</p>
+      </div>
+      <div class="phone">
+        <div class="bar"><span class="zh">选车员 · 李</span><span>09:10</span></div>
+        <div class="zcard">
+          <span class="m">极氪9X · 新车</span><span class="ru">Zeekr 9X · новая</span>
+          <div class="zrow"><span class="zh">颜色 黑/黑</span><span class="zh">剩余 1:55</span></div>
+          <div style="font-size:12.5px;color:var(--sub)">«Нужен Zeekr 9X чёрный на чёрном…»</div>
+          <div class="zh" style="font-size:13.5px">需要极氪9X，黑色外观黑色内饰，新车。</div>
+          <div class="zrow"><span class="zh">经销商报价 ¥398 000</span><span class="zh">交车 7–14天</span></div>
+          <div class="zbtn">发送给代理 · отправить</div>
+        </div>
+        <p class="cap">Подборщица видит запрос на китайском, вносит цену в юанях. Имя клиента и наценку она не видит.</p>
+      </div>
+      <div class="phone">
+        <div class="bar"><span>Собственник · сводка</span><span>11:00</span></div>
+        <div class="tiles" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="tile"><div class="l">Запросов</div><div class="v">34</div></div>
+          <div class="tile y"><div class="l">Ждут цены</div><div class="v">5</div></div>
+          <div class="tile g"><div class="l">Ответ в ср.</div><div class="v">1:52</div></div>
+          <div class="tile r"><div class="l">Просрочено</div><div class="v">1</div></div>
+        </div>
+        <div style="font-size:13.5px;border-top:1px solid var(--soft);padding-top:8px">Ли · 13 из 14 · 1:35<br>Чжан · 10 из 12 · <span style="color:var(--bad)">1 просрочка</span><br>Чэнь · 8 из 8 · 1:20</div>
+        <p class="cap">Вы видите поток запросов и работу каждого — без пересылок и проверок переписки.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Как будет устроено</h2>
+    <p class="read">Основа — CRM Kommo: агенты, сделки, переписка WhatsApp и Instagram, мобильное приложение. Поверх неё мы делаем то, чего в Kommo нет: панель на китайском для подборщиков и финансовый блок с дашбордом для вас. Всё связано автоматически, данные вводятся один раз.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 780 340" role="img" aria-label="Схема: агенты и клиенты пишут в WhatsApp и Instagram, сообщения попадают в Kommo; Kommo связан с нашим сервером, где работают панель подборщиков на китайском, финансы, дашборд и ИИ">
+        <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9z" style="fill:var(--sub)"/></marker></defs>
+        <rect x="20" y="40" width="160" height="84" rx="10" style="fill:var(--paper);stroke:var(--rule)"/>
+        <text x="100" y="72" text-anchor="middle" style="fill:var(--ink);font:600 15px var(--body)">Агенты, клиенты</text>
+        <text x="100" y="94" text-anchor="middle" style="fill:var(--sub);font:400 13px var(--body)">WhatsApp, Instagram</text>
+        <rect x="20" y="216" width="160" height="84" rx="10" style="fill:var(--paper);stroke:var(--rule)"/>
+        <text x="100" y="248" text-anchor="middle" style="fill:var(--ink);font:600 15px var(--body)">Собственники,</text>
+        <text x="100" y="270" text-anchor="middle" style="fill:var(--ink);font:600 15px var(--body)">логист</text>
+        <rect x="230" y="60" width="180" height="220" rx="12" style="fill:var(--kom-soft);stroke:var(--kom)"/>
+        <text x="320" y="96" text-anchor="middle" style="fill:var(--ink);font:600 16px var(--body)">Kommo</text>
+        <text x="320" y="124" text-anchor="middle" style="fill:var(--sub);font:400 13px var(--body)">сделки и клиенты</text>
+        <text x="320" y="146" text-anchor="middle" style="fill:var(--sub);font:400 13px var(--body)">переписка в одном окне</text>
+        <text x="320" y="168" text-anchor="middle" style="fill:var(--sub);font:400 13px var(--body)">этапы и задачи</text>
+        <text x="320" y="190" text-anchor="middle" style="fill:var(--sub);font:400 13px var(--body)">мобильное приложение</text>
+        <text x="320" y="246" text-anchor="middle" style="fill:var(--faint);font:400 12px var(--body)">готовая CRM, подписка</text>
+        <rect x="470" y="60" width="290" height="220" rx="12" style="fill:var(--acc-soft);stroke:var(--acc)"/>
+        <text x="615" y="92" text-anchor="middle" style="fill:var(--acc-ink);font:600 16px var(--body)">Наша надстройка</text>
+        <text x="615" y="112" text-anchor="middle" style="fill:var(--acc-ink);font:400 12px var(--body)">сервер в Сингапуре</text>
+        <rect x="488" y="128" width="122" height="60" rx="8" style="fill:var(--cn-soft);stroke:var(--cn)"/>
+        <text x="549" y="154" text-anchor="middle" style="fill:var(--ink);font:600 13px var(--body)">Панель 中文</text>
+        <text x="549" y="173" text-anchor="middle" style="fill:var(--sub);font:400 12px var(--body)">подборщики</text>
+        <rect x="622" y="128" width="122" height="60" rx="8" style="fill:var(--paper);stroke:var(--acc)"/>
+        <text x="683" y="154" text-anchor="middle" style="fill:var(--ink);font:600 13px var(--body)">Финансы</text>
+        <text x="683" y="173" text-anchor="middle" style="fill:var(--sub);font:400 12px var(--body)">деньги, разрывы</text>
+        <rect x="488" y="200" width="122" height="60" rx="8" style="fill:var(--paper);stroke:var(--acc)"/>
+        <text x="549" y="226" text-anchor="middle" style="fill:var(--ink);font:600 13px var(--body)">Дашборд CEO</text>
+        <text x="549" y="245" text-anchor="middle" style="fill:var(--sub);font:400 12px var(--body)">всё на экране</text>
+        <rect x="622" y="200" width="122" height="60" rx="8" style="fill:var(--paper);stroke:var(--acc)"/>
+        <text x="683" y="226" text-anchor="middle" style="fill:var(--ink);font:600 13px var(--body)">ИИ</text>
+        <text x="683" y="245" text-anchor="middle" style="fill:var(--sub);font:400 12px var(--body)">разбор, перевод</text>
+        <path d="M180 82 H226" fill="none" style="stroke:var(--sub);stroke-width:1.5" marker-end="url(#a)" marker-start="url(#a)"/>
+        <path d="M180 258 H226" fill="none" style="stroke:var(--sub);stroke-width:1.5" marker-end="url(#a)" marker-start="url(#a)"/>
+        <path d="M410 170 H466" fill="none" style="stroke:var(--sub);stroke-width:1.5" marker-end="url(#a)" marker-start="url(#a)"/>
+        <text x="438" y="160" text-anchor="middle" style="fill:var(--faint);font:400 11px var(--mono)">API</text>
+      </svg>
+    </div>
+    <div class="legend"><span><i style="background:var(--kom-soft);border-color:var(--kom)"></i>Kommo — готовая CRM, оплачиваете вы</span><span><i style="background:var(--acc-soft);border-color:var(--acc)"></i>то, что делаем мы</span></div>
+    <div class="why" style="margin-top:14px">
+      <div><h3>Что берём у Kommo</h3><ul><li>Готовые воронки, задачи, карточки клиентов</li><li>WhatsApp и Instagram в одном окне</li><li>Мобильное приложение для агентов и логиста</li><li>Открытый API: данные можно забирать в наши панели</li></ul></div>
+      <div><h3>Что делаем сами и почему</h3><ul><li>Панель для подборщиков — в Kommo нет китайского</li><li>Финансы и разрывы — CRM не считает деньги на счетах</li><li>Дашборд CEO — по вашему макету</li><li>Разбор и перевод сообщений ИИ</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Деньги на одном экране <span class="ex">пример</span></h2>
+    <p class="read">Это продолжение вашего макета из ChatGPT. Верхняя строка показывает, что есть сегодня. Ниже — то, ради чего всё делается: остаток денег по дням вперёд.</p>
+    <div class="tiles">
+      <div class="tile g"><div class="l">На счетах и в кассе</div><div class="v">$24 800</div><div class="n">доступно сейчас</div></div>
+      <div class="tile y"><div class="l">Нам должны</div><div class="v">$15 500</div><div class="n">из них у агентов $6 200</div></div>
+      <div class="tile r"><div class="l">Мы должны</div><div class="v">$11 000</div><div class="n">за 7 дней $6 500</div></div>
+      <div class="tile b"><div class="l">Вложено в машины</div><div class="v">$48 000</div><div class="n">6 машин в работе</div></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline"><h3 style="margin:0">Платёжный календарь на 14 дней</h3><span style="font-size:13px;color:var(--faint)">остаток денег на конец дня, $</span></div>
+      <div class="chart"><svg id="cal" viewBox="0 0 760 260" role="img" aria-label="График остатка денег на 14 дней: на 9-й день остаток уходит в минус 3200 долларов"></svg></div>
+    </div>
+    <div class="alert">
+      <div><b>Через 9 дней не хватит $3 200</b><p style="margin:4px 0 0;font-size:15px">27 ноября в один день сходятся задатки трём дистрибьюторам, выкуп BYD Han и зарплаты. Система видит это сегодня.</p></div>
+      <div><span style="font-size:13px;color:var(--sub)">Что можно сделать заранее:</span><ul><li>напомнить агенту перевести $4 000 клиента, которые у него на руках</li><li>перенести выкуп BYD Han на 3 дня</li><li>попросить остаток с клиента по Zeekr 001 после видео с VIN</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Откуда берутся кассовые разрывы</h2>
+    <p class="read">Клиент платит полную сумму до выкупа, поэтому разрыв возникает не на самой машине, а в промежутках между деньгами. Вот где мы их ожидаем — это наша гипотеза, проверим на ваших данных в первый месяц.</p>
+    <div class="causes">
+      <div class="cause"><div class="h">Задатки из своих</div><p>Вы платите дистрибьютору $1 000 за бронь, пока клиент думает. 10 броней одновременно — $10 000 заморожено.</p></div>
+      <div class="cause"><div class="h">Деньги у агентов</div><p>Клиент заплатил агенту, агент ещё не перевёл. Для компании это долг, которого нет в Excel.</p></div>
+      <div class="cause"><div class="h">Логистика вперёд</div><p>Доставку, тонировку и плёнку оплачиваете до того, как клиент получил машину.</p></div>
+      <div class="cause"><div class="h">Три валюты</div><p>Платите в юанях, продаёте в долларах, расходы в сомони. Курс съедает маржу незаметно.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Прибыль по каждой машине <span class="ex">пример</span></h2>
+    <p class="read">Сейчас прибыль считается в Excel после сделки. В системе она видна сразу, как только подборщик внёс цену, и уточняется по факту расходов.</p>
+    <div class="unit">
+      <div class="card"><h3>Zeekr 9X · сделка №1284</h3>
+        <div class="wf" id="wf"></div>
+      </div>
+      <div class="card"><h3>Что это даёт</h3>
+        <ul style="margin:0;padding-left:18px;font-size:15px;color:var(--sub);display:flex;flex-direction:column;gap:6px">
+          <li>Видно, на каких моделях вы зарабатываете больше, а на каких почти ноль.</li>
+          <li>Комиссия агенту считается сама по цене машины: $300 / $500 / $1 000.</li>
+          <li>Ману не собирает расходы по переписке — они записаны в сделке.</li>
+          <li>В конце месяца — прибыль по агентам, моделям и подборщикам.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Где каждая машина <span class="ex">пример</span></h2>
+    <div class="card">
+      <div class="lg">
+        <div class="stepnames"><div></div><div><span>выкуп</span><span>подготовка</span><span>в пути</span><span>таможня</span><span>выдача</span></div><div style="text-align:right">дней</div></div>
+        <div class="lgrow late"><span>Zeekr 001 · Душанбе</span><div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div><span class="dd">34</span></div>
+        <div class="lgrow late"><span>Lixiang L9 · Худжанд</span><div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div><span class="dd">31</span></div>
+        <div class="lgrow"><span>Zeekr 9X · Душанбе</span><div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><span class="dd">26</span></div>
+        <div class="lgrow"><span>BYD Han · Бохтар</span><div class="steps"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><span class="dd">12</span></div>
+        <div class="lgrow"><span>Toyota bZ4X · Куляб</span><div class="steps"><i class="on"></i><i></i><i></i><i></i><i></i></div><span class="dd">5</span></div>
+      </div>
+      <p style="margin:12px 0 0;font-size:14.5px;color:var(--sub)">Красным — дольше 30 дней. Логисту приходит задача «позвонить и выяснить», вам — сигнал. Клиент получает статус в WhatsApp без ваших звонков.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Кто за что отвечает <span class="ex">предварительно</span></h2>
+    <p class="read">Набросок по тому, что вы рассказали. Нормативы — примеры, точные цифры выставим вместе в пятом месяце.</p>
+    <div class="org">
+      <div class="orow o1"><div class="ob"><div class="w">Стратегия</div><div class="nm">Фируз — CEO</div><div style="font-size:14px;color:var(--sub)">направления, найм, контроль по дашборду</div></div></div>
+      <div class="orow o3">
+        <div class="ob"><div class="w">Закупка</div><div class="nm">Фаррух</div><div class="kpi">выкуп в срок, цена не выше прайса</div></div>
+        <div class="ob"><div class="w">Финансы</div><div class="nm">Ману</div><div class="kpi">платёжный календарь без разрывов, маржа по сделкам</div></div>
+        <div class="ob new"><div class="w">Новая роль</div><div class="nm">Логист</div><div class="kpi">0 машин дольше 30 дней без объяснения</div></div>
+      </div>
+      <div class="zone">Офис в Китае</div>
+      <div class="orow o3">
+        <div class="ob"><div class="w">Подбор, ×3</div><div class="nm">Ли и коллеги</div><div class="kpi">цена за 2 часа, 90%+ запросов закрыты</div></div>
+        <div class="ob"><div class="w">Экспорт</div><div class="nm">Ван</div><div class="kpi">документы готовы к отгрузке</div></div>
+        <div class="ob"><div class="w">Учёт</div><div class="nm">Бухгалтер</div><div class="kpi">оплаты внесены в тот же день</div></div>
+      </div>
+      <div class="zone">Таджикистан</div>
+      <div class="orow o3">
+        <div class="ob"><div class="w">Продажи, ~10</div><div class="nm">Торговые агенты</div><div class="kpi">запросы только через систему, деньги — в банк за 1 день</div></div>
+        <div class="ob"><div class="w">B2B</div><div class="nm">Исмаил</div><div class="kpi">спецтехника и грузовики в той же воронке</div></div>
+        <div class="ob"><div class="w">Маркетинг и сервис</div><div class="nm">SMM ×2, автосервис</div><div class="kpi">ответ в Instagram, повторные продажи</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Посмотреть вживую</h2>
+    <div class="links">
+      <a class="lnk" href="kak-est.html"><b>Схема процесса сейчас →</b><span>20 шагов от запроса до выдачи машины: кто кому передаёт и где теряется контроль.</span></a>
+      <a class="lnk" href="prototip.html"><b>Кликабельный макет →</b><span>Сводка для собственников и кабинет подборщика на китайском. Можно нажимать и отправлять цену.</span></a>
+    </div>
+  </section>
+
+  <section>
+    <h2>План на шесть месяцев</h2>
+    <p class="read">Порядок можно менять, если что-то окажется срочнее. План — пример, финально согласуем на старте.</p>
+    <div class="months">
+      <div class="mo"><div class="n">месяц<b>1</b></div><div><h3>Разбор и быстрый ответ</h3><ul><li>Интервью с вами и сотрудниками, схема ролей</li><li>Kommo: воронки, WhatsApp, агенты</li><li>Панель подборщиков: запрос → цена</li><li>Платёжный календарь в Google Таблице — сразу, чтобы видеть разрывы</li><li>Проверка, что всё открывается из Китая</li></ul></div><div class="res"><span class="k">Результат</span>Пилот: 2 агента и 1 подборщик дают цену без собственника. Разрывы видны на 2 недели вперёд</div></div>
+      <div class="mo"><div class="n">месяц<b>2</b></div><div><h3>Сделки и логистика</h3><ul><li>Запуск на всех агентов и подборщиков</li><li>Этапы сделки: задаток → VIN → оплата → выкуп</li><li>Логист и этапы доставки, задержки красным</li><li>Расчёт комиссий агентам</li></ul></div><div class="res"><span class="k">Результат</span>Каждая машина на своём этапе, ни одна не теряется</div></div>
+      <div class="mo"><div class="n">месяц<b>3</b></div><div><h3>Деньги</h3><ul><li>Платёжный календарь переезжает в систему и связывается со сделками</li><li>Кто должен нам, кому мы, деньги у агентов</li><li>Прибыль по каждой машине, три валюты</li></ul></div><div class="res"><span class="k">Результат</span>Финансы компании на одном экране, без Excel</div></div>
+      <div class="mo"><div class="n">месяц<b>4</b></div><div><h3>Дашборд и цены</h3><ul><li>Дашборд CEO по вашему макету</li><li>Утренний прайс 15–20 моделей</li><li>Бот сразу даёт ориентировочную цену агентам и в Instagram</li></ul></div><div class="res"><span class="k">Результат</span>Вы управляете бизнесом с одного экрана</div></div>
+      <div class="mo"><div class="n">месяц<b>5</b></div><div><h3>Роли и мотивация</h3><ul><li>Нормативы на каждого сотрудника</li><li>Мотивация от результата</li><li>Регламенты по каждому этапу</li></ul></div><div class="res"><span class="k">Результат</span>Каждый знает, за что отвечает и за что получает деньги</div></div>
+      <div class="mo"><div class="n">месяц<b>6</b></div><div><h3>Рост и передача</h3><ul><li>Повторные продажи: «купил полтора года назад — предложить трейд-ин»</li><li>B2B в системе</li><li>Обучение, отладка, итоговый разбор</li></ul></div><div class="res"><span class="k">Результат</span>Система работает в ежедневной жизни; дальше — по желанию</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Стоимость</h2>
+    <div class="price">
+      <div class="bigp">
+        <span class="eyebrow">Наша работа</span>
+        <span class="s">$1 000 <small>в месяц</small></span>
+        <span style="color:var(--sub)">договор на 6 месяцев · всего $6 000</span>
+        <ul><li>Еженедельная встреча и отчёт</li><li>Разбор процессов, роли, мотивация</li><li>Настройка Kommo и разработка надстройки по плану</li><li>Сопровождение: сервер, обновления, исправления, обучение</li></ul>
+      </div>
+      <div class="tw"><table>
+        <thead><tr><th>Оплачиваете напрямую</th><th class="num">Сколько</th></tr></thead>
+        <tbody>
+          <tr><td>Kommo, тариф Advanced<br><span style="font-size:13px;color:var(--faint)">$35 за пользователя в месяц, оплата сразу за 6 месяцев. Сколько мест нужно — посчитаем вместе</span></td><td class="num">$210 / чел.<br>за 6 мес.</td></tr>
+          <tr><td>Сервер и ИИ<br><span style="font-size:13px;color:var(--faint)">надстройка, разбор и перевод сообщений</span></td><td class="num">~$35 / мес.</td></tr>
+          <tr><td>WhatsApp<br><span style="font-size:13px;color:var(--faint)">способ подключения выберем в первый месяц; при вашем объёме расходы минимальные</span></td><td class="num">по факту</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <p class="read" style="margin-top:12px;font-size:15px;color:var(--sub)">Пример: 6 мест в Kommo — $1 260 за полгода. Цены Kommo — по сайту на 18.11.2026; для вашей страны Kommo может показать региональную цену.</p>
+    <h3 style="margin-top:18px">Окупаемость <span class="ex">оценка</span></h3>
+    <div class="roi">
+      <div><b>$1 000–2 000</b>прибыль с одной машины — уточним по вашим данным</div>
+      <div><b>2 сделки</b>в месяц, спасённые быстрым ответом, уже дают $2–4 тыс.</div>
+      <div><b>×2–4</b>к стоимости нашей работы — не считая разрывов, которых удалось избежать</div>
+    </div>
+    <div class="note" style="margin-top:12px"><b>Выезд в Китай.</b> Если хотите, в первый месяц к вам в офис приедет наш специалист: посмотреть процесс вживую и поговорить с подборщиками. Дорогу и проживание согласуем отдельно.</div>
+  </section>
+
+  <section>
+    <h2>Риски — говорим заранее</h2>
+    <div class="risks">
+      <div class="risk"><div><span class="k">Риск</span>Как Kommo работает из Китая без VPN, заранее никто не знает.</div><div><span class="k">Как снижаем</span>Проверяем в первую неделю на пробном аккаунте, до оплаты. Подборщики в любом случае работают в нашей панели. Если Kommo из Китая работать не будет, собираем систему без него.</div></div>
+      <div class="risk"><div><span class="k">Риск</span>Личный WeChat подборщиков с дистрибьюторами автоматизировать нельзя.</div><div><span class="k">Как снижаем</span>Подборщик спрашивает дистрибьютора как сейчас, а цену вносит в панель. Позже можно перейти на корпоративный WeChat, где контакты принадлежат компании.</div></div>
+      <div class="risk"><div><span class="k">Риск</span>Остатки на счетах в банках Китая и Таджикистана автоматически подтянуть, скорее всего, не получится.</div><div><span class="k">Как снижаем</span>Ману или бухгалтер вносит остатки раз в день — это две минуты. Всё остальное считается само.</div></div>
+      <div class="risk"><div><span class="k">Риск</span>Система не заработает, если люди продолжат работать по-старому.</div><div><span class="k">Как снижаем</span>Нужно ваше решение: запросы цены — только через систему. Правила закрепляем в мотивации, внутри нужен ответственный.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Что нужно от вас</h2>
+    <ol class="need read">
+      <li><span>Список сотрудников с обязанностями.</span></li>
+      <li><span>Ваш макет из ChatGPT и текущие таблицы Excel — с них начнём финансы.</span></li>
+      <li><span>Средняя маржа с машины и правило наценки — для расчёта цены.</span></li>
+      <li><span>Где сейчас возникают разрывы: два-три последних случая — когда и из-за чего.</span></li>
+      <li><span>Двое агентов и один подборщик на пилот, плюс ответственный за систему внутри.</span></li>
+      <li><span>Оплата Kommo со своей карты компании — подскажем, как оформить.</span></li>
+    </ol>
+  </section>
+
+  <section class="next">
+    <h2>Следующий шаг</h2>
+    <p style="margin:0">Обсуждаем предложение на созвоне, уточняем план первого месяца и подписываем договор. В первую неделю — интервью с командой, пробный аккаунт Kommo, проверка из Китая и первый платёжный календарь.</p>
+  </section>
+
+  <footer>SolutionCRM · внедрение и автоматизация продаж. Предложение предварительное: цифры в примерах условные, план по месяцам и состав работ уточним вместе на старте.</footer>
+</div>
+
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg";
+  function el(p,t,a,x){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(x!=null)e.textContent=x;p.appendChild(e);return e}
+  /* платёжный календарь (пример) */
+  var days=["19","20","21","22","23","24","25","26","27","28","29","30","1","2"];
+  var bal=[24.8,21.3,27.3,25.1,18.6,19.6,14.1,9.1,-3.2,-1.2,8.8,7.6,15.6,13.4];
+  var s=document.getElementById("cal"),W=760,H=260,L=56,R=16,T=16,B=36,min=-10,max=30;
+  var x=function(i){return L+i*(W-L-R)/(days.length-1)},y=function(v){return T+(max-v)*(H-T-B)/(max-min)};
+  [-10,0,10,20,30].forEach(function(v){el(s,"line",{x1:L,x2:W-R,y1:y(v),y2:y(v),style:"stroke:var("+(v===0?"--sub":"--rule")+");stroke-width:"+(v===0?1.2:1)+(v===0?"":";stroke-dasharray:3 4")});
+    el(s,"text",{x:L-8,y:y(v)+4,"text-anchor":"end",style:"fill:var(--faint);font:400 11px var(--mono)"},(v<0?"−":"")+"$"+Math.abs(v)+"k")});
+  var area="M"+x(0)+" "+y(0);bal.forEach(function(v,i){area+=" L"+x(i)+" "+y(v)});area+=" L"+x(bal.length-1)+" "+y(0)+" Z";
+  el(s,"path",{d:area,style:"fill:var(--acc);opacity:.12"});
+  var line="";bal.forEach(function(v,i){line+=(i?" L":"M")+x(i)+" "+y(v)});
+  el(s,"path",{d:line,fill:"none",style:"stroke:var(--acc);stroke-width:2.2"});
+  el(s,"rect",{x:x(7.5),y:y(0),width:x(9.6)-x(7.5),height:y(min)-y(0),style:"fill:var(--bad);opacity:.15"});
+  bal.forEach(function(v,i){var neg=v<0;el(s,"circle",{cx:x(i),cy:y(v),r:neg?5:3.2,style:"fill:var("+(neg?"--bad":"--acc")+")"});
+    el(s,"text",{x:x(i),y:H-12,"text-anchor":"middle",style:"fill:var(--faint);font:400 11px var(--mono)"},days[i])});
+  el(s,"text",{x:x(8)+10,y:y(-3.2)+4,style:"fill:var(--bad);font:600 12px var(--body)"},"−$3 200 · 27 ноября");
+  el(s,"text",{x:x(0)+6,y:y(24.8)-10,style:"fill:var(--ink);font:500 12px var(--mono)"},"$24 800 сегодня");
+  /* прибыль по машине (пример) */
+  var rows=[["Цена клиенту",62000,"--acc"],["Машина у дистрибьютора: ¥398 000 по 7,10",-56056,"--sub"],["Доставка до Душанбе",-2100,"--sub"],["Экспорт и документы",-350,"--sub"],["Тонировка и плёнка",-450,"--sub"],["Комиссия агенту (машина $60–100 тыс.)",-1000,"--warn"]];
+  var wf=document.getElementById("wf"),tot=0,mx=62000;
+  rows.forEach(function(r){tot+=r[1];var d=document.createElement("div");d.className="r";
+    d.innerHTML="<span>"+r[0]+"</span><span>"+(r[1]<0?"−":"")+"$"+Math.abs(r[1]).toLocaleString("ru-RU")+"</span><div class='bar'><i style='width:"+(Math.abs(r[1])/mx*100).toFixed(1)+"%;background:var("+r[2]+")'></i></div>";wf.appendChild(d)});
+  var t=document.createElement("div");t.className="r tot";t.innerHTML="<span>Прибыль компании</span><span style='color:var(--acc)'>$"+tot.toLocaleString("ru-RU")+"</span>";wf.appendChild(t);
+})();
+</script>
