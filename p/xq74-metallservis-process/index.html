@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="ru">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>МеталлСервис: процесс и воронки</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#eef1f5;color:#1c2430;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+body{display:flex;flex-direction:column}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 16px;background:#14243d;color:#fff}
+.bar b{margin-right:12px}
+.bar button{border:1px solid #3a5070;background:#1f3557;color:#fff;border-radius:8px;padding:5px 12px;font:inherit;cursor:pointer}
+.bar button:hover{border-color:#f08a24}
+.bar #tp.on{background:#0e9384;border-color:#0e9384}
+.bar .z{min-width:52px;text-align:center;color:#c9d3e0}
+.bar .hint{font-size:12px;color:#c9d3e0;margin-left:8px}
+#vp{flex:1;overflow:auto;cursor:grab}
+#vp.drag{cursor:grabbing}
+#vp svg{display:block;margin:0 auto;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.nt{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.25;overflow:hidden;font-size:13.5px}
+.nt.md{font-size:15px;font-weight:600}
+.nt.sm{font-size:13.5px}
+.nt.xs{font-size:12.5px;text-align:left;justify-content:flex-start}
+.nt.dec{font-size:13px;font-weight:700}
+.nt.xs.c{text-align:center;justify-content:center;font-weight:700;font-size:11px}
+#sch.noprop .prop{display:none}
+@media print{ .bar{display:none} #vp{overflow:visible} }
+
+.tabs{display:flex;gap:4px;margin-right:16px}
+.tabs button.on{background:#f08a24;border-color:#f08a24;color:#fff;font-weight:700}
+.p2{flex:1;overflow:auto;background:#eef1f5}
+.p2w{max-width:1500px;margin:0 auto;padding:24px 16px 60px}
+.p2head{display:flex;flex-wrap:wrap;gap:20px;align-items:center;background:#fff;border-radius:14px;padding:18px 22px;margin-bottom:18px}
+.logo{background:#f2f2f2;padding:10px 16px;font-size:28px;font-weight:800;border-left:3px solid #2e7fb8}
+.logo .l1{color:#1d4a6e;padding-right:8px;border-right:2px solid #2e7fb8}.logo .l2{color:#3ba3a0;font-weight:400;padding-left:8px}
+.p2t{flex:1;min-width:260px}.p2t h2{margin:0 0 4px;color:#14243d;font-size:26px}.p2t .sub{color:#5b6675;font-size:14px}
+.blk{background:#fff;border-radius:14px;padding:20px 22px;margin-bottom:18px}
+.blk h3{margin:0 0 6px;color:#14243d;font-size:21px}
+.lead{color:#3d4654;margin:0 0 14px}.lead.small{font-size:13.5px;margin-top:12px}
+.warn{background:#fdecea;border-left:5px solid #c0392b;border-radius:6px;padding:10px 14px;color:#7a1d12;font-size:14px;margin:12px 0 0}
+.note{background:#fff3e6;border-left:5px solid #f08a24;border-radius:6px;padding:10px 14px;font-size:14px}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:14px}
+.f{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.5px;line-height:1.25;padding:10px 12px;min-height:58px;border:1.5px solid}
+.f.stage{background:#fff2cc;border-color:#d6b656;border-radius:8px;font-weight:600}
+.f.stage.kev{background:#f08a24;border-color:#c96a0c;color:#fff;box-shadow:0 0 0 4px #ffe1c2}
+.f.won{background:#d5e8d4;border-color:#82b366;border-radius:8px;font-weight:600}
+.f.lost{background:#f8cecc;border-color:#b85450;border-radius:8px}
+.f.event{background:#e1d5e7;border-color:#9673a6;border-radius:8px}
+.f.task{background:#dae8fc;border-color:#6c8ebf;border-radius:50%;min-height:86px;padding:12px 22px}
+.f.doc{background:#f5f5f5;border-color:#8a8a8a;border-radius:4px 4px 40% 10%/4px 4px 18px 10px;font-size:12.5px}
+.f.dec{background:#fff;border:none;min-height:96px;font-weight:700;font-size:13px;padding:0 26px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='50,1 99,50 50,99 1,50' fill='white' stroke='%2314243d' stroke-width='1.6' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");background-size:100% 100%}
+.f.dec.sm{display:inline-flex;min-height:28px;width:34px;padding:0;margin-right:8px;vertical-align:middle;float:left}
+.r{position:absolute;bottom:-8px;right:10px;width:26px;height:26px;border-radius:50%;background:#c2185b;color:#fff;font:800 13px/26px Georgia,serif;text-align:center;border:2px solid #fff}
+.r+.r{right:40px}
+.chain,.mini{display:flex;flex-wrap:nowrap;align-items:center;gap:6px;overflow-x:auto;padding:6px 2px 12px}
+.chain .f{flex:1 1 0;min-width:96px}
+.chain i,.mini i,.g9 i{font-style:normal;color:#14243d;font-weight:700;font-size:18px;text-align:center}
+.vars{display:grid;grid-template-columns:repeat(auto-fit,minmax(600px,1fr));gap:14px}
+.var{border:1.5px solid #dfe4ea;border-radius:12px;padding:14px 16px}
+.var.best{border:2.5px solid #f08a24;background:#fffaf4}
+.var.no{background:#f7f7f8;opacity:.92}
+.vh{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-bottom:12px}
+.vh h4{margin:0;font-size:18px;color:#14243d}
+.badge{background:#f08a24;color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;flex-basis:100%;max-width:max-content}
+.badge.b2{background:#2e6da4}.badge.b3{background:#8a94a3}
+.power{font-size:13px;color:#5b6675}.power b{color:#f08a24;letter-spacing:2px}
+.mini .f{flex:1 1 0;min-width:110px}
+.mini .f.task{flex:1.5 1 0;min-width:180px;min-height:104px;padding:14px 26px}
+.var ul{margin:12px 0 0;padding-left:20px;font-size:14px}.var li{margin:3px 0}
+.mx{border:1px solid #dfe4ea;border-radius:10px;overflow:hidden}
+.mxr{display:grid;grid-template-columns:1.2fr 1.6fr .6fr 1fr;border-top:1px solid #dfe4ea}
+.mxr>div{padding:10px 12px;font-size:14px}
+.mxr.hd{background:#14243d;color:#fff;font-weight:600;border-top:none}
+.mxr:not(.hd)>div:first-child{background:#fff2cc}
+.g9{display:grid;grid-template-columns:1fr 34px 1.2fr 34px 1fr 50px 1.2fr 34px 1fr;align-items:center;row-gap:6px}
+.g9 i.yes,.g9 i.no{font-size:14px;color:#14243d}
+.g9 i.v{text-align:center}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.kpi{border:1px solid #dfe4ea;border-radius:12px;padding:14px}
+.kpi b{display:block;font-size:28px;color:#14243d}.kpi span{display:block;font-weight:600}.kpi em{display:block;color:#5b6675;font-size:13px;font-style:normal;margin-top:4px}
+.foot{color:#5b6675;font-size:12.5px;text-align:center}
+@media (max-width:900px){.g9{grid-template-columns:1fr;}.g9>div:empty{display:none}.g9 i{transform:rotate(90deg)}.mxr{grid-template-columns:1fr 1fr}.vars{grid-template-columns:1fr}}
+
+
+table.pl{width:100%;border-collapse:collapse;font-size:14px}
+table.pl th{background:#14243d;color:#fff;text-align:left;padding:10px;font-weight:600;position:sticky;top:0}
+table.pl td{border-top:1px solid #dfe4ea;padding:10px;vertical-align:top}
+table.pl td.n span{display:inline-block;width:30px;height:30px;border-radius:50%;background:#0e9384;color:#fff;font-weight:800;text-align:center;line-height:30px}
+table.pl tr.kp td:nth-child(4){background:#fff7ef}
+table.pl tr.ki td:nth-child(4){background:#f2f6fd}
+table.pl tr.ka td:nth-child(4){background:#eef9f7}
+table.pl small{color:#5b6675}
+.tw{overflow-x:auto}
+.ic{font-size:16px}
+.filt{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.filt button{border:1px solid #dfe4ea;background:#fff;border-radius:999px;padding:5px 14px;font:inherit;cursor:pointer}
+.filt button.on{background:#0e9384;border-color:#0e9384;color:#fff}
+ol.top{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+ol.top li{background:#eef9f7;border-left:5px solid #0e9384;border-radius:8px;padding:10px 14px}
+ol.top .tn{display:inline-block;width:26px;height:26px;border-radius:50%;background:#0e9384;color:#fff;font-weight:800;text-align:center;line-height:26px;margin-right:8px}
+ol.top em{color:#0b4f47;font-style:normal;font-weight:600}
+ul.plain{margin:0;padding-left:22px}ul.plain li{margin:4px 0}
+
+
+.fnw{max-width:1600px;margin:0 auto}
+.fblk{background:#fff;border-radius:14px;padding:20px 22px;margin-bottom:18px}
+.fblk h3{margin:0 0 4px;color:#14243d;font-size:21px}
+.map{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px}
+.map.sub{margin-top:10px}
+.mbox{border-radius:10px;padding:12px 16px;color:#fff;min-width:200px;flex:1 1 200px}
+.mbox b{display:block;font-size:16px}.mbox span{font-size:13px;opacity:.9}
+.m1{background:#2e6da4}.m2{background:#b5600e}.m3{background:#5b6675}.m4{background:#1e8449;border:2px dashed #fff;outline:2px dashed #1e8449}
+.marr{font-weight:700;color:#14243d;font-size:14px;white-space:nowrap}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:16px}
+.rules>div{background:#f4f6f9;border-radius:8px;padding:10px 12px;font-size:14px}
+.fh{display:flex;gap:14px;align-items:flex-start;border-left:6px solid var(--c);padding-left:14px;margin-bottom:14px}
+.fh .fn{background:var(--c);color:#fff;font-weight:800;font-size:20px;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none}
+.fh p{margin:2px 0 0;color:#5b6675;font-size:14px}
+.hint{font-size:12.5px;color:#b5600e;font-weight:600;margin:-4px 0 8px}
+.board{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;align-items:stretch}
+.col{flex:0 0 190px;background:#f4f6f9;border-radius:8px;display:flex;flex-direction:column;min-width:0}
+.col .ch{background:#fff2cc;border:1.5px solid #d6b656;border-radius:8px 8px 0 0;padding:10px;font-weight:700;font-size:14px;color:#1c2430;min-height:56px;display:flex;align-items:center}
+.col.kev .ch{background:#f08a24;border-color:#c96a0c;color:#fff}
+.col.kev{box-shadow:0 0 0 3px #ffe1c2}
+.col.won .ch{background:#d5e8d4;border-color:#82b366}
+.col.lost{flex-basis:220px}
+.col.lost .ch{background:#f8cecc;border-color:#b85450}
+.sec{padding:8px 10px;font-size:12.5px;line-height:1.35}
+.sec+.sec{border-top:1px dashed #d4dae2}
+.sec .lab{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#5b6675;font-weight:700;margin-bottom:4px}
+.sec.rb .lab{color:#0e9384}
+.sec ul{margin:0;padding-left:16px}.sec li{margin:2px 0}
+.fnote{font-size:13.5px;color:#3d4654;margin:12px 0 0}
+.fnote.c{text-align:center;color:#5b6675;margin-bottom:20px}
+
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="tabs"><button id="t1" class="on">1. Процесс как есть</button><button id="t2">2. Варианты КЭВ</button><button id="t3">3. Что меняем</button><button id="t4">4. Воронки amoCRM</button></div>
+  <span id="zoomctl">
+  <button id="zo">−</button><span class="z" id="zl">100%</span><button id="zi">+</button>
+  <button id="fitw">По ширине</button><button id="fit">Вся схема</button><button id="one">100%</button><button id="tp" class="on">Предложения: показаны</button>
+  <span class="hint">Тяните мышью, чтобы двигать · Ctrl + колесо — масштаб</span></span>
+</div>
+<div id="vp">
+<svg id="sch" xmlns="http://www.w3.org/2000/svg" viewBox="0 -76 1930 8028.4" width="1930" height="8028.4" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1c2430"/></marker><marker id="arO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f08a24"/></marker></defs>
+<rect x="0" y="-76" width="1930" height="8028.4" fill="#ffffff"/>
+<rect x="20" y="-46" width="300" height="70" fill="#f2f2f2"/>
+<path d="M20,6 V24 H40" fill="none" stroke="#2e7fb8" stroke-width="3"/><path d="M300,-46 H320 V-28" fill="none" stroke="#2e7fb8" stroke-width="3"/>
+<text x="38" y="0" font-size="34" font-weight="800" fill="#1d4a6e">SOLUTION</text>
+<line x1="213" y1="-30" x2="213" y2="8" stroke="#2e7fb8" stroke-width="2"/>
+<text x="222" y="0" font-size="34" font-weight="400" fill="#3ba3a0">CRM</text>
+<text x="1890" y="-12" text-anchor="end" font-size="30" font-weight="800" fill="#14243d">МеталлСервис</text>
+<text x="1890" y="14" text-anchor="end" font-size="15" fill="#5b6675">Процесс продаж · v2 от 20.11.2026 (правки по встрече 20.11) · для согласования</text>
+<rect x="1270" y="259.6" width="625" height="576.0" rx="16" fill="#f6f7f9" stroke="#c9d1db" stroke-dasharray="6 6"/>
+<text x="1290" y="821.6" font-size="15" font-weight="700" fill="#5b6675">ЭТАП 1 · ДО ЗАЯВКИ (книга продаж: «два этапа работ»)</text>
+<rect x="40" y="6051.6" width="1855" height="1862.3999999999996" rx="16" fill="#fff8f0" stroke="#f0b27a" stroke-dasharray="6 6"/>
+<text x="60" y="6081.6" font-size="18" font-weight="800" fill="#b5600e">ВОРОНКА 2 · ПОВТОРНЫЕ ПРОДАЖИ (79% выручки)</text>
+<path d="M585.0,330 H528.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,458 H528.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,867.6 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,1162.0 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M815.0,1411.6 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,1552.4 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M782.0,1699.6000000000001 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,1846.8 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M815.0,2774.7999999999997 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,2915.6 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,3056.4 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M1335.0,3862.8 H1392.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M1355.0,4150.8 H1392.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M795.0,4573.2 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M795.0,5117.2 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,3581.2 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M795.0,4835.6 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M1085.0,5546.0 H1122.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M815.0,5821.2 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M815.0,6877.2 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,6877.2 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M1605.0,650.0 H1662.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M150,101.0 V126.0 H150 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M150,101.0 V126.0 H420 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M420,101.0 V126.0 H420 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M690,101.0 V126.0 H690 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M690,101.0 V126.0 H960 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M690,101.0 V126.0 H420 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M1000,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M1270,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M1540,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M1810,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M150,229.0 V265.0 H592.8 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M420,229.0 V265.0 H641.4 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,229.0 V265.0 H690.0 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M960,229.0 V265.0 H738.6 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1500,229.0 V299.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1500,411.6 V446.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1500,558.8 V621.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="1510" y="575.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M1592.0,502.8 H1665.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="1600.0" y="493.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M1500,679.0 V734.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1395.0,765.2 H1230 V330 H795.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,359.0 V402.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,514.0 V550.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,608.6 V664.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,776.4 V811.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="700" y="793.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M782.0,720.4 H912.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="790.0" y="711.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M690,923.6 V958.8000000000001" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,1070.8000000000002 V1106.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="700" y="1087.8000000000002" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M598.0,1014.8000000000001 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="590.0" y="1005.8000000000001" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M690,1218.0 V1261.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,1319.0 V1355.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,1467.6 V1496.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,1608.4 V1643.6000000000001" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,1755.6000000000001 V1790.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="700" y="1772.6000000000001" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M598.0,1699.6000000000001 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="590.0" y="1690.6000000000001" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M690,1902.8 V1943.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,2005.8 V2053.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,2165.2 V2450.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="700" y="2182.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M782.0,2109.2 H1230 V2168.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="790.0" y="2100.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M1230,2280.4 V2309.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1230,2421.2 V2506.0 H815.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,2562.0 V2609.3999999999996" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,2671.3999999999996 V2718.7999999999997" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,2830.7999999999997 V2859.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,2971.6 V3000.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,3112.4 V3155.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,3213.4 V3256.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,3368.4 V3417.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,3475.8 V3525.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,3637.2 V3686.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,3744.6 V3806.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,3918.8 V3981.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="700" y="3935.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M782.0,3862.8 H1125.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="790.0" y="3853.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M1230,3893.8 V3947.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1230,4059.6 V4094.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1230,4206.8 V4242.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1138.0,4298.0 H690 V4382.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="1130.0" y="4289.0" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да — согласовали</text>
+<path d="M1322.0,4298.0 H1395.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="1330.0" y="4289.0" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M690,4039.0 V4101.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M598.0,4157.2 H420 V4242.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="590.0" y="4148.2" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M690,4213.2 V4382.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="700" y="4230.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M420,4354.0 V4438.8 H565.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,4494.8 V4544.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,4602.2 V4645.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,4757.2 V4806.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,4864.6 V4920.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,5032.4 V5088.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,5146.2 V5220.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,5282.6 V5342.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M598.0,5398.8 H420 V5490.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="590.0" y="5389.8" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">самовывоз</text>
+<path d="M782.0,5398.8 H960 V5490.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="790.0" y="5389.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">доставка</text>
+<path d="M420,5602.0 V5686.8 H585.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M960,5602.0 V5686.8 H795.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,5715.8 V5765.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,5877.2 V5931.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,5993.0 V6137.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="700" y="6010.0" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">робот создаёт сделку в «Повторных»</text>
+<path d="M690,6195.8 V6251.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,6363.6 V6392.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,6504.4 V6539.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,6651.6 V6713.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="700" y="6668.6" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M598.0,6595.6 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="590.0" y="6586.6" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M690,6771.8 V6821.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,6933.2 V6968.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,7080.4 V7142.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="700" y="7097.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M782.0,7024.4 H1138.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="790.0" y="7015.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M1230,7080.4 V7115.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="1240" y="7097.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">65+</text>
+<path d="M1230,7227.6 V7283.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<text x="1240" y="7244.6" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">180+</text>
+<path d="M468.0,7171.6 H585.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,7200.6 V7256.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,7368.4 V7424.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,7482.2 V7552.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,7610.2 V7680.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,7738.2 V7806.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M585.0,7837.2 H25 V6166.8 H585.0" fill="none" stroke="#f08a24" stroke-width="2.6" marker-end="url(#arO)" stroke-linejoin="round"/>
+<text x="33" y="7002.0" text-anchor="start" font-size="15" font-weight="600" fill="#f08a24" paint-order="stroke" stroke="#fff" stroke-width="5">кольцо: новая сделка по циклу клиента</text>
+<rect x="55.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="61.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Яндекс Директ → сайт</div></foreignObject>
+<rect x="325.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="331.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Рекомендации</div></foreignObject>
+<rect x="595.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="601.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Постоянные клиенты</div></foreignObject>
+<rect x="865.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="871.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Своя база (не проработана)</div></foreignObject>
+<rect x="1135.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="1141.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Холодные: запрашивали, не купили</div></foreignObject>
+<rect x="1405.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="1411.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Базы застройщиков, новые объекты</div></foreignObject>
+<rect x="1675.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="1681.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Партнёры</div></foreignObject>
+<rect x="55.0" y="175.0" width="190" height="54" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="61.0" y="178.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Форма «Заказать звонок»</div></foreignObject>
+<rect x="325.0" y="175.0" width="190" height="54" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="331.0" y="178.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Звонок на общий номер</div></foreignObject>
+<rect x="595.0" y="175.0" width="190" height="54" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="601.0" y="178.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Почта (общая + личные)</div></foreignObject>
+<rect x="865.0" y="175.0" width="190" height="54" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="871.0" y="178.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">MAX</div></foreignObject>
+<rect x="1405.0" y="175.0" width="190" height="54" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="1411.0" y="178.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Прозвон базы менеджером</div></foreignObject>
+<ellipse cx="1500" cy="355.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1399.0" y="309.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Звонок: какие объекты и работы ведёте, чем можем помочь?</div></foreignObject>
+<circle cx="1611.0" cy="405.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1611.0" y="411.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<polygon points="1500,446.8 1592.0,502.8 1500,558.8 1408.0,502.8" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="1440" y="468.8" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Есть объект или скоро будет задача?</div></foreignObject>
+<rect x="1665.0" y="467.8" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="1671.0" y="470.8" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Нет — вернуться позже</div></foreignObject>
+<rect x="1395.0" y="621.0" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="1401.0" y="624.0" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Перспективные</div></foreignObject>
+<rect x="1662.0" y="611.0" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="1662.0" y="611.0" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="1672.0" y="614.0" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Этап в amoCRM настраивали — «не совсем удобно»</div></foreignObject>
+<rect x="1395.0" y="734.2" width="210" height="62" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<foreignObject x="1401.0" y="737.2" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Появилась конкретная заявка</div></foreignObject>
+<rect x="585.0" y="301.0" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="304.0" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Новая заявка</div></foreignObject>
+<rect x="312.0" y="291.0" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="312.0" y="291.0" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="322.0" y="294.0" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Очередь звонков 20 сек; почт несколько; заявка с формы не дошла; MAX не работает</div></foreignObject>
+<ellipse cx="690" cy="458" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="412.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Берёт тот менеджер, кто свободен</div></foreignObject>
+<circle cx="801.0" cy="508.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="514.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="312.0" y="419.0" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="312.0" y="419.0" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="322.0" y="422.0" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Реакция ~1 час, а нужно 5–15 мин. Новый или старый — вручную по названию</div></foreignObject>
+<polygon points="690,664.4 782.0,720.4 690,776.4 598.0,720.4" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="686.4" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Постоянный клиент?</div></foreignObject>
+<ellipse cx="690" cy="867.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="821.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Квалификация, 5 мин: целевая заявка? целевой клиент (ИНН, ОКВЭД)?</div></foreignObject>
+<circle cx="801.0" cy="917.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="923.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<path d="M317.0,828.6 H523.0 V896.6 Q471.5,884.6 420.0,898.6 T317.0,900.6 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="832.6" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Книга 1.2: «Целевая номенклатура», «Целевой клиент или нецелевой»</div></foreignObject>
+<polygon points="690,958.8000000000001 782.0,1014.8000000000001 690,1070.8000000000002 598.0,1014.8000000000001" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="980.8000000000001" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Целевые заявка и клиент?</div></foreignObject>
+<rect x="45.0" y="979.8000000000001" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="51.0" y="982.8000000000001" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Закрыто: торгующая, тендер, не наша номенклатура</div></foreignObject>
+<ellipse cx="690" cy="1162.0" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="1116.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Сложность: 1–3 поз. / склад — простая; 5–40 / не склад — сложная. Наружка или внутрянка, ОВ или ВК</div></foreignObject>
+<circle cx="801.0" cy="1212.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="1218.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<path d="M317.0,1123.0 H523.0 V1191.0 Q471.5,1179.0 420.0,1193.0 T317.0,1195.0 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="1127.0" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Склады: «Металлсервис», «Санехкомплект», «Эльф»</div></foreignObject>
+<rect x="585.0" y="550.6" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="553.6" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Взято в работу</div></foreignObject>
+<ellipse cx="690" cy="1411.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="1365.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Письмо «заявку получили»: вопросы + мини-презентация</div></foreignObject>
+<circle cx="801.0" cy="1461.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="1467.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="852.0" y="1372.6" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="1372.6" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="1375.6" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Шаблона письма пока нет</div></foreignObject>
+<ellipse cx="690" cy="1552.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="1506.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Звонок + формула продаж: ОП (объект), ЗС (когда), ФВ (бюджет выделен?)</div></foreignObject>
+<circle cx="801.0" cy="1602.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="1608.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="1602.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="1608.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<path d="M317.0,1513.4 H523.0 V1581.4 Q471.5,1569.4 420.0,1583.4 T317.0,1585.4 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="1517.4" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Книга 2.1: П = ФВ × ОП × Д × ЛПР × ЗС</div></foreignObject>
+<polygon points="690,1643.6000000000001 782.0,1699.6000000000001 690,1755.6000000000001 598.0,1699.6000000000001" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="1665.6000000000001" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Все множители больше нуля?</div></foreignObject>
+<rect x="45.0" y="1664.6000000000001" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="51.0" y="1667.6000000000001" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Ноль в формуле: отложить, в «зависшие» или отказ</div></foreignObject>
+<rect x="852.0" y="1660.6000000000001" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="1660.6000000000001" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="1663.6000000000001" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Формулу заполняют не всегда; вопросов на ЛПР и Д нет</div></foreignObject>
+<ellipse cx="690" cy="1846.8" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="1800.8" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">«Вилка»: бюджетный или беспроблемный? «Гарантию на объекте несёте?»</div></foreignObject>
+<circle cx="801.0" cy="1896.8" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="1902.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="1896.8" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="1902.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<path d="M317.0,1807.8 H523.0 V1875.8 Q471.5,1863.8 420.0,1877.8 T317.0,1879.8 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="1811.8" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Книга 2.2: «Вилка»</div></foreignObject>
+<rect x="585.0" y="1943.8" width="210" height="62" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<foreignObject x="591.0" y="1946.8" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Согласие на беспроблемный вариант</div></foreignObject>
+<polygon points="690,2053.2 782.0,2109.2 690,2165.2 598.0,2109.2" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="2075.2" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Сложная заявка или «хочу сравнить»?</div></foreignObject>
+<ellipse cx="1230" cy="2224.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1129.0" y="2178.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">«Это сложная заявка» + письмо «Как будем работать» (клиенту, инициатору, руководителю)</div></foreignObject>
+<circle cx="1341.0" cy="2274.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1341.0" y="2280.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<ellipse cx="1230" cy="2365.2" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1129.0" y="2319.2" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Созвон через 20–40 мин: очерёдность закупок, контакты технарей</div></foreignObject>
+<circle cx="1341.0" cy="2415.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1341.0" y="2421.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="1307.0" cy="2415.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1307.0" y="2421.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<ellipse cx="690" cy="2506.0" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="2460.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Проработка с техспециалистом: параметры, аналоги, частичная поставка</div></foreignObject>
+<circle cx="801.0" cy="2556.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="2562.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="2556.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="2562.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<rect x="585.0" y="2609.3999999999996" width="210" height="62" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<foreignObject x="591.0" y="2612.3999999999996" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Техспециалист согласовал решение — «победа на 95%»</div></foreignObject>
+<ellipse cx="690" cy="2774.7999999999997" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="2728.7999999999997" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Просчёт: свои склады + кабинеты поставщиков + наценка</div></foreignObject>
+<circle cx="801.0" cy="2824.7999999999997" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="2830.7999999999997" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="2824.7999999999997" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="2830.7999999999997" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">П</text>
+<rect x="852.0" y="2735.7999999999997" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="2735.7999999999997" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="2738.7999999999997" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ От 1 часа до 2 дней на проект. Контакты поставщиков — в Excel и телефонах</div></foreignObject>
+<ellipse cx="690" cy="2915.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="2869.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Предвосхитить возражения до счёта: цена (доллар, ЭТРН), сроки</div></foreignObject>
+<circle cx="801.0" cy="2965.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="2971.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<path d="M317.0,2876.6 H523.0 V2944.6 Q471.5,2932.6 420.0,2946.6 T317.0,2948.6 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="2880.6" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Регламент по предвосхищению возражений</div></foreignObject>
+<rect x="585.0" y="1261.0" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="1264.0" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Квалификация пройдена</div></foreignObject>
+<circle cx="960" cy="720.4" r="48" fill="#fff3e6" stroke="#f08a24" stroke-width="2.4"/>
+<foreignObject x="914" y="684.4" width="92" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs c" style="color:#8a4a0a">в воронку «Повторные» ↓</div></foreignObject>
+<ellipse cx="690" cy="3056.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="3010.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Письмо-упаковка + счёт: на почту и в MAX, напомнить, о чём договорились на «Вилке»</div></foreignObject>
+<circle cx="801.0" cy="3106.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="3112.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<path d="M317.0,3017.4 H523.0 V3085.4 Q471.5,3073.4 420.0,3087.4 T317.0,3089.4 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="3021.4" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Книга: «Упаковка счёта», 3 шаблона писем</div></foreignObject>
+<rect x="585.0" y="3155.4" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="3158.4" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Счёт отправлен</div></foreignObject>
+<ellipse cx="690" cy="3312.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="3266.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Контрольный звонок: получили? переслали ЛПР? когда созвон по решению?</div></foreignObject>
+<circle cx="801.0" cy="3362.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="3368.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="585.0" y="3417.8" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="3420.8" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Счёт получен ЛПР</div></foreignObject>
+<ellipse cx="690" cy="3581.2" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="3535.2" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Касание: в 9:00 письмо с пользой (паспорт, сертификат), в 10–11:00 звонок по счёту</div></foreignObject>
+<circle cx="801.0" cy="3631.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="3637.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="3631.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="3637.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<path d="M317.0,3542.2 H523.0 V3610.2 Q471.5,3598.2 420.0,3612.2 T317.0,3614.2 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="3546.2" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Регламент подготовки клиента к согласованию счёта («Касание с клиентом»)</div></foreignObject>
+<rect x="585.0" y="3686.6" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="3689.6" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Касание проведено (название уточняем)</div></foreignObject>
+<polygon points="690,3806.8 782.0,3862.8 690,3918.8 598.0,3862.8" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="3828.8" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Счёт согласован?</div></foreignObject>
+<rect x="1125.0" y="3831.8" width="210" height="62" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<foreignObject x="1131.0" y="3834.8" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Не сегодня: ждут денег (20–25 дн.), директора, бухгалтерию; сравнивают</div></foreignObject>
+<rect x="1392.0" y="3823.8" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="1392.0" y="3823.8" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="1402.0" y="3826.8" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Снабжение без обоснования оплатило дешёвый счёт (октябрь, случай Венеры)</div></foreignObject>
+<ellipse cx="1230" cy="4003.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1129.0" y="3957.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Возражение — событие, не этап: отметить в поле, разобрать с РОПом</div></foreignObject>
+<circle cx="1341.0" cy="4053.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1341.0" y="4059.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<ellipse cx="1230" cy="4150.8" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1129.0" y="4104.8" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Новое касание: новая дата созвона, счётчик +1; 2 звонка без решения — «зависший»</div></foreignObject>
+<circle cx="1341.0" cy="4200.8" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1341.0" y="4206.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="1392.0" y="4111.8" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="1392.0" y="4111.8" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="1402.0" y="4114.8" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Касание часто забывают — из-за этого решение переносится</div></foreignObject>
+<polygon points="1230,4242.0 1322.0,4298.0 1230,4354.0 1138.0,4298.0" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="1170" y="4264.0" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Решились?</div></foreignObject>
+<rect x="1395.0" y="4263.0" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="1401.0" y="4266.0" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Закрыто: купили у других</div></foreignObject>
+<rect x="585.0" y="3981.0" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="3984.0" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Счёт согласован, отдан на оплату*</div></foreignObject>
+<polygon points="690,4101.2 782.0,4157.2 690,4213.2 598.0,4157.2" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="4123.2" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Сложная или нестандартная позиция?</div></foreignObject>
+<ellipse cx="420" cy="4298.0" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="319.0" y="4252.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Договор-спецификация: параметры согласованы, возврату не подлежит</div></foreignObject>
+<circle cx="531.0" cy="4348.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="531.0" y="4354.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<ellipse cx="690" cy="4438.8" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="4392.8" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Оплата: 100% · 50/50 · банковская гарантия · редко отсрочка</div></foreignObject>
+<circle cx="801.0" cy="4488.8" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="4494.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<rect x="585.0" y="4544.2" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="4547.2" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Оплата получена</div></foreignObject>
+<rect x="852.0" y="4534.2" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="4534.2" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="4537.2" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Форма оплаты сейчас не фиксируется</div></foreignObject>
+<ellipse cx="690" cy="4701.2" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="4655.2" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Клиенту: «оплата пришла, товар заказан, будет в понедельник»</div></foreignObject>
+<circle cx="801.0" cy="4751.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="4757.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="585.0" y="4806.6" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="4809.6" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Заказ сформирован</div></foreignObject>
+<rect x="852.0" y="4796.6" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="4796.6" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="4799.6" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Менеджера нет в день заказа — заказ забывают</div></foreignObject>
+<ellipse cx="690" cy="4976.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="4930.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">В день заказа: корзина в кабинете поставщика → ✅ «Заказ отправлен»</div></foreignObject>
+<circle cx="801.0" cy="5026.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="5032.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="5026.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="5032.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">П</text>
+<rect x="585.0" y="5088.2" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="5091.2" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Товар поступил (пн)</div></foreignObject>
+<rect x="852.0" y="5078.2" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="5078.2" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="5081.2" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Срыв узнаём по факту; сделку забывают переносить</div></foreignObject>
+<rect x="585.0" y="5220.6" width="210" height="62" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<foreignObject x="591.0" y="5223.6" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Автосообщение клиенту: «товар готов к отгрузке» + что взять с собой</div></foreignObject>
+<polygon points="690,5342.8 782.0,5398.8 690,5454.8 598.0,5398.8" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="5364.8" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Самовывоз или доставка?</div></foreignObject>
+<ellipse cx="420" cy="5546.0" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="319.0" y="5500.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Самовывоз: доверенность, паспорт или печать</div></foreignObject>
+<circle cx="531.0" cy="5596.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="531.0" y="5602.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<circle cx="497.0" cy="5596.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="497.0" y="5602.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">С</text>
+<ellipse cx="960" cy="5546.0" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="859.0" y="5500.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Доставка: контакт принимающего — в день поступления, согласовать время</div></foreignObject>
+<circle cx="1071.0" cy="5596.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1071.0" y="5602.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">С</text>
+<rect x="1122.0" y="5507.0" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="1122.0" y="5507.0" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="1132.0" y="5510.0" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Кладовщик = логист, не справляется</div></foreignObject>
+<rect x="585.0" y="5657.8" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="5660.8" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Отгружено</div></foreignObject>
+<ellipse cx="690" cy="5821.2" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="5775.2" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Документы: паспорта, сертификаты с «мокрой» печатью, закрывающие, доплата</div></foreignObject>
+<circle cx="801.0" cy="5871.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="5877.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="852.0" y="5782.2" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="5782.2" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="5785.2" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Всё вручную: распечатать, подписать, отсканировать</div></foreignObject>
+<rect x="585.0" y="5931.0" width="210" height="62" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="591.0" y="5934.0" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Успешно реализовано</div></foreignObject>
+<rect x="585.0" y="6137.8" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="6140.8" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Новая сделка в «Повторных»</div></foreignObject>
+<ellipse cx="690" cy="6307.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="6261.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Обратная связь: всё ли устроило? Есть замечания?</div></foreignObject>
+<circle cx="801.0" cy="6357.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="6363.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<ellipse cx="690" cy="6448.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="6402.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Следующая заявка + рекомендация («соседний подъезд — познакомите?»)</div></foreignObject>
+<circle cx="801.0" cy="6498.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="6504.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="6498.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="6504.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<polygon points="690,6539.6 782.0,6595.6 690,6651.6 598.0,6595.6" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="6561.6" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Нужны повторные касания?</div></foreignObject>
+<rect x="45.0" y="6560.6" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="51.0" y="6563.6" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Разовый или торгующий: флажок «касания не нужны»</div></foreignObject>
+<rect x="585.0" y="6713.8" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="6716.8" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Контакт запланирован (≤ 3 мес.)</div></foreignObject>
+<ellipse cx="690" cy="6877.2" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="6831.2" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Касание по поводу и по циклу: «пришлите к среде — в чт машина»</div></foreignObject>
+<circle cx="801.0" cy="6927.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="6933.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="852.0" y="6838.2" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="6838.2" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="6841.2" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ 43 постоянных ушли; ежемесячные автозадачи (30 в день) бросили</div></foreignObject>
+<path d="M317.0,6838.2 H523.0 V6906.2 Q471.5,6894.2 420.0,6908.2 T317.0,6910.2 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="6842.2" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 База amoCRM: 79% выручки — повторные; у половины клиентов покупка раз в 21 день</div></foreignObject>
+<polygon points="690,6968.4 782.0,7024.4 690,7080.4 598.0,7024.4" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="6990.4" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Пришла заявка?</div></foreignObject>
+<polygon points="1230,6968.4 1322.0,7024.4 1230,7080.4 1138.0,7024.4" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="1170" y="6990.4" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Дней без покупки?</div></foreignObject>
+<ellipse cx="1230" cy="7171.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1129.0" y="7125.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">65+ дней: звонок «всё ли в порядке?», новости склада</div></foreignObject>
+<circle cx="1341.0" cy="7221.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1341.0" y="7227.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="1125.0" y="7283.8" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="1131.0" y="7286.8" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">180+ дней: клиент ушёл → «Реактивация»</div></foreignObject>
+<circle cx="420" cy="7171.6" r="48" fill="#fff3e6" stroke="#f08a24" stroke-width="2.4"/>
+<foreignObject x="374" y="7135.6" width="92" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs c" style="color:#8a4a0a">из «Постоянный клиент?»</div></foreignObject>
+<rect x="585.0" y="7142.6" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="7145.6" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Заявка получена</div></foreignObject>
+<ellipse cx="690" cy="7312.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="7266.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Счёт сразу, без КЭВа. Новый крупный объект — снова разбор</div></foreignObject>
+<circle cx="801.0" cy="7362.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="7368.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="585.0" y="7424.2" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="7427.2" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Оплата получена</div></foreignObject>
+<rect x="585.0" y="7552.2" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="7555.2" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Заказ сформирован</div></foreignObject>
+<rect x="585.0" y="7680.2" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="7683.2" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Отгружено, документы закрыты</div></foreignObject>
+<rect x="585.0" y="7806.2" width="210" height="62" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="591.0" y="7809.2" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Успешно реализовано</div></foreignObject>
+<g class="prop"><rect x="842.0" y="412.0" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="846.0" cy="416.0" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="846.0" y="422.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">1</text>
+<foreignObject x="862.0" y="416.0" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">🔌 Все каналы в одну ленту amoCRM: форма сайта напрямую, почты, MAX, телефония</div></foreignObject></g>
+<g class="prop"><rect x="842.0" y="533.6" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="846.0" cy="537.6" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="846.0" y="543.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">2</text>
+<foreignObject x="862.0" y="537.6" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Таймер 15 мин: не взяли — РОПу уведомление, клиенту автоответ. Постоянных пока отмечаем вручную, потом — автоматически</div></foreignObject></g>
+<g class="prop"><rect x="842.0" y="821.6" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="846.0" cy="825.6" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="846.0" y="831.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">3</text>
+<foreignObject x="862.0" y="825.6" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ ИНН в карточке → проверка компании (ОКВЭД, статус). Поля квалификации обязательны</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="1128.8" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="1132.8" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="1138.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">4</text>
+<foreignObject x="52.0" y="1132.8" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Причина отказа обязательна; спам и технические закрытия — отдельно; строителя с «не нашим» запросом оставить в базе</div></foreignObject></g>
+<g class="prop"><rect x="842.0" y="1116.0" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="846.0" cy="1120.0" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="846.0" y="1126.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">5</text>
+<foreignObject x="862.0" y="1120.0" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">✎ Утвердить границы сложности: заявки на 4 позиции и больше 40 сейчас не описаны</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="1365.6" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="1369.6" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="1375.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">6</text>
+<foreignObject x="52.0" y="1369.6" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Письмо «заявку получили» — шаблон в amoCRM, отправка в 1 клик</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="1506.4" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="1510.4" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="1516.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">7</text>
+<foreignObject x="52.0" y="1510.4" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Поля ФВ, ОП, Д, ЛПР, ЗС обязательны (решено 20.11). ЛПР — роль контакта: «по технике» и «по оплате»</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="2063.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="2067.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="2073.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">8</text>
+<foreignObject x="52.0" y="2067.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">✎ КЭВ: этапы «Разбор назначен» → «Решение согласовано» до счёта. Вариант выбирает клиент (вкладка 2)</div></foreignObject></g>
+<g class="prop"><rect x="1382.0" y="2319.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1386.0" cy="2323.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1386.0" y="2329.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">20</text>
+<foreignObject x="1402.0" y="2323.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Флажок «Сложное решение» (завод, КБ — до недели): этапы те же, своя аналитика и длинный порог «зависла»</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="2524.0" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="2528.0" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="2534.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">9</text>
+<foreignObject x="52.0" y="2528.0" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">✎ Техспециалист — обязательный контакт в сделке. Обоснование уходит и ему, и снабжению</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="2728.8" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="2732.8" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="2738.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">10</text>
+<foreignObject x="1132.0" y="2732.8" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">🔌 Поставщики в amoCRM: карточки, фильтр, писать в MAX и на почту из CRM. Позже — 1С</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="3074.4" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="3078.4" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="3084.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">11</text>
+<foreignObject x="1132.0" y="3078.4" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Шаблоны писем-упаковок в amoCRM, отправка на почту и в MAX; после счёта — автозадача «контрольный звонок»</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="3400.8" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="3404.8" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="3410.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">21</text>
+<foreignObject x="52.0" y="3404.8" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">✎ Новый этап «Счёт получен ЛПР»: переслали тому, кто согласует, и договорились о дате созвона</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="3669.6" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="3673.6" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="3679.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">22</text>
+<foreignObject x="52.0" y="3673.6" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Касания: автозадачи в 9:00 «письмо с пользой» и ко времени созвона «звонок»; поле «Число касаний». Само касание — человек</div></foreignObject></g>
+<g class="prop"><rect x="1652.0" y="4034.4" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1656.0" cy="4038.4" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1656.0" y="4044.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">12</text>
+<foreignObject x="1672.0" y="4038.4" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Возражение — поле, не этап: при заполнении задача РОПу. Порог «зависла»: 3 дня, «Сложное решение» — 7 (пример)</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="4111.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="4115.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="4121.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">13</text>
+<foreignObject x="52.0" y="4115.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Флажок «Сложная / нестандартная позиция»: без подписанной спецификации нельзя на «Оплата получена»</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="4789.6" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="4793.6" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="4799.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">23</text>
+<foreignObject x="1132.0" y="4793.6" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Поле «Дата заказа» → задача на этот день; ✅ «Заказ отправлен» видно на карточке; поле «Плановая дата прихода»</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="5135.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="5139.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="5145.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">14</text>
+<foreignObject x="1132.0" y="5139.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Перенос в «Товар поступил» → автосообщение клиенту. Не пришёл к плановой дате — задача «предупредить клиента»</div></foreignObject></g>
+<g class="prop"><rect x="1382.0" y="5500.0" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1386.0" cy="5504.0" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1386.0" y="5510.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">15</text>
+<foreignObject x="1402.0" y="5504.0" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">✎ Логист и воронка «Закуп и логистика» — позже, когда наймут логиста</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="5775.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="5779.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="5785.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">16</text>
+<foreignObject x="1132.0" y="5779.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Поле «Форма оплаты» → контроль доплаты и закрывающих; шаблоны паспортов и сертификатов — Месяц 2</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="6095.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="6099.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="6105.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">18</text>
+<foreignObject x="1132.0" y="6099.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Робот создаёт сделку в «Повторных» сразу после «Успешно реализовано»</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="6274.4" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="6278.4" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="6284.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">17</text>
+<foreignObject x="1132.0" y="6278.4" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Обратная связь — первый шаг «Повторных». Поле «Кто порекомендовал»</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="6703.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="6707.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="6713.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">24</text>
+<foreignObject x="52.0" y="6707.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">✎ «Контакт запланирован» — дата обязательна, не дальше 3 мес. Разовым — флажок. Не больше 10–15 задач в день</div></foreignObject></g>
+<g class="prop"><rect x="1382.0" y="7125.6" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1386.0" cy="7129.6" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1386.0" y="7135.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">19</text>
+<foreignObject x="1402.0" y="7129.6" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Статус по давности покупок каждую ночь: 65+ дн. — задача «звонок», 180+ — «Реактивация»</div></foreignObject></g>
+<g class="prop"><circle cx="591.0" cy="305.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="310.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">1</text></g>
+<g class="prop"><circle cx="599.0" cy="414.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="419.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">2</text></g>
+<g class="prop"><circle cx="591.0" cy="554.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="559.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">2</text></g>
+<g class="prop"><circle cx="599.0" cy="823.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="828.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">3</text></g>
+<g class="prop"><circle cx="644" cy="980.8000000000001" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="985.8000000000001" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">4</text></g>
+<g class="prop"><circle cx="51.0" cy="983.8000000000001" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="51.0" y="988.8000000000001" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">4</text></g>
+<g class="prop"><circle cx="599.0" cy="1118.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="1123.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">5</text></g>
+<g class="prop"><circle cx="591.0" cy="1265.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="1270.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">5</text></g>
+<g class="prop"><circle cx="599.0" cy="1367.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="1372.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">6</text></g>
+<g class="prop"><circle cx="599.0" cy="1508.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="1513.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">7</text></g>
+<g class="prop"><circle cx="644" cy="1665.6000000000001" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="1670.6000000000001" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">7</text></g>
+<g class="prop"><circle cx="591.0" cy="1947.8" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="1952.8" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">8</text></g>
+<g class="prop"><circle cx="644" cy="2075.2" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="2080.2" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">8</text></g>
+<g class="prop"><circle cx="1139.0" cy="2180.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1139.0" y="2185.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">20</text></g>
+<g class="prop"><circle cx="1139.0" cy="2321.2" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1139.0" y="2326.2" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">20</text></g>
+<g class="prop"><circle cx="599.0" cy="2462.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="2467.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">9</text></g>
+<g class="prop"><circle cx="591.0" cy="2613.3999999999996" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="2618.3999999999996" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">9</text></g>
+<g class="prop"><circle cx="599.0" cy="2730.7999999999997" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="2735.7999999999997" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">10</text></g>
+<g class="prop"><circle cx="599.0" cy="3012.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="3017.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">11</text></g>
+<g class="prop"><circle cx="599.0" cy="3268.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="3273.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">11</text></g>
+<g class="prop"><circle cx="591.0" cy="3421.8" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="3426.8" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">21</text></g>
+<g class="prop"><circle cx="599.0" cy="3537.2" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="3542.2" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">22</text></g>
+<g class="prop"><circle cx="591.0" cy="3690.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="3695.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">22</text></g>
+<g class="prop"><circle cx="644" cy="3828.8" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="3833.8" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">12</text></g>
+<g class="prop"><circle cx="1139.0" cy="3959.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1139.0" y="3964.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">12</text></g>
+<g class="prop"><circle cx="1139.0" cy="4106.8" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1139.0" y="4111.8" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">12</text></g>
+<g class="prop"><circle cx="644" cy="4123.2" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="4128.2" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">13</text></g>
+<g class="prop"><circle cx="591.0" cy="4810.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="4815.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">23</text></g>
+<g class="prop"><circle cx="599.0" cy="4932.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="4937.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">23</text></g>
+<g class="prop"><circle cx="591.0" cy="5092.2" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="5097.2" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">14</text></g>
+<g class="prop"><circle cx="591.0" cy="5224.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="5229.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">14</text></g>
+<g class="prop"><circle cx="869.0" cy="5502.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="869.0" y="5507.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">15</text></g>
+<g class="prop"><circle cx="599.0" cy="5777.2" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="5782.2" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">16</text></g>
+<g class="prop"><circle cx="591.0" cy="5935.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="5940.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">18</text></g>
+<g class="prop"><circle cx="591.0" cy="6141.8" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="6146.8" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">18</text></g>
+<g class="prop"><circle cx="599.0" cy="6263.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="6268.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">17</text></g>
+<g class="prop"><circle cx="599.0" cy="6404.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="6409.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">17</text></g>
+<g class="prop"><circle cx="644" cy="6561.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="6566.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">24</text></g>
+<g class="prop"><circle cx="591.0" cy="6717.8" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="6722.8" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">24</text></g>
+<g class="prop"><circle cx="1184" cy="6990.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1184" y="6995.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">19</text></g>
+<g class="prop"><circle cx="1139.0" cy="7127.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1139.0" y="7132.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">19</text></g>
+<g class="chg"><rect x="745.0" y="2988.4" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="784.0" y="3002.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="745.0" y="3244.4" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="784.0" y="3258.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="725.0" y="3405.8" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="764.0" y="3419.8" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="745.0" y="3513.2" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="784.0" y="3527.2" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="453.0" y="3530.2" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="492.0" y="3544.2" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="725.0" y="3674.6" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="764.0" y="3688.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="725.0" y="3969.0" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="764.0" y="3983.0" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="1285.0" y="3935.6" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="1324.0" y="3949.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="1285.0" y="4082.8" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="1324.0" y="4096.8" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="710" y="4107.2" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="749" y="4121.2" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="475.0" y="4230.0" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="514.0" y="4244.0" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="725.0" y="4794.6" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="764.0" y="4808.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="745.0" y="4908.4" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="784.0" y="4922.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="725.0" y="5208.6" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="764.0" y="5222.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="475.0" y="5478.0" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="514.0" y="5492.0" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="745.0" y="6239.6" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="784.0" y="6253.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="745.0" y="6380.4" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="784.0" y="6394.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="710" y="6545.6" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="749" y="6559.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="185.0" y="6548.6" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="224.0" y="6562.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="725.0" y="6701.8" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="764.0" y="6715.8" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="725.0" y="7540.2" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="764.0" y="7554.2" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="745.0" y="1484.4" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="784.0" y="1498.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<g class="chg"><rect x="710" y="670.4" width="78" height="20" rx="10" fill="#f08a24" stroke="#fff" stroke-width="1.5"/><text x="749" y="684.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text></g>
+<rect x="1220" y="920.0" width="680" height="1078" rx="14" fill="#fff" stroke="#dfe4ea"/>
+<text x="1240" y="954.0" font-size="20" font-weight="800" fill="#14243d">Обозначения</text>
+<circle cx="1280" cy="990.0" r="18" fill="#c2185b"/><text x="1280" y="997.0" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<text x="1340" y="996.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Менеджер</text>
+<circle cx="1280" cy="1046.0" r="18" fill="#c2185b"/><text x="1280" y="1053.0" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<text x="1340" y="1052.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Клиент (техспециалист, снабжение, директор)</text>
+<circle cx="1280" cy="1102.0" r="18" fill="#c2185b"/><text x="1280" y="1109.0" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Georgia,serif">П</text>
+<text x="1340" y="1108.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Поставщик</text>
+<circle cx="1280" cy="1158.0" r="18" fill="#c2185b"/><text x="1280" y="1165.0" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Georgia,serif">С</text>
+<text x="1340" y="1164.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Склад / логист</text>
+<rect x="1240" y="1196.0" width="80" height="36" rx="6" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<text x="1340" y="1220.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Источники клиентов</text>
+<rect x="1240" y="1252.0" width="80" height="36" rx="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<text x="1340" y="1276.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Каналы заявок</text>
+<ellipse cx="1280" cy="1326.0" rx="44" ry="18" fill="#dae8fc" stroke="#6c8ebf"/>
+<text x="1340" y="1332.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Задачи, которые нужно выполнить</text>
+<rect x="1240" y="1364.0" width="80" height="36" rx="6" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<text x="1340" y="1388.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Этапы сделки</text>
+<rect x="1240" y="1420.0" width="80" height="36" rx="6" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<text x="1340" y="1444.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">События и варианты событий</text>
+<polygon points="1280,1474.0 1312,1494.0 1280,1514.0 1248,1494.0" fill="#fff" stroke="#14243d" stroke-width="1.6"/>
+<text x="1340" y="1500.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Развилка (да / нет)</text>
+<rect x="1240" y="1532.0" width="80" height="36" rx="6" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<text x="1340" y="1556.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Этап, закрывающий сделку</text>
+<rect x="1240" y="1588.0" width="80" height="36" rx="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<text x="1340" y="1612.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Этап, успешно закрывающий сделку</text>
+<path d="M1240,1644.0 H1320 V1674.0 Q1300,1664.0 1280,1676.0 T1240,1676.0 Z" fill="#f5f5f5" stroke="#8a8a8a"/>
+<text x="1340" y="1668.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Документ из книги продаж</text>
+<rect x="1240" y="1700.0" width="80" height="36" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.4"/>
+<text x="1340" y="1724.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Где теряем клиентов или время</text>
+<rect x="1240" y="1756.0" width="80" height="36" rx="8" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/><text x="1280" y="1781.0" text-anchor="middle" font-size="18">⚙</text>
+<text x="1340" y="1780.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Предложение: автоматизация в amoCRM</text>
+<rect x="1240" y="1812.0" width="80" height="36" rx="8" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/><text x="1280" y="1837.0" text-anchor="middle" font-size="18">✎</text>
+<text x="1340" y="1836.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Предложение: изменение процесса</text>
+<rect x="1240" y="1868.0" width="80" height="36" rx="8" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/><text x="1280" y="1893.0" text-anchor="middle" font-size="18">🔌</text>
+<text x="1340" y="1892.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Предложение: интеграция</text>
+<rect x="1241" y="1932.0" width="78" height="20" rx="10" fill="#f08a24"/><text x="1280" y="1946.0" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text>
+<text x="1340" y="1948.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Изменено по встрече 20.11</text>
+<line x1="1240" y1="1998.0" x2="1320" y2="1998.0" stroke="#f08a24" stroke-width="2.6" marker-end="url(#arO)"/><text x="1340" y="2004.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Кольцо повторных продаж</text>
+</svg>
+</div>
+<div id="p2" class="p2" hidden>
+<div class="p2w">
+
+<div class="p2head">
+  <div class="logo"><span class="l1">SOLUTION</span><span class="l2">CRM</span></div>
+  <div class="p2t"><h2>Варианты КЭВ для МеталлСервис</h2>
+  <div class="sub">КЭВ — ключевой этап воронки: событие между заявкой и оплатой, после которого клиент покупает заметно чаще. Предложение SolutionCRM для обсуждения 20.11 и сессии с РОП 26.11 — пример, а не окончательное решение.</div></div>
+</div>
+
+<!-- 1. Где КЭВ в воронке -->
+<section class="blk">
+<h3>1. Где КЭВ стоит в воронке</h3>
+<p class="lead">Два этапа: «назначен» и «проведён». Стоят <b>после квалификации и до счёта</b> — чтобы счёт уходил уже согласованным, а не «на сравнение» к снабженцу.</p>
+<div class="chain">
+  <div class="f stage">Новая заявка</div><i>→</i>
+  <div class="f stage">Взято в работу</div><i>→</i>
+  <div class="f stage">Квалификация пройдена</div><i>→</i>
+  <div class="f stage kev">★ Разбор назначен</div><i>→</i>
+  <div class="f stage kev">★ Решение согласовано с техспециалистом</div><i>→</i>
+  <div class="f stage">Счёт отправлен</div><i>→</i>
+  <div class="f stage">Счёт на оплате</div><i>→</i>
+  <div class="f stage">Оплата получена</div><i>→</i>
+  <div class="f stage">Товар поступил</div><i>→</i>
+  <div class="f stage">Отгружено</div><i>→</i>
+  <div class="f won">Успешно реализовано</div>
+</div>
+<div class="row2">
+  <div class="note"><b>Почему именно здесь.</b> В их же книге продаж: «если техспециалист согласует — это победа уже на 95%». На встрече 17.11: тёплый контакт с техспециалистом — 85–90% гарантии сделки. В октябре сделку потеряли, потому что обоснование не дошло до снабжения.</div>
+  <div class="note"><b>Названия этапов — человеческие.</b> Не «КЭВ назначен», а то, что понятно новому менеджеру. Сделка назад не откатывается: повторный созвон — задача внутри сделки, а не возврат на этап.</div>
+</div>
+</section>
+
+<!-- 2. Варианты -->
+<section class="blk">
+<h3>2. Пять вариантов КЭВа</h3>
+<p class="lead">По силе доверия: встреча вживую → видеозвонок с показом экрана → телефонный разговор с пользой → письмо с КП. Правило: для одного типа клиентов — один понятный КЭВ.</p>
+
+<div class="vars">
+
+  <div class="var best">
+    <div class="vh"><span class="badge">★ рекомендуем как основной</span><h4>А. Разбор спецификации с техспециалистом</h4>
+      <div class="power" title="сила">Сила <b>●●●●</b>○</div></div>
+    <div class="mini">
+      <div class="f task">Созвон или Zoom с прорабом по списку<span class="r">М</span><span class="r">К</span></div><i>→</i>
+      <div class="f event">Позиции, аналоги, сроки согласованы</div><i>→</i>
+      <div class="f doc">📘 Обоснование для снабжения = их письмо «беспроблемный vs бюджетный»</div><i>→</i>
+      <div class="f stage kev">★ Решение согласовано</div>
+    </div>
+    <ul>
+      <li><b>Для кого:</b> все новые квалифицированные клиенты.</li>
+      <li><b>Опора у клиента:</b> п. 8–10 «Последовательности обработки заявки» и «Вилка» — по сути они уже это делают, но без названия и без этапа в amoCRM.</li>
+      <li><b>Плюс:</b> ускоряет просчёт — после 20–30 минут с прорабом лишнее убрано, срочное отмечено.</li>
+      <li><b>Риск:</b> техспециалист не передаст обоснование — поэтому письмо уходит и ему, и снабжению.</li>
+    </ul>
+  </div>
+
+  <div class="var">
+    <div class="vh"><span class="badge b2">для крупных объектов</span><h4>Б. Выезд на объект</h4>
+      <div class="power">Сила <b>●●●●●</b></div></div>
+    <div class="mini">
+      <div class="f task">Выезд на объект, разговор с прорабом<span class="r">М</span><span class="r">К</span></div><i>→</i>
+      <div class="f event">Список и график поставок по объекту</div><i>→</i>
+      <div class="f stage kev">★ Выезд проведён</div>
+    </div>
+    <ul>
+      <li><b>Для кого:</b> крупный объект в Уфе и рядом (пример: от 100 позиций или от [сумма] ₽).</li>
+      <li><b>Плюс:</b> самая сильная точка доверия, видно реальный монтаж.</li>
+      <li><b>Минус:</b> дорого по времени менеджера — только по порогу.</li>
+    </ul>
+  </div>
+
+  <div class="var">
+    <div class="vh"><span class="badge b2">для местных монтажников</span><h4>В. Встреча на складе</h4>
+      <div class="power">Сила <b>●●●</b>○○</div></div>
+    <div class="mini">
+      <div class="f task">Клиент на складе: видит наличие<span class="r">К</span><span class="r">С</span></div><i>→</i>
+      <div class="f event">Забрал часть сразу</div><i>→</i>
+      <div class="f stage kev">★ Был на складе</div>
+    </div>
+    <ul>
+      <li><b>Для кого:</b> монтажники, которые сами забирают товар.</li>
+      <li><b>Плюс:</b> «Склады Металлсервис, Санехкомплект, Эльф» становятся не словами, а фактом.</li>
+      <li><b>Минус:</b> кладовщик уже перегружен (он же логист).</li>
+    </ul>
+  </div>
+
+  <div class="var">
+    <div class="vh"><span class="badge b2">облегчённый, для простых заявок</span><h4>Г. «Вилка» по телефону</h4>
+      <div class="power">Сила <b>●●</b>○○○</div></div>
+    <div class="mini">
+      <div class="f task">Звонок 10–15 мин: «Гарантию несёте?»<span class="r">М</span><span class="r">К</span></div><i>→</i>
+      <div class="f event">Принципиальное согласие на беспроблемный</div><i>→</i>
+      <div class="f stage">Счёт отправлен</div>
+    </div>
+    <ul>
+      <li><b>Для кого:</b> простые заявки — 1–3 позиции или всё со склада.</li>
+      <li><b>Опора:</b> их документ «2.2 Вилка», утв. 04.11.</li>
+      <li><b>Минус:</b> разговор с тем, кто прислал заявку, — не всегда с техспециалистом.</li>
+    </ul>
+  </div>
+
+  <div class="var no">
+    <div class="vh"><span class="badge b3">не КЭВ</span><h4>Д. Отправка счёта / КП и подписанная спецификация</h4>
+      <div class="power">Сила <b>●</b>○○○○</div></div>
+    <div class="mini">
+      <div class="f task">Письмо со счётом<span class="r">М</span></div><i>→</i>
+      <div class="f lost">Снабжение сравнивает итоговую цифру</div>
+    </div>
+    <ul>
+      <li><b>Счёт / КП</b> — рабочий шаг после КЭВа: клиент видит только цену, наши сильные стороны за кадром.</li>
+      <li><b>Подписанная спецификация</b> — только для заказных позиций и уже после решения: это шаг к оплате, а не создание доверия.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- 3. Матрица -->
+<section class="blk">
+<h3>3. Один КЭВ — разная глубина: по их делению заявок</h3>
+<div class="mx">
+  <div class="mxr hd"><div>Тип заявки (книга продаж)</div><div>Формат КЭВа</div><div>Длительность</div><div>Этапы в amoCRM</div></div>
+  <div class="mxr"><div><span class="f dec sm">?</span><b>Простая</b><br>1–3 позиции, складские</div><div>Звонок прорабу + «Вилка» (вариант Г)</div><div>10–15 мин</div><div>можно сразу на «Решение согласовано»</div></div>
+  <div class="mxr"><div><span class="f dec sm">?</span><b>Сложная</b><br>5–40 позиций, не складские, или «хочу сравнить»</div><div>Письмо «Как будем работать» → созвон или Zoom с техспециалистом (вариант А)</div><div>20–40 мин</div><div>Разбор назначен → Решение согласовано</div></div>
+  <div class="mxr"><div><span class="f dec sm">?</span><b>Крупный объект</b><br>больше 40, обычно 100+ позиций</div><div>Встреча в офисе клиента или выезд на объект (вариант Б)</div><div>40–60 мин</div><div>Разбор назначен → Решение согласовано</div></div>
+  <div class="mxr"><div><span class="f dec sm">?</span><b>Постоянный клиент</b></div><div>КЭВ не нужен — сразу счёт. Новый крупный объект — снова разбор</div><div>—</div><div>воронка «Постоянные»</div></div>
+</div>
+<p class="warn">⚠ В книге продаж «несложные» — 1–3 позиции, «сложные» — 5–40. Заявки на 4 позиции и больше 40 не описаны, а типичный объект — 100+. Границы утвердить на сессии с РОП.</p>
+</section>
+
+<!-- 4. Приглашение и 3 отказа -->
+<section class="blk">
+<h3>4. Как приглашаем на разбор: дожим до трёх отказов</h3>
+<div class="g9">
+  <div class="f stage">Квалификация пройдена</div><i>→</i>
+  <div class="f task">Предложить разбор: выгода + выбор из двух времён<span class="r">М</span></div><i>→</i>
+  <div class="f dec">Согласился?</div><i class="yes">да →</i>
+  <div class="f task">Подтвердить: в день записи и утром в день разбора<span class="r">М</span></div><i>→</i>
+  <div class="f stage kev">★ Разбор назначен</div>
+  <div></div><div></div><div></div><div></div><i class="no v">нет ↓</i><div></div><div></div><div></div><div></div>
+  <div></div><div></div><div></div><div></div>
+  <div class="f task">Ещё раз, с новой выгодой: аналоги дешевле, пересорт, обоснование для снабжения<span class="r">М</span></div><i>→</i>
+  <div class="f dec">Уже 3 отказа?</div><i class="yes">да →</i>
+  <div class="f event">Выставить счёт, отметить «Отказ от разбора»</div>
+</div>
+<p class="lead small">«Нет» на развилке «Уже 3 отказа?» — снова предлагаем разбор с другой выгодой. Первое «пришлите просто счёт» — не отказ, а привычка; большинство менеджеров сдаётся после первого.</p>
+</section>
+
+<!-- 5. Цифры -->
+<section class="blk">
+<h3>5. Что измеряем</h3>
+<div class="kpis">
+  <div class="kpi"><b>от 50%</b><span>квалифицированных согласились на разбор</span><em>ниже — не предлагают или слабый оффер</em></div>
+  <div class="kpi"><b>от 80%</b><span>назначенных разборов состоялись</span><em>ниже — назначают далеко, не подтверждают</em></div>
+  <div class="kpi"><b>замерим</b><span>разбор → оплата</span><em>первый месяц работы по стандарту</em></div>
+</div>
+<p class="lead small">Ориентиры — средние по нашим внедрениям. Цели ставим от реальных цифр МеталлСервис после первого месяца.</p>
+</section>
+
+<p class="foot">SolutionCRM · МеталлСервис · варианты КЭВ v2 от 20.11.2026 · для обсуждения · подробно — методичка «КЭВ» v2</p>
+</div>
+</div>
+
+<div id="p3" class="p2" hidden><div class="p2w">
+<div class="p2head"><div class="logo"><span class="l1">SOLUTION</span><span class="l2">CRM</span></div>
+<div class="p2t"><h2>Что меняем: итог по схеме (v2, после встречи 20.11)</h2><div class="sub">Номера совпадают с бирюзовыми кружками на схеме (вкладка 1). Предложение SolutionCRM для обсуждения 20.11 — пример, а не окончательное решение. Сроки — по плану Месяца 1.</div></div></div>
+<section class="blk"><div class="kpis">
+<div class="kpi"><b>24</b><span>предложений по процессу</span><em>от заявки до повторной покупки</em></div>
+<div class="kpi"><b>⚙ 16</b><span>автоматизаций в amoCRM</span><em>этапы, поля, роботы, автозадачи</em></div>
+<div class="kpi"><b>✎ 6</b><span>изменений процесса</span><em>решают руководитель и РОП</em></div>
+<div class="kpi"><b>🔌 2</b><span>интеграции</span><em>каналы заявок, поставщики, 1С</em></div>
+</div></section>
+<section class="blk"><h3>Топ-5 по эффекту — начать с них</h3><ol class="top"><li><span class="tn">8</span><b>КЭВ.</b> КЭВ: этапы «Разбор назначен» → «Решение согласовано» до счёта. Вариант выбирает клиент (вкладка 2) <em>→ Счёт уходит согласованным, а не «на сравнение»</em></li><li><span class="tn">22</span><b>Касания перед решением.</b> Касания: автозадачи в 9:00 «письмо с пользой» и ко времени созвона «звонок»; поле «Число касаний». Само касание — человек <em>→ Короче цикл сделки, выше доля оплат</em></li><li><span class="tn">23</span><b>Заказ поставщику.</b> Поле «Дата заказа» → задача на этот день; ✅ «Заказ отправлен» видно на карточке; поле «Плановая дата прихода» <em>→ Ни один оплаченный заказ не забыт</em></li><li><span class="tn">18</span><b>Переход в повторку.</b> Робот создаёт сделку в «Повторных» сразу после «Успешно реализовано» <em>→ Каждая отгрузка запускает следующую продажу</em></li><li><span class="tn">1</span><b>Заявка.</b> Все каналы в одну ленту amoCRM: форма сайта напрямую, почты, MAX, телефония <em>→ Ни одна заявка не теряется, всё в одной ленте</em></li></ol></section>
+<section class="blk"><h3>Полный список</h3>
+<div class="filt"><button class="on" data-k="">Все</button><button data-k="a">⚙ Автоматизация</button><button data-k="p">✎ Процесс</button><button data-k="i">🔌 Интеграции</button></div>
+<div class="tw"><table class="pl"><thead><tr><th>№</th><th>Где в процессе</th><th>Что сейчас</th><th>Что предлагаем</th><th>Что даст</th><th>Задача договора / когда</th></tr></thead><tbody><tr class="ki"><td class="n"><span>1</span></td><td><b>Заявка</b></td><td>Заявки с формы теряются, почт несколько, MAX не работает</td><td><span class="ic">🔌</span> Все каналы в одну ленту amoCRM: форма сайта напрямую, почты, MAX, телефония</td><td>Ни одна заявка не теряется, всё в одной ленте</td><td>№ 6 единое окно, № 10 мессенджеры, № 8 телефония<br><small>нед. 3</small></td></tr><tr class="ka"><td class="n"><span>2</span></td><td><b>Взять в работу</b></td><td>Реакция ~1 час, берёт кто свободен, новый/старый вручную</td><td><span class="ic">⚙</span> Таймер 15 мин: не взяли — РОПу уведомление, клиенту автоответ. Постоянных пока отмечаем вручную, потом — автоматически</td><td>Реакция 5–15 мин; клиент сразу получает ответ</td><td>№ 6, № 11 автозадачи<br><small>нед. 3</small></td></tr><tr class="ka"><td class="n"><span>3</span></td><td><b>Квалификация</b></td><td>Целевость проверяют вручную</td><td><span class="ic">⚙</span> ИНН в карточке → проверка компании (ОКВЭД, статус). Поля квалификации обязательны</td><td>Быстрее отсев перекупщиков и тендеров</td><td>№ 4 квалификация, № 5 воронки<br><small>нед. 3</small></td></tr><tr class="ka"><td class="n"><span>4</span></td><td><b>Отказ</b></td><td>Технические закрытия смешаны с реальными: конверсия 18% вместо 44%</td><td><span class="ic">⚙</span> Причина отказа обязательна; спам и технические закрытия — отдельно; строителя с «не нашим» запросом оставить в базе</td><td>Честная статистика и база целевых на будущее</td><td>№ 5, № 11<br><small>нед. 3</small></td></tr><tr class="kp"><td class="n"><span>5</span></td><td><b>Сложность заявки</b></td><td>4 позиции и больше 40 в книге продаж не описаны</td><td><span class="ic">✎</span> Утвердить границы сложности: заявки на 4 позиции и больше 40 сейчас не описаны</td><td>Понятно, какой формат КЭВа выбрать</td><td>№ 4, сессия с РОП<br><small>до 25.11</small></td></tr><tr class="ka"><td class="n"><span>6</span></td><td><b>Письмо «заявку получили»</b></td><td>Шаблона нет</td><td><span class="ic">⚙</span> Письмо «заявку получили» — шаблон в amoCRM, отправка в 1 клик</td><td>Доверие с первой минуты, экономия времени</td><td>№ 11<br><small>нед. 3</small></td></tr><tr class="ka"><td class="n"><span>7</span></td><td><b>Формула продаж и ЛПР</b></td><td>Заполняют не всегда; ЛПР не разделён — решено 20.11</td><td><span class="ic">⚙</span> Поля ФВ, ОП, Д, ЛПР, ЗС обязательны (решено 20.11). ЛПР — роль контакта: «по технике» и «по оплате»</td><td>Не считаем спецификации тем, кто не купит; видно, кто решает по технике и по оплате</td><td>№ 4, № 5<br><small>нед. 3</small></td></tr><tr class="kp"><td class="n"><span>8</span></td><td><b>КЭВ</b></td><td>Согласование с техспециалистом есть, но без этапа; вариант выбирает клиент</td><td><span class="ic">✎</span> КЭВ: этапы «Разбор назначен» → «Решение согласовано» до счёта. Вариант выбирает клиент (вкладка 2)</td><td>Счёт уходит согласованным, а не «на сравнение»</td><td>№ 3 КЭВ<br><small>до 25.11</small></td></tr><tr class="kp"><td class="n"><span>9</span></td><td><b>Техспециалист</b></td><td>Обоснование не доходит до снабжения</td><td><span class="ic">✎</span> Техспециалист — обязательный контакт в сделке. Обоснование уходит и ему, и снабжению</td><td>Снабжение не меняет выбор на дешёвый</td><td>№ 3, № 5<br><small>нед. 3</small></td></tr><tr class="ki"><td class="n"><span>10</span></td><td><b>Поставщики и просчёт</b></td><td>Контакты в Excel и телефонах; просчёт 1 час — 2 дня</td><td><span class="ic">🔌</span> Поставщики в amoCRM: карточки, фильтр, писать в MAX и на почту из CRM. Позже — 1С</td><td>Быстрее просчёт; 1С — отдельный проект</td><td>решение по поставщикам; 1С — вне договора<br><small>Месяц 1 / позже</small></td></tr><tr class="ka"><td class="n"><span>11</span></td><td><b>Письмо-упаковка и счёт</b></td><td>Шаблоны вне amoCRM; почта и MAX по отдельности</td><td><span class="ic">⚙</span> Шаблоны писем-упаковок в amoCRM, отправка на почту и в MAX; после счёта — автозадача «контрольный звонок»</td><td>Шаблон в 1 клик, клиент видит письмо в обоих каналах</td><td>№ 11, № 10<br><small>после подключения MAX</small></td></tr><tr class="ka"><td class="n"><span>12</span></td><td><b>Возражения и зависшие</b></td><td>Этап «Возражения» ломал аналитику; порогов зависания нет</td><td><span class="ic">⚙</span> Возражение — поле, не этап: при заполнении задача РОПу. Порог «зависла»: 3 дня, «Сложное решение» — 7 (пример)</td><td>РОП видит возражения без лишнего этапа; уведомления по порогу</td><td>№ 11, № 5<br><small>нед. 3</small></td></tr><tr class="ka"><td class="n"><span>13</span></td><td><b>Спецификация</b></td><td>Подписывают не всегда; нужна только для сложных и нестандартных</td><td><span class="ic">⚙</span> Флажок «Сложная / нестандартная позиция»: без подписанной спецификации нельзя на «Оплата получена»</td><td>Нет возвратов индивидуального товара</td><td>№ 5<br><small>нед. 3</small></td></tr><tr class="ka"><td class="n"><span>14</span></td><td><b>Товар поступил</b></td><td>Сделку забывают переносить; клиенту не пишут</td><td><span class="ic">⚙</span> Перенос в «Товар поступил» → автосообщение клиенту. Не пришёл к плановой дате — задача «предупредить клиента»</td><td>Клиент знает, что товар готов и что взять с собой</td><td>№ 11<br><small>нед. 3</small></td></tr><tr class="kp"><td class="n"><span>15</span></td><td><b>Логистика</b></td><td>Кладовщик = логист, не справляется</td><td><span class="ic">✎</span> Логист и воронка «Закуп и логистика» — позже, когда наймут логиста</td><td>Склад не тормозит отгрузки</td><td>решение клиента<br><small>по найму</small></td></tr><tr class="ka"><td class="n"><span>16</span></td><td><b>Оплата и документы</b></td><td>Формы оплаты нет; закрывающие — вручную</td><td><span class="ic">⚙</span> Поле «Форма оплаты» → контроль доплаты и закрывающих; шаблоны паспортов и сертификатов — Месяц 2</td><td>Контроль доплаты; ничего не теряется после отгрузки</td><td>№ 5, № 11<br><small>нед. 3 / Месяц 2</small></td></tr><tr class="ka"><td class="n"><span>17</span></td><td><b>Обратная связь</b></td><td>Отзыв и рекомендации — по памяти</td><td><span class="ic">⚙</span> Обратная связь — первый шаг «Повторных». Поле «Кто порекомендовал»</td><td>Рекомендации как стабильный источник заявок</td><td>№ 11<br><small>нед. 3</small></td></tr><tr class="ka"><td class="n"><span>18</span></td><td><b>Переход в повторку</b></td><td>Отдельной воронки нет: 79% выручки — без системы</td><td><span class="ic">⚙</span> Робот создаёт сделку в «Повторных» сразу после «Успешно реализовано»</td><td>Каждая отгрузка запускает следующую продажу</td><td>№ 5 воронки<br><small>нед. 3</small></td></tr><tr class="ka"><td class="n"><span>19</span></td><td><b>Цикл закупок</b></td><td>43 постоянных ушли, никто не заметил</td><td><span class="ic">⚙</span> Статус по давности покупок каждую ночь: 65+ дн. — задача «звонок», 180+ — «Реактивация»</td><td>Возвращаем клиентов до того, как они уйдут</td><td>работа с базой<br><small>Месяц 2</small></td></tr><tr class="ka"><td class="n"><span>20</span></td><td><b>Сложное решение</b></td><td>Решение КБ завода — до недели, сделка выглядит зависшей</td><td><span class="ic">⚙</span> Флажок «Сложное решение» (завод, КБ — до недели): этапы те же, своя аналитика и длинный порог «зависла»</td><td>Своя аналитика, РОП не дёргают раньше времени</td><td>№ 5, № 11<br><small>нед. 3</small></td></tr><tr class="kp"><td class="n"><span>21</span></td><td><b>Счёт получен ЛПР</b></td><td>«Да, перешлю» — и забыли; счёт не доходит до того, кто согласует</td><td><span class="ic">✎</span> Новый этап «Счёт получен ЛПР»: переслали тому, кто согласует, и договорились о дате созвона</td><td>Видно, сколько счетов реально дошло до ЛПР</td><td>№ 5<br><small>нед. 3</small></td></tr><tr class="ka"><td class="n"><span>22</span></td><td><b>Касания перед решением</b></td><td>Касание забывают — решение переносится</td><td><span class="ic">⚙</span> Касания: автозадачи в 9:00 «письмо с пользой» и ко времени созвона «звонок»; поле «Число касаний». Само касание — человек</td><td>Короче цикл сделки, выше доля оплат</td><td>№ 5, № 11<br><small>нед. 3</small></td></tr><tr class="ka"><td class="n"><span>23</span></td><td><b>Заказ поставщику</b></td><td>Менеджера нет в четверг — заказ пропускают</td><td><span class="ic">⚙</span> Поле «Дата заказа» → задача на этот день; ✅ «Заказ отправлен» видно на карточке; поле «Плановая дата прихода»</td><td>Ни один оплаченный заказ не забыт</td><td>№ 5, № 11<br><small>нед. 3</small></td></tr><tr class="kp"><td class="n"><span>24</span></td><td><b>Ритм повторных касаний</b></td><td>30 автозадач в день — их бросили</td><td><span class="ic">✎</span> «Контакт запланирован» — дата обязательна, не дальше 3 мес. Разовым — флажок. Не больше 10–15 задач в день</td><td>10–15 осмысленных задач в день, разовым — ничего</td><td>№ 5, № 11<br><small>нед. 3</small></td></tr></tbody></table></div>
+</section>
+<section class="blk"><h3>Без автоматизации: договориться и записать в книгу продаж</h3>
+<ul class="plain">
+<li>Что значит «взять заявку в работу»: увидеть, уведомить клиента, начать формулу продаж — за 15 минут в рабочее время.</li>
+<li>Сроки касаний для «зависших» — вписать в регламент.</li>
+<li>Заменить пример про сроки в регламенте возражений (сейчас он из IT: «архитектура», «модули»).</li>
+<li>Подготовить шаблоны писем «заявку получили» и «Как будем работать».</li>
+<li>Убрать на сайте защиту от копирования: она мешает клиентам и снижает конверсию.</li>
+<li>Мотивация: решить, считаем по оплатам или по отгрузкам, — от этого зависят отчёты.</li>
+</ul></section>
+<section class="blk"><h3>Что нужно от МеталлСервис</h3>
+<ul class="plain">
+<li>Недостающие документы книги продаж: «Целевая номенклатура» (две версии), «Целевой клиент или нецелевой», папки «Выставленный счёт», «Возражения», «Зависшие».</li>
+<li>Перенос MAX от прежнего подрядчика.</li>
+<li>Что уже делали по интеграции с 1С.</li>
+<li>ФИО и контакты РОПа, имена менеджеров и кладовщика.</li>
+</ul></section>
+<p class="foot">SolutionCRM · МеталлСервис · что меняем v2 от 20.11.2026 · для обсуждения</p>
+</div></div>
+<div id="p4" class="p2" hidden><div class="p2w">
+<div class="p2head"><div class="logo"><span class="l1">SOLUTION</span><span class="l2">CRM</span></div>
+<div class="p2t"><h2>Воронки amoCRM</h2><div class="sub">Как процесс со схемы ложится на воронки: этапы, что заполняет менеджер и что делает amoCRM сама. Отдельно для показа клиенту — файл МеталлСервис_воронки_amoCRM_v2.html.</div></div></div>
+<div class="fnw">
+<section class="fblk"><h3>Как воронки связаны между собой</h3>
+<div class="map">
+  <div class="mbox m3"><b>3. Доквалификация базы</b><span>отложено — после запуска 1 и 2</span></div>
+  <div class="marr">есть заявка →</div>
+  <div class="mbox m1"><b>1. Первичные продажи</b><span>новые клиенты, КЭВ до счёта</span></div>
+  <div class="marr">успешно →</div>
+  <div class="mbox m2"><b>2. Повторные продажи ↺</b><span>кольцо по циклу закупок</span></div>
+</div>
+<div class="map sub"><div class="mbox m4"><b>4. Закуп и логистика</b><span>отложено — пока этап «Заказ сформирован» внутри 1 и 2</span></div></div>
+<div class="rules"><div><b>Не больше 4 воронок.</b> Менеджеру проще, отчёты чище.</div><div><b>Этап — завершённое действие:</b> «Счёт отправлен», а не «Думает».</div><div><b>Сделка назад не двигается.</b> Повторный созвон — задача внутри сделки.</div><div><b>Обязательные поля на переходе</b> и обязательная причина отказа.</div></div>
+</section>
+<section class="fblk"><div class="fh" style="--c:#2e6da4"><span class="fn">1</span><div><h3>Первичные продажи</h3><p>Для новых клиентов: от заявки до первой отгрузки. Версия после встречи 20.11.</p></div></div>
+<div class="hint">Все этапы не помещаются на экран — прокрутите вбок →</div>
+<div class="board"><div class="col"><div class="ch">Новая заявка</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Заявки с сайта, почт, MAX и звонков сами создают сделку</li><li>Спам — сразу «Закрыто и не реализовано»</li></ul></div></div><div class="col"><div class="ch">Взято в работу</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Источник заявки</li><li>Постоянный клиент: да / нет (пока вручную)</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Таймер 15 минут: не взяли — уведомление РОПу</li><li>Клиенту автоответ и письмо «заявку получили»</li></ul></div></div><div class="col"><div class="ch">Квалификация пройдена</div><div class="sec"><div class="lab">Заполняем</div><ul><li>ИНН, целевая компания</li><li>Сложность: простая / сложная / крупный объект</li><li>Наружка или внутрянка, ОВ или ВК</li><li>Формула продаж: ФВ, ОП, Д, ЛПР, ЗС — обязательно</li><li>Роли контактов: ЛПР по технике, ЛПР по оплате</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Без этих полей сделка дальше не двигается</li></ul></div></div><div class="col kev"><div class="ch">★ Разбор назначен</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Дата и время разбора</li><li>Формат: звонок, Zoom, встреча, выезд</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>За 30–60 минут — задача «Подготовиться»</li></ul></div></div><div class="col kev"><div class="ch">★ Решение согласовано</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Вариант: беспроблемный или бюджетный</li><li>Флажок «Сложное решение» (завод, КБ)</li><li>Следующий шаг</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>«Сложное решение» — свой порог «зависла» (пример: 7 дней)</li></ul></div></div><div class="col"><div class="ch">Счёт отправлен</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Бюджет</li><li>Форма оплаты</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Письмо-упаковка по шаблону — на почту и в MAX</li><li>Через 1–2 часа — задача «контрольный звонок»</li></ul></div></div><div class="col"><div class="ch">Счёт получен ЛПР</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Кто согласует (контакт с ролью ЛПР)</li><li>Дата созвона по решению</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Задачи на день созвона: 9:00 «письмо с пользой», время созвона — «звонок»</li></ul></div></div><div class="col"><div class="ch">Касание проведено</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Число касаний</li><li>Новая дата созвона, если перенос</li><li>Возражение (если есть) — поле, не этап</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Возражение → задача РОПу «разобрать»</li><li>Нет движения 3 дня — уведомление РОПу (пример)</li></ul></div></div><div class="col"><div class="ch">Счёт согласован, отдан на оплату</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Сложная / нестандартная позиция → подписанная спецификация</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Без спецификации по сложным позициям дальше нельзя</li></ul></div></div><div class="col"><div class="ch">Оплата получена</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Клиенту: «оплата пришла, товар заказан, будет в понедельник»</li></ul></div></div><div class="col"><div class="ch">Заказ сформирован</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Дата заказа</li><li>Плановая дата прихода</li><li>✅ Заказ отправлен</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Задача «Сделать заказ» на дату заказа</li><li>Галочки видно на карточке — РОП видит, что не заказано</li></ul></div></div><div class="col"><div class="ch">Товар поступил</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Самовывоз или доставка</li><li>Контакт принимающего</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Клиенту: «товар готов к отгрузке» + что взять с собой</li><li>Не пришёл к плановой дате — задача «предупредить клиента»</li></ul></div></div><div class="col"><div class="ch">Отгружено</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Закрывающие документы</li><li>Доплата (50/50, отсрочка)</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Контроль доплаты по форме оплаты</li></ul></div></div><div class="col won"><div class="ch">Успешно реализовано</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Создаёт сделку в «Повторных продажах»</li></ul></div></div>
+<div class="col lost"><div class="ch">Закрыто и не реализовано</div><div class="sec"><div class="lab">Причина обязательна</div><ul><li>Торгующая компания</li><li>Тендер без контактного лица</li><li>Не наша номенклатура</li><li>Нет финансирования</li><li>Купили у других</li><li>Не вышли на связь</li><li>Технические: дубль, спам, ошибка — отдельной группой</li></ul></div></div>
+</div>
+<p class="fnote">★ — ключевой этап воронки (КЭВ), вариант выбирает клиент. «Касание проведено» и «Счёт согласован» — рабочие названия, уточняем с отделом продаж.</p>
+</section>
+<section class="fblk"><div class="fh" style="--c:#b5600e"><span class="fn">2</span><div><h3>Повторные продажи</h3><p>Для постоянных клиентов: 79% вашей выручки. Кольцо: каждая отгрузка запускает следующую продажу.</p></div></div>
+<div class="hint">Все этапы не помещаются на экран — прокрутите вбок →</div>
+<div class="board"><div class="col"><div class="ch">Новая сделка</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Создаётся роботом после «Успешно реализовано» в Первичных</li></ul></div></div><div class="col"><div class="ch">Обратная связь получена</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Всё ли устроило, замечания</li><li>Кто порекомендовал (если дали контакт)</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Задача «обратная связь» через 1–2 дня после отгрузки</li></ul></div></div><div class="col"><div class="ch">Контакт запланирован</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Дата следующего контакта — обязательно, не дальше 3 месяцев</li><li>Флажок «Касания не нужны» — разовым и торгующим</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Задача на дату контакта</li><li>Не больше 10–15 задач в день на менеджера</li></ul></div></div><div class="col"><div class="ch">Заявка получена</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Заявка постоянного клиента приходит сюда, а не в «Первичные»</li></ul></div></div><div class="col"><div class="ch">Счёт отправлен</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Бюджет, форма оплаты</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Разбор не нужен; новый крупный объект — снова разбор</li></ul></div></div><div class="col"><div class="ch">Оплата получена</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Сообщение клиенту</li></ul></div></div><div class="col"><div class="ch">Заказ сформирован</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Дата заказа</li><li>✅ Заказ отправлен</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Задача «Сделать заказ» на дату заказа</li></ul></div></div><div class="col"><div class="ch">Товар поступил</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Самовывоз или доставка</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Клиенту: «товар готов к отгрузке» + что взять</li></ul></div></div><div class="col"><div class="ch">Отгружено</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Закрывающие документы</li></ul></div></div><div class="col won"><div class="ch">Успешно реализовано</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Создаёт следующую сделку — кольцо</li></ul></div></div>
+<div class="col lost"><div class="ch">Закрыто и не реализовано</div><div class="sec"><div class="lab">Причина обязательна</div><ul><li>Разовый клиент — касания не нужны</li><li>180+ дней без покупки → «Реактивация»</li><li>Купили у других</li><li>Объект закончился, новых нет</li></ul></div></div>
+</div>
+<p class="fnote">Статус клиента по давности покупок пересчитывается каждую ночь: 65+ дней — звонок, 180+ — реактивация. Поводы для касаний — из документа «точки касания».</p>
+</section>
+<section class="fblk"><div class="fh" style="--c:#5b6675"><span class="fn">3</span><div><h3>Доквалификация базы</h3><p>Отложено (решение 20.11): делаем после запуска Первичных и Повторных. Для необработанной базы и внешних списков.</p></div></div>
+<div class="board"><div class="col"><div class="ch">Выгружено</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Партия: например, «застройщики»</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Дубли с текущими клиентами отсеиваются</li></ul></div></div><div class="col"><div class="ch">Взят в работу</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Задача на звонок ответственному</li></ul></div></div><div class="col"><div class="ch">Дозвон состоялся</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Недозвон — задача на повтор (пример: через 2 дня)</li></ul></div></div><div class="col"><div class="ch">Квалифицирован</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Целевой: да / нет</li><li>Есть объект? Когда старт работ?</li></ul></div></div><div class="col"><div class="ch">Перспективный</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Дата старта объекта</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Касания по графику объекта</li></ul></div></div><div class="col won"><div class="ch">Есть заявка</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Сделка уходит в «Первичные» с меткой «из холодной базы»</li></ul></div></div>
+<div class="col lost"><div class="ch">Отказ</div><div class="sec"><div class="lab">Причина обязательна</div><ul><li>Нецелевой</li><li>Нет объекта</li><li>Работает с другим поставщиком</li><li>Не дозвонились 3 раза</li></ul></div></div>
+</div>
+<p class="fnote">Повторная выгрузка — например, раз в квартал.</p>
+</section>
+<section class="fblk"><div class="fh" style="--c:#1e8449"><span class="fn">4</span><div><h3>Закуп и логистика</h3><p>Отложено (решение 20.11): пока заказ ведём этапом «Заказ сформирован» в продажах. Вернёмся, когда появится логист или снабженец.</p></div></div>
+<div class="board"><div class="col"><div class="ch">Заказать у поставщика</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Создаётся, когда в продажах «Оплата получена»</li></ul></div></div><div class="col"><div class="ch">Заказано</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Поставщик (из карточки)</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Написать поставщику в MAX или на почту из amoCRM</li></ul></div></div><div class="col"><div class="ch">В пути</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Машина: четверг</li></ul></div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Срыв — уведомление менеджеру сделки</li></ul></div></div><div class="col"><div class="ch">На складе</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Сделка продаж переходит в «Товар поступил»</li></ul></div></div><div class="col"><div class="ch">Доставка согласована</div><div class="sec"><div class="lab">Заполняем</div><ul><li>Контакт принимающего, время</li></ul></div></div><div class="col won"><div class="ch">Выдано / доставлено</div><div class="sec rb"><div class="lab">⚙ amoCRM делает</div><ul><li>Сделка продаж переходит в «Отгружено»</li></ul></div></div>
+</div>
+<p class="fnote">Это вариант, а не решение: альтернатива — фильтр «Поставщики» в контактах или готовый виджет.</p>
+</section>
+<p class="fnote c">Это предложение SolutionCRM для обсуждения: этапы, поля и роботы утверждаем вместе, после этого настраиваем в amoCRM. Всё, что помечено «пример» или «вариант», — не окончательное решение.</p>
+</div>
+</div></div>
+<script>
+(function(){
+  var W=1930,H=8028.4,svg=document.getElementById('sch'),vp=document.getElementById('vp'),zl=document.getElementById('zl'),s=1;
+  function set(ns,cx,cy){
+    ns=Math.max(0.1,Math.min(2.5,ns));
+    var r=vp.getBoundingClientRect(); cx=cx==null?r.width/2:cx; cy=cy==null?r.height/2:cy;
+    var px=(vp.scrollLeft+cx)/s, py=(vp.scrollTop+cy)/s;
+    s=ns; svg.setAttribute('width',W*s); svg.setAttribute('height',H*s);
+    vp.scrollLeft=px*s-cx; vp.scrollTop=py*s-cy; zl.textContent=Math.round(s*100)+'%';
+  }
+  function fitw(){var r=vp.getBoundingClientRect(); set(Math.min(1.2,(r.width-20)/W)); vp.scrollTop=0;}
+  document.getElementById('zi').onclick=function(){set(s*1.25)};
+  document.getElementById('zo').onclick=function(){set(s/1.25)};
+  document.getElementById('fitw').onclick=fitw;
+  document.getElementById('fit').onclick=function(){var r=vp.getBoundingClientRect(); set(Math.min(r.width/W,r.height/H)); vp.scrollTop=0;};
+  document.getElementById('one').onclick=function(){set(1)};
+  vp.addEventListener('wheel',function(e){if(e.ctrlKey||e.metaKey){e.preventDefault();var r=vp.getBoundingClientRect();set(s*(e.deltaY<0?1.12:1/1.12),e.clientX-r.left,e.clientY-r.top);}},{passive:false});
+  var d=null;
+  vp.addEventListener('mousedown',function(e){d={x:e.clientX,y:e.clientY,l:vp.scrollLeft,t:vp.scrollTop};vp.classList.add('drag');});
+  window.addEventListener('mousemove',function(e){if(!d)return;vp.scrollLeft=d.l-(e.clientX-d.x);vp.scrollTop=d.t-(e.clientY-d.y);});
+  window.addEventListener('mouseup',function(){d=null;vp.classList.remove('drag');});
+  var t1=document.getElementById('t1'),t2=document.getElementById('t2'),t3=document.getElementById('t3'),p2=document.getElementById('p2'),p3=document.getElementById('p3'),t4=document.getElementById('t4'),p4=document.getElementById('p4'),zc=document.getElementById('zoomctl');
+  function tab(n){ vp.hidden=n!==1; p2.hidden=n!==2; p3.hidden=n!==3; p4.hidden=n!==4; zc.style.display=n===1?'':'none'; [t1,t2,t3,t4].forEach(function(b,i){b.classList.toggle('on',i+1===n)}); try{history.replaceState(null,'',['#','#kev','#changes','#funnels'][n-1])}catch(e){} }
+  t1.onclick=function(){tab(1)}; t2.onclick=function(){tab(2)}; t3.onclick=function(){tab(3)}; t4.onclick=function(){tab(4)};
+  if(location.hash==='#kev') tab(2); if(location.hash==='#changes') tab(3); if(location.hash==='#funnels') tab(4);
+  var tp=document.getElementById('tp'); tp.onclick=function(){ var off=svg.classList.toggle('noprop'); tp.classList.toggle('on',!off); tp.textContent=off?'Предложения: скрыты':'Предложения: показаны'; };
+  document.querySelectorAll('.filt button').forEach(function(b){ b.onclick=function(){ document.querySelectorAll('.filt button').forEach(function(x){x.classList.toggle('on',x===b)}); var k=b.getAttribute('data-k'); document.querySelectorAll('table.pl tbody tr').forEach(function(tr){ tr.style.display=(!k||tr.classList.contains('k'+k))?'':'none'; }); }; });
+  fitw();
+})();
+</script>
+</body>
+</html>
