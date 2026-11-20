@@ -15,17 +15,17 @@ body{display:flex;flex-direction:column}
 .bar #tp.on{background:#0e9384;border-color:#0e9384}
 .bar .z{min-width:52px;text-align:center;color:#c9d3e0}
 .bar .hint{font-size:12px;color:#c9d3e0;margin-left:8px}
-#vp{flex:1;overflow:auto;cursor:grab}
-#vp.drag{cursor:grabbing}
-#vp svg{display:block;margin:0 auto;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.vp{flex:1;overflow:auto;cursor:grab}
+.vp.drag{cursor:grabbing}
+.vp svg{display:block;margin:0 auto;box-shadow:0 2px 12px rgba(0,0,0,.08)}
 .nt{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.25;overflow:hidden;font-size:13.5px}
 .nt.md{font-size:15px;font-weight:600}
 .nt.sm{font-size:13.5px}
 .nt.xs{font-size:12.5px;text-align:left;justify-content:flex-start}
 .nt.dec{font-size:13px;font-weight:700}
 .nt.xs.c{text-align:center;justify-content:center;font-weight:700;font-size:11px}
-#sch.noprop .prop{display:none}
-@media print{ .bar{display:none} #vp{overflow:visible} }
+.sch.noprop .prop{display:none}
+@media print{ .bar{display:none} .vp{overflow:visible} }
 
 .tabs{display:flex;gap:4px;margin-right:16px}
 .tabs button.on{background:#f08a24;border-color:#f08a24;color:#fff;font-weight:700}
@@ -135,19 +135,538 @@ ul.plain{margin:0;padding-left:22px}ul.plain li{margin:4px 0}
 .fnote{font-size:13.5px;color:#3d4654;margin:12px 0 0}
 .fnote.c{text-align:center;color:#5b6675;margin-bottom:20px}
 
+.vp[hidden]{display:none}
 </style>
 </head>
 <body>
 <div class="bar">
-  <div class="tabs"><button id="t1" class="on">1. Процесс как есть</button><button id="t2">2. Варианты КЭВ</button><button id="t3">3. Что меняем</button><button id="t4">4. Воронки amoCRM</button></div>
+  <div class="tabs"><button id="t1" class="on">1. Процесс как есть (v1)</button><button id="t2">2. Варианты КЭВ</button><button id="t3">3. Что меняем</button><button id="t4">4. Воронки amoCRM</button><button id="t5">5. Процесс после редакции (v2, 20.11)</button></div>
   <span id="zoomctl">
   <button id="zo">−</button><span class="z" id="zl">100%</span><button id="zi">+</button>
   <button id="fitw">По ширине</button><button id="fit">Вся схема</button><button id="one">100%</button><button id="tp" class="on">Предложения: показаны</button>
   <span class="hint">Тяните мышью, чтобы двигать · Ctrl + колесо — масштаб</span></span>
 </div>
-<div id="vp">
-<svg id="sch" xmlns="http://www.w3.org/2000/svg" viewBox="0 -76 1930 8028.4" width="1930" height="8028.4" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif">
-<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1c2430"/></marker><marker id="arO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f08a24"/></marker></defs>
+<div id="vp1" class="vp">
+<svg id="sch1" class="sch" xmlns="http://www.w3.org/2000/svg" viewBox="0 -76 1930 6921.2" width="1930" height="6921.2" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif">
+<defs><marker id="ar_sch1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1c2430"/></marker><marker id="arO_sch1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f08a24"/></marker></defs>
+<rect x="0" y="-76" width="1930" height="6921.2" fill="#ffffff"/>
+<rect x="20" y="-46" width="300" height="70" fill="#f2f2f2"/>
+<path d="M20,6 V24 H40" fill="none" stroke="#2e7fb8" stroke-width="3"/><path d="M300,-46 H320 V-28" fill="none" stroke="#2e7fb8" stroke-width="3"/>
+<text x="38" y="0" font-size="34" font-weight="800" fill="#1d4a6e">SOLUTION</text>
+<line x1="213" y1="-30" x2="213" y2="8" stroke="#2e7fb8" stroke-width="2"/>
+<text x="222" y="0" font-size="34" font-weight="400" fill="#3ba3a0">CRM</text>
+<text x="1890" y="-12" text-anchor="end" font-size="30" font-weight="800" fill="#14243d">МеталлСервис</text>
+<text x="1890" y="14" text-anchor="end" font-size="15" fill="#5b6675">Процесс продаж как есть · v1 от 19.11.2026 · для согласования</text>
+<rect x="1270" y="259.6" width="625" height="576.0" rx="16" fill="#f6f7f9" stroke="#c9d1db" stroke-dasharray="6 6"/>
+<text x="1290" y="821.6" font-size="15" font-weight="700" fill="#5b6675">ЭТАП 1 · ДО ЗАЯВКИ (книга продаж: «два этапа работ»)</text>
+<rect x="40" y="5642.0" width="1855" height="1164.8000000000002" rx="16" fill="#fff8f0" stroke="#f0b27a" stroke-dasharray="6 6"/>
+<text x="60" y="5672.0" font-size="18" font-weight="800" fill="#b5600e">ВОРОНКА 2 · ПОВТОРНЫЕ ПРОДАЖИ (79% выручки)</text>
+<path d="M585.0,330 H528.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,458 H528.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,867.6 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,1162.0 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M815.0,1411.6 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,1552.4 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M782.0,1699.6000000000001 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,1846.8 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M815.0,2774.7999999999997 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,2915.6 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,3056.3999999999996 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M1335.0,3459.6 H1392.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M1355.0,3747.6 H1392.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M795.0,4029.2 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M795.0,4432.4 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M815.0,4560.4 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M1085.0,4854.8 H1122.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M815.0,5130.0 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M815.0,5898.0 H852.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M565.0,5898.0 H523.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M1605.0,650.0 H1662.0" fill="none" stroke="#9aa5b4" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M150,101.0 V126.0 H150 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M150,101.0 V126.0 H420 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M420,101.0 V126.0 H420 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M690,101.0 V126.0 H690 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M690,101.0 V126.0 H960 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M690,101.0 V126.0 H420 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M1000,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M1270,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M1540,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M1810,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
+<path d="M150,229.0 V265.0 H592.8 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M420,229.0 V265.0 H641.4 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,229.0 V265.0 H690.0 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M960,229.0 V265.0 H738.6 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M1500,229.0 V299.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M1500,411.6 V446.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M1500,558.8 V621.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="1510" y="575.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M1592.0,502.8 H1665.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="1600.0" y="493.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M1500,679.0 V734.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M1395.0,765.2 H1230 V330 H795.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,359.0 V402.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,514.0 V550.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,608.6 V664.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,776.4 V811.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="700" y="793.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M782.0,720.4 H912.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="790.0" y="711.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M690,923.6 V958.8000000000001" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,1070.8000000000002 V1106.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="700" y="1087.8000000000002" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M598.0,1014.8000000000001 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="590.0" y="1005.8000000000001" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M690,1218.0 V1261.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,1319.0 V1355.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,1467.6 V1496.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,1608.4 V1643.6000000000001" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,1755.6000000000001 V1790.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="700" y="1772.6000000000001" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M598.0,1699.6000000000001 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="590.0" y="1690.6000000000001" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M690,1902.8 V1943.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,2005.8 V2053.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,2165.2 V2450.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="700" y="2182.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M782.0,2109.2 H1230 V2168.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="790.0" y="2100.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M1230,2280.4 V2309.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M1230,2421.2 V2506.0 H815.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,2562.0 V2609.3999999999996" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,2671.3999999999996 V2718.7999999999997" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,2830.7999999999997 V2859.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,2971.6 V3000.3999999999996" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,3112.3999999999996 V3155.3999999999996" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,3213.3999999999996 V3256.3999999999996" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,3368.3999999999996 V3403.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,3515.6 V3550.7999999999997" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="700" y="3532.6" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M782.0,3459.6 H1125.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="790.0" y="3450.6" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M1230,3490.6 V3544.3999999999996" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M1230,3656.3999999999996 V3691.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M1230,3803.6 V3838.7999999999997" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M1138.0,3894.7999999999997 H815.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="1130.0" y="3885.7999999999997" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да — бюджет пришёл</text>
+<path d="M1322.0,3894.7999999999997 H1395.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="1330.0" y="3885.7999999999997" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M598.0,3606.7999999999997 H420 V3691.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="590.0" y="3597.7999999999997" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M690,3662.7999999999997 V3838.7999999999997" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="700" y="3679.7999999999997" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M420,3803.6 V3894.7999999999997 H565.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,3950.7999999999997 V4000.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,4058.2 V4101.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,4213.2 V4242.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,4354.0 V4403.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,4461.4 V4504.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,4616.4 V4651.599999999999" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M598.0,4707.599999999999 H420 V4798.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="590.0" y="4698.599999999999" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">самовывоз</text>
+<path d="M782.0,4707.599999999999 H960 V4798.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="790.0" y="4698.599999999999" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">доставка</text>
+<path d="M420,4910.8 V4995.599999999999 H585.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M960,4910.8 V4995.599999999999 H795.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,5024.599999999999 V5074.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,5186.0 V5214.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,5326.8 V5355.599999999999" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,5467.599999999999 V5515.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,5577.0 V5728.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="700" y="5594.0" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">робот создаёт новую сделку</text>
+<path d="M690,5786.2 V5842.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,5954.0 V5989.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,6101.2 V6163.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="700" y="6118.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
+<path d="M782.0,6045.2 H1138.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="790.0" y="6036.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
+<path d="M1230,6101.2 V6136.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="1240" y="6118.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">65+</text>
+<path d="M1230,6248.4 V6304.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<text x="1240" y="6265.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">180+</text>
+<path d="M468.0,6192.4 H585.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,6221.4 V6277.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,6389.2 V6445.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,6503.0 V6573.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M690,6631.0 V6699.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch1)" stroke-linejoin="round"/>
+<path d="M585.0,6730.0 H25 V5757.2 H585.0" fill="none" stroke="#f08a24" stroke-width="2.6" marker-end="url(#arO_sch1)" stroke-linejoin="round"/>
+<text x="33" y="6243.6" text-anchor="start" font-size="15" font-weight="600" fill="#f08a24" paint-order="stroke" stroke="#fff" stroke-width="5">кольцо: новая сделка по циклу клиента</text>
+<rect x="55.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="61.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Яндекс Директ → сайт</div></foreignObject>
+<rect x="325.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="331.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Рекомендации</div></foreignObject>
+<rect x="595.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="601.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Постоянные клиенты</div></foreignObject>
+<rect x="865.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="871.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Своя база (не проработана)</div></foreignObject>
+<rect x="1135.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="1141.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Холодные: запрашивали, не купили</div></foreignObject>
+<rect x="1405.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="1411.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Базы застройщиков, новые объекты</div></foreignObject>
+<rect x="1675.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<foreignObject x="1681.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Партнёры</div></foreignObject>
+<rect x="55.0" y="175.0" width="190" height="54" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="61.0" y="178.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Форма «Заказать звонок»</div></foreignObject>
+<rect x="325.0" y="175.0" width="190" height="54" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="331.0" y="178.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Звонок на общий номер</div></foreignObject>
+<rect x="595.0" y="175.0" width="190" height="54" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="601.0" y="178.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Почта (общая + личные)</div></foreignObject>
+<rect x="865.0" y="175.0" width="190" height="54" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="871.0" y="178.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">MAX</div></foreignObject>
+<rect x="1405.0" y="175.0" width="190" height="54" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="1411.0" y="178.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Прозвон базы менеджером</div></foreignObject>
+<ellipse cx="1500" cy="355.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1399.0" y="309.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Звонок: какие объекты и работы ведёте, чем можем помочь?</div></foreignObject>
+<circle cx="1611.0" cy="405.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1611.0" y="411.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<polygon points="1500,446.8 1592.0,502.8 1500,558.8 1408.0,502.8" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="1440" y="468.8" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Есть объект или скоро будет задача?</div></foreignObject>
+<rect x="1665.0" y="467.8" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="1671.0" y="470.8" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Нет — вернуться позже</div></foreignObject>
+<rect x="1395.0" y="621.0" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="1401.0" y="624.0" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Перспективные</div></foreignObject>
+<rect x="1662.0" y="611.0" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="1662.0" y="611.0" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="1672.0" y="614.0" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Этап в amoCRM настраивали — «не совсем удобно»</div></foreignObject>
+<rect x="1395.0" y="734.2" width="210" height="62" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<foreignObject x="1401.0" y="737.2" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Появилась конкретная заявка</div></foreignObject>
+<rect x="585.0" y="301.0" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="304.0" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Новая заявка</div></foreignObject>
+<rect x="312.0" y="291.0" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="312.0" y="291.0" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="322.0" y="294.0" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Очередь звонков 20 сек; почт несколько; заявка с формы не дошла; MAX не работает</div></foreignObject>
+<ellipse cx="690" cy="458" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="412.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Берёт тот менеджер, кто свободен</div></foreignObject>
+<circle cx="801.0" cy="508.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="514.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="312.0" y="419.0" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="312.0" y="419.0" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="322.0" y="422.0" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Реакция ~1 час, а нужно 5–15 мин. Новый или старый — вручную по названию</div></foreignObject>
+<polygon points="690,664.4 782.0,720.4 690,776.4 598.0,720.4" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="686.4" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Постоянный клиент?</div></foreignObject>
+<ellipse cx="690" cy="867.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="821.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Квалификация, 5 мин: целевая заявка? целевой клиент (ИНН, ОКВЭД)?</div></foreignObject>
+<circle cx="801.0" cy="917.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="923.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<path d="M317.0,828.6 H523.0 V896.6 Q471.5,884.6 420.0,898.6 T317.0,900.6 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="832.6" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Книга 1.2: «Целевая номенклатура», «Целевой клиент или нецелевой»</div></foreignObject>
+<polygon points="690,958.8000000000001 782.0,1014.8000000000001 690,1070.8000000000002 598.0,1014.8000000000001" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="980.8000000000001" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Целевые заявка и клиент?</div></foreignObject>
+<rect x="45.0" y="979.8000000000001" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="51.0" y="982.8000000000001" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Закрыто: торгующая, тендер, не наша номенклатура</div></foreignObject>
+<ellipse cx="690" cy="1162.0" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="1116.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Сложность: 1–3 поз. / склад — простая; 5–40 / не склад — сложная. Наружка или внутрянка, ОВ или ВК</div></foreignObject>
+<circle cx="801.0" cy="1212.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="1218.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<path d="M317.0,1123.0 H523.0 V1191.0 Q471.5,1179.0 420.0,1193.0 T317.0,1195.0 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="1127.0" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Склады: «Металлсервис», «Санехкомплект», «Эльф»</div></foreignObject>
+<rect x="585.0" y="550.6" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="553.6" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Взято в работу</div></foreignObject>
+<ellipse cx="690" cy="1411.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="1365.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Письмо «заявку получили»: вопросы + мини-презентация</div></foreignObject>
+<circle cx="801.0" cy="1461.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="1467.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="852.0" y="1372.6" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="1372.6" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="1375.6" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Шаблона письма пока нет</div></foreignObject>
+<ellipse cx="690" cy="1552.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="1506.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Звонок + формула продаж: ОП (объект), ЗС (когда), ФВ (бюджет выделен?)</div></foreignObject>
+<circle cx="801.0" cy="1602.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="1608.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="1602.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="1608.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<path d="M317.0,1513.4 H523.0 V1581.4 Q471.5,1569.4 420.0,1583.4 T317.0,1585.4 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="1517.4" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Книга 2.1: П = ФВ × ОП × Д × ЛПР × ЗС</div></foreignObject>
+<polygon points="690,1643.6000000000001 782.0,1699.6000000000001 690,1755.6000000000001 598.0,1699.6000000000001" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="1665.6000000000001" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Все множители больше нуля?</div></foreignObject>
+<rect x="45.0" y="1664.6000000000001" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="51.0" y="1667.6000000000001" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Ноль в формуле: отложить, в «зависшие» или отказ</div></foreignObject>
+<rect x="852.0" y="1660.6000000000001" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="1660.6000000000001" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="1663.6000000000001" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Формулу заполняют не всегда; вопросов на ЛПР и Д нет</div></foreignObject>
+<ellipse cx="690" cy="1846.8" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="1800.8" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">«Вилка»: бюджетный или беспроблемный? «Гарантию на объекте несёте?»</div></foreignObject>
+<circle cx="801.0" cy="1896.8" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="1902.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="1896.8" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="1902.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<path d="M317.0,1807.8 H523.0 V1875.8 Q471.5,1863.8 420.0,1877.8 T317.0,1879.8 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="1811.8" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Книга 2.2: «Вилка»</div></foreignObject>
+<rect x="585.0" y="1943.8" width="210" height="62" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<foreignObject x="591.0" y="1946.8" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Согласие на беспроблемный вариант</div></foreignObject>
+<polygon points="690,2053.2 782.0,2109.2 690,2165.2 598.0,2109.2" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="2075.2" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Сложная заявка или «хочу сравнить»?</div></foreignObject>
+<ellipse cx="1230" cy="2224.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1129.0" y="2178.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">«Это сложная заявка» + письмо «Как будем работать» (клиенту, инициатору, руководителю)</div></foreignObject>
+<circle cx="1341.0" cy="2274.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1341.0" y="2280.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<ellipse cx="1230" cy="2365.2" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1129.0" y="2319.2" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Созвон через 20–40 мин: очерёдность закупок, контакты технарей</div></foreignObject>
+<circle cx="1341.0" cy="2415.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1341.0" y="2421.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="1307.0" cy="2415.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1307.0" y="2421.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<ellipse cx="690" cy="2506.0" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="2460.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Проработка с техспециалистом: параметры, аналоги, частичная поставка</div></foreignObject>
+<circle cx="801.0" cy="2556.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="2562.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="2556.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="2562.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<rect x="585.0" y="2609.3999999999996" width="210" height="62" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<foreignObject x="591.0" y="2612.3999999999996" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Техспециалист согласовал решение — «победа на 95%»</div></foreignObject>
+<ellipse cx="690" cy="2774.7999999999997" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="2728.7999999999997" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Просчёт: свои склады + кабинеты поставщиков + наценка</div></foreignObject>
+<circle cx="801.0" cy="2824.7999999999997" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="2830.7999999999997" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="2824.7999999999997" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="2830.7999999999997" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">П</text>
+<rect x="852.0" y="2735.7999999999997" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="2735.7999999999997" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="2738.7999999999997" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ От 1 часа до 2 дней на проект. Контакты поставщиков — в Excel и телефонах</div></foreignObject>
+<ellipse cx="690" cy="2915.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="2869.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Предвосхитить возражения до счёта: цена (доллар, ЭТРН), сроки</div></foreignObject>
+<circle cx="801.0" cy="2965.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="2971.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<path d="M317.0,2876.6 H523.0 V2944.6 Q471.5,2932.6 420.0,2946.6 T317.0,2948.6 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="2880.6" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Регламент по предвосхищению возражений</div></foreignObject>
+<ellipse cx="690" cy="3056.3999999999996" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="3010.3999999999996" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Счёт + письмо «беспроблемный vs бюджетный» + протокол договорённостей</div></foreignObject>
+<circle cx="801.0" cy="3106.3999999999996" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="3112.3999999999996" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<path d="M317.0,3017.3999999999996 H523.0 V3085.3999999999996 Q471.5,3073.3999999999996 420.0,3087.3999999999996 T317.0,3089.3999999999996 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="3021.3999999999996" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 Книга: «Упаковка счёта», 3 шаблона писем</div></foreignObject>
+<rect x="585.0" y="3155.3999999999996" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="3158.3999999999996" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Счёт отправлен</div></foreignObject>
+<ellipse cx="690" cy="3312.3999999999996" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="3266.3999999999996" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Контрольный звонок: получили? переслали снабжению? созвон сегодня в …</div></foreignObject>
+<circle cx="801.0" cy="3362.3999999999996" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="3368.3999999999996" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<polygon points="690,3403.6 782.0,3459.6 690,3515.6 598.0,3459.6" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="3425.6" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Согласовали и оплачивают?</div></foreignObject>
+<rect x="1125.0" y="3428.6" width="210" height="62" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<foreignObject x="1131.0" y="3431.6" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Ждут денег от заказчика (20–25 дн.), директора; сравнивают цены</div></foreignObject>
+<rect x="1392.0" y="3420.6" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="1392.0" y="3420.6" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="1402.0" y="3423.6" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Октябрь: снабжение без обоснования купило дешевле</div></foreignObject>
+<ellipse cx="1230" cy="3600.3999999999996" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1129.0" y="3554.3999999999996" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Возражение: выслушать, попросить альтернативу, папка «Возражения»</div></foreignObject>
+<circle cx="1341.0" cy="3650.3999999999996" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1341.0" y="3656.3999999999996" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<ellipse cx="1230" cy="3747.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1129.0" y="3701.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">«Зависшие»: 2 звонка без решения. Прогрев: техданные, фото, машина в чт</div></foreignObject>
+<circle cx="1341.0" cy="3797.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1341.0" y="3803.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="1392.0" y="3708.6" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="1392.0" y="3708.6" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="1402.0" y="3711.6" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Сроков касаний нет</div></foreignObject>
+<polygon points="1230,3838.7999999999997 1322.0,3894.7999999999997 1230,3950.7999999999997 1138.0,3894.7999999999997" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="1170" y="3860.7999999999997" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Решились?</div></foreignObject>
+<rect x="1395.0" y="3859.7999999999997" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="1401.0" y="3862.7999999999997" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Закрыто: купили у других</div></foreignObject>
+<polygon points="690,3550.7999999999997 782.0,3606.7999999999997 690,3662.7999999999997 598.0,3606.7999999999997" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="3572.7999999999997" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Заказная позиция?</div></foreignObject>
+<ellipse cx="420" cy="3747.6" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="319.0" y="3701.6" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Подписать спецификацию: паспорт, тех. характеристики</div></foreignObject>
+<circle cx="531.0" cy="3797.6" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="531.0" y="3803.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<ellipse cx="690" cy="3894.7999999999997" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="3848.7999999999997" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Оплата: 100% · 50/50 · банковская гарантия · редко отсрочка</div></foreignObject>
+<circle cx="801.0" cy="3944.7999999999997" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="3950.7999999999997" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<rect x="585.0" y="4000.2" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="4003.2" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Оплата получена</div></foreignObject>
+<rect x="852.0" y="3990.2" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="3990.2" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="3993.2" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Форма оплаты в amoCRM не фиксируется</div></foreignObject>
+<ellipse cx="690" cy="4157.2" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="4111.2" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Клиенту: «оплата пришла, товар заказан, будет в понедельник»</div></foreignObject>
+<circle cx="801.0" cy="4207.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="4213.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<ellipse cx="690" cy="4298.0" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="4252.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Заказ поставщику → региональная машина в четверг</div></foreignObject>
+<circle cx="801.0" cy="4348.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="4354.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="4348.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="4354.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">П</text>
+<rect x="585.0" y="4403.4" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="4406.4" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Товар поступил (пн)</div></foreignObject>
+<rect x="852.0" y="4393.4" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="4393.4" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="4396.4" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Срыв поставки узнаём по факту — клиент звонит сам</div></foreignObject>
+<ellipse cx="690" cy="4560.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="4514.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Утром написать новому клиенту «всё по плану»</div></foreignObject>
+<circle cx="801.0" cy="4610.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="4616.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="852.0" y="4521.4" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="4521.4" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="4524.4" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Часто забывают</div></foreignObject>
+<polygon points="690,4651.599999999999 782.0,4707.599999999999 690,4763.599999999999 598.0,4707.599999999999" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="4673.599999999999" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Самовывоз или доставка?</div></foreignObject>
+<ellipse cx="420" cy="4854.8" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="319.0" y="4808.8" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Самовывоз: печать или доверенность</div></foreignObject>
+<circle cx="531.0" cy="4904.8" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="531.0" y="4910.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<circle cx="497.0" cy="4904.8" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="497.0" y="4910.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">С</text>
+<ellipse cx="960" cy="4854.8" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="859.0" y="4808.8" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Доставка: контакт принимающего — в день поступления, согласовать время</div></foreignObject>
+<circle cx="1071.0" cy="4904.8" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1071.0" y="4910.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">С</text>
+<rect x="1122.0" y="4815.8" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="1122.0" y="4815.8" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="1132.0" y="4818.8" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Кладовщик = логист, не справляется. Ищут логиста</div></foreignObject>
+<rect x="585.0" y="4966.599999999999" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="4969.599999999999" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Отгружено</div></foreignObject>
+<ellipse cx="690" cy="5130.0" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="5084.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Документы: паспорта, сертификаты с «мокрой» печатью, закрывающие, доплата</div></foreignObject>
+<circle cx="801.0" cy="5180.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="5186.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="852.0" y="5091.0" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="5091.0" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="5094.0" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ Всё вручную: распечатать, подписать, отсканировать</div></foreignObject>
+<ellipse cx="690" cy="5270.8" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="5224.8" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Звонок: всё ли устроило? Есть замечания?</div></foreignObject>
+<circle cx="801.0" cy="5320.8" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="5326.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<ellipse cx="690" cy="5411.599999999999" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="5365.599999999999" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Следующая заявка + рекомендация («соседний подъезд — познакомите?»)</div></foreignObject>
+<circle cx="801.0" cy="5461.599999999999" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="5467.599999999999" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<circle cx="767.0" cy="5461.599999999999" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="767.0" y="5467.599999999999" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<rect x="585.0" y="5515.0" width="210" height="62" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="591.0" y="5518.0" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Успешно реализовано</div></foreignObject>
+<rect x="585.0" y="1261.0" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="1264.0" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Квалификация пройдена</div></foreignObject>
+<circle cx="960" cy="720.4" r="48" fill="#fff3e6" stroke="#f08a24" stroke-width="2.4"/>
+<foreignObject x="914" y="684.4" width="92" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs c" style="color:#8a4a0a">в воронку «Повторные» ↓</div></foreignObject>
+<rect x="585.0" y="5728.2" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="5731.2" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Новая сделка в «Повторных»</div></foreignObject>
+<ellipse cx="690" cy="5898.0" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="5852.0" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Следим за графиком объекта и циклом закупок: «пришлите к среде — в чт машина»</div></foreignObject>
+<circle cx="801.0" cy="5948.0" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="5954.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="852.0" y="5859.0" width="216" height="78" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.2"/>
+<rect x="852.0" y="5859.0" width="6" height="78" rx="3" fill="#c0392b"/>
+<foreignObject x="862.0" y="5862.0" width="200" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#7a1d12">⚠ 43 постоянных клиента ушли; контроля цикла закупок нет</div></foreignObject>
+<path d="M317.0,5859.0 H523.0 V5927.0 Q471.5,5915.0 420.0,5929.0 T317.0,5931.0 Z" fill="#f5f5f5" stroke="#8a8a8a" stroke-width="1.4"/>
+<foreignObject x="323.0" y="5863.0" width="194" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#3d3d3d">📘 База amoCRM: 79% выручки — повторные; у половины клиентов покупка раз в 21 день</div></foreignObject>
+<polygon points="690,5989.2 782.0,6045.2 690,6101.2 598.0,6045.2" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="630" y="6011.2" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Пришла заявка?</div></foreignObject>
+<polygon points="1230,5989.2 1322.0,6045.2 1230,6101.2 1138.0,6045.2" fill="#ffffff" stroke="#14243d" stroke-width="1.8"/>
+<foreignObject x="1170" y="6011.2" width="120" height="68"><div xmlns="http://www.w3.org/1999/xhtml" class="nt dec" style="color:#1c2430">Дней без покупки?</div></foreignObject>
+<ellipse cx="1230" cy="6192.4" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="1129.0" y="6146.4" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">65+ дней: звонок «всё ли в порядке?», новости склада</div></foreignObject>
+<circle cx="1341.0" cy="6242.4" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="1341.0" y="6248.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="1125.0" y="6304.6" width="210" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<foreignObject x="1131.0" y="6307.6" width="198" height="64"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">180+ дней: клиент ушёл → «Реактивация»</div></foreignObject>
+<circle cx="420" cy="6192.4" r="48" fill="#fff3e6" stroke="#f08a24" stroke-width="2.4"/>
+<foreignObject x="374" y="6156.4" width="92" height="72"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs c" style="color:#8a4a0a">из «Постоянный клиент?»</div></foreignObject>
+<rect x="585.0" y="6163.4" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="6166.4" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Заявка получена</div></foreignObject>
+<ellipse cx="690" cy="6333.2" rx="125.0" ry="56.0" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.6"/>
+<foreignObject x="589.0" y="6287.2" width="202" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Счёт сразу, без КЭВа. Новый крупный объект — снова разбор</div></foreignObject>
+<circle cx="801.0" cy="6383.2" r="16" fill="#c2185b" stroke="#fff" stroke-width="2"/><text x="801.0" y="6389.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<rect x="585.0" y="6445.0" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="6448.0" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Оплата получена</div></foreignObject>
+<rect x="585.0" y="6573.0" width="210" height="58" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<foreignObject x="591.0" y="6576.0" width="198" height="52"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Отгружено, документы закрыты</div></foreignObject>
+<rect x="585.0" y="6699.0" width="210" height="62" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<foreignObject x="591.0" y="6702.0" width="198" height="56"><div xmlns="http://www.w3.org/1999/xhtml" class="nt md" style="color:#1c2430">Успешно реализовано</div></foreignObject>
+<g class="prop"><rect x="842.0" y="412.0" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="846.0" cy="416.0" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="846.0" y="422.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">1</text>
+<foreignObject x="862.0" y="416.0" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">🔌 Все каналы в одну ленту amoCRM: форма сайта напрямую, почты, MAX, телефония</div></foreignObject></g>
+<g class="prop"><rect x="842.0" y="533.6" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="846.0" cy="537.6" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="846.0" y="543.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">2</text>
+<foreignObject x="862.0" y="537.6" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Распределение заявок + таймер 15 мин: не взяли — РОПу уведомление, клиенту автоответ. Метка «новый / постоянный» при звонке</div></foreignObject></g>
+<g class="prop"><rect x="842.0" y="821.6" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="846.0" cy="825.6" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="846.0" y="831.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">3</text>
+<foreignObject x="862.0" y="825.6" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ ИНН в карточке → автопроверка компании (ОКВЭД, статус). Поля квалификации обязательны</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="1128.8" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="1132.8" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="1138.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">4</text>
+<foreignObject x="52.0" y="1132.8" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Причина отказа обязательна; технические закрытия — отдельно; строителя с «не нашим» запросом оставить в базе</div></foreignObject></g>
+<g class="prop"><rect x="842.0" y="1116.0" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="846.0" cy="1120.0" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="846.0" y="1126.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">5</text>
+<foreignObject x="862.0" y="1120.0" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">✎ Утвердить границы сложности: заявки на 4 позиции и больше 40 сейчас не описаны</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="1365.6" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="1369.6" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="1375.6" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">6</text>
+<foreignObject x="52.0" y="1369.6" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Письмо «заявку получили» — шаблон в amoCRM, отправка в 1 клик</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="1506.4" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="1510.4" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="1516.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">7</text>
+<foreignObject x="52.0" y="1510.4" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Поля ФВ, ОП, Д, ЛПР, ЗС в сделке — без них нельзя дальше. Добавить в скрипт вопрос про ЛПР</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="2063.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="2067.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="2073.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">8</text>
+<foreignObject x="52.0" y="2067.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">✎ КЭВ: этапы «Разбор назначен» → «Решение согласовано» до счёта (вкладка 2)</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="2524.0" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="2528.0" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="2534.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">9</text>
+<foreignObject x="52.0" y="2528.0" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">✎ Техспециалист — обязательный контакт в сделке. Обоснование уходит и ему, и снабжению</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="2728.8" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="2732.8" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="2738.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">10</text>
+<foreignObject x="1132.0" y="2732.8" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">🔌 Поставщики в amoCRM: карточки, фильтр, писать в MAX и на почту из CRM. Позже — 1С (номенклатура, счета)</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="3074.4" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="3078.4" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="3084.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">11</text>
+<foreignObject x="1132.0" y="3078.4" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Счёт и письмо по шаблону; после отправки — автозадача «контрольный звонок» через 1–2 часа</div></foreignObject></g>
+<g class="prop"><rect x="1652.0" y="3631.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1656.0" cy="3635.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1656.0" y="3641.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">12</text>
+<foreignObject x="1672.0" y="3635.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Касания «зависшим» по расписанию: день 0, 1, 2 (до среды), неделя. Поле «Форма оплаты» → свой сценарий</div></foreignObject></g>
+<g class="prop"><rect x="32.0" y="3560.8" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="36.0" cy="3564.8" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="36.0" y="3570.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">13</text>
+<foreignObject x="52.0" y="3564.8" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Галочка «Заказная позиция»: без подписанной спецификации нельзя на «Оплата получена»</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="4450.4" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="4454.4" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="4460.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">14</text>
+<foreignObject x="1132.0" y="4454.4" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Товар поступил → утром автосообщение «всё по плану». Срыв поставки → задача «предупредить клиента»</div></foreignObject></g>
+<g class="prop"><rect x="1382.0" y="4808.8" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1386.0" cy="4812.8" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1386.0" y="4818.8" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">15</text>
+<foreignObject x="1402.0" y="4812.8" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">✎ Отдельный логист + короткая воронка «Закуп и логистика»</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="5084.0" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="5088.0" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="5094.0" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">16</text>
+<foreignObject x="1132.0" y="5088.0" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Контроль закрывающих и доплаты по форме оплаты; шаблоны паспортов и сертификатов</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="5295.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="5299.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="5305.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">17</text>
+<foreignObject x="1132.0" y="5299.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Через 1–2 дня после отгрузки — автозадача «отзыв + рекомендация»; поле «Кто порекомендовал»</div></foreignObject></g>
+<g class="prop"><rect x="1112.0" y="5711.2" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1116.0" cy="5715.2" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1116.0" y="5721.2" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">18</text>
+<foreignObject x="1132.0" y="5715.2" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ Робот создаёт сделку в «Повторных»; дата касания = отгрузка + обычный интервал клиента</div></foreignObject></g>
+<g class="prop"><rect x="1382.0" y="6146.4" width="236" height="92" rx="10" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/>
+<circle cx="1386.0" cy="6150.4" r="17" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1386.0" y="6156.4" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">19</text>
+<foreignObject x="1402.0" y="6150.4" width="210" height="84"><div xmlns="http://www.w3.org/1999/xhtml" class="nt xs" style="color:#0b4f47">⚙ RFM-статус пересчитывается каждую ночь: 65+ дн. — задача «звонок», 180+ — в «Реактивацию»</div></foreignObject></g>
+<g class="prop"><circle cx="591.0" cy="305.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="310.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">1</text></g>
+<g class="prop"><circle cx="599.0" cy="414.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="419.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">2</text></g>
+<g class="prop"><circle cx="591.0" cy="554.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="559.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">2</text></g>
+<g class="prop"><circle cx="599.0" cy="823.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="828.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">3</text></g>
+<g class="prop"><circle cx="644" cy="980.8000000000001" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="985.8000000000001" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">4</text></g>
+<g class="prop"><circle cx="51.0" cy="983.8000000000001" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="51.0" y="988.8000000000001" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">4</text></g>
+<g class="prop"><circle cx="599.0" cy="1118.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="1123.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">5</text></g>
+<g class="prop"><circle cx="591.0" cy="1265.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="1270.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">5</text></g>
+<g class="prop"><circle cx="599.0" cy="1367.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="1372.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">6</text></g>
+<g class="prop"><circle cx="599.0" cy="1508.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="1513.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">7</text></g>
+<g class="prop"><circle cx="644" cy="1665.6000000000001" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="1670.6000000000001" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">7</text></g>
+<g class="prop"><circle cx="591.0" cy="1947.8" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="1952.8" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">8</text></g>
+<g class="prop"><circle cx="644" cy="2075.2" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="2080.2" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">8</text></g>
+<g class="prop"><circle cx="599.0" cy="2462.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="2467.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">9</text></g>
+<g class="prop"><circle cx="591.0" cy="2613.3999999999996" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="2618.3999999999996" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">9</text></g>
+<g class="prop"><circle cx="599.0" cy="2730.7999999999997" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="2735.7999999999997" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">10</text></g>
+<g class="prop"><circle cx="599.0" cy="3012.3999999999996" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="3017.3999999999996" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">11</text></g>
+<g class="prop"><circle cx="599.0" cy="3268.3999999999996" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="3273.3999999999996" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">11</text></g>
+<g class="prop"><circle cx="644" cy="3425.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="3430.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">12</text></g>
+<g class="prop"><circle cx="1139.0" cy="3703.6" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1139.0" y="3708.6" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">12</text></g>
+<g class="prop"><circle cx="644" cy="3572.7999999999997" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="644" y="3577.7999999999997" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">13</text></g>
+<g class="prop"><circle cx="591.0" cy="4407.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="4412.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">14</text></g>
+<g class="prop"><circle cx="599.0" cy="4516.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="4521.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">14</text></g>
+<g class="prop"><circle cx="869.0" cy="4810.8" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="869.0" y="4815.8" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">15</text></g>
+<g class="prop"><circle cx="599.0" cy="5086.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="5091.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">16</text></g>
+<g class="prop"><circle cx="599.0" cy="5226.8" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="5231.8" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">17</text></g>
+<g class="prop"><circle cx="599.0" cy="5367.599999999999" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="599.0" y="5372.599999999999" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">17</text></g>
+<g class="prop"><circle cx="591.0" cy="5519.0" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="5524.0" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">18</text></g>
+<g class="prop"><circle cx="591.0" cy="5732.2" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="591.0" y="5737.2" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">18</text></g>
+<g class="prop"><circle cx="1184" cy="6011.2" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1184" y="6016.2" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">19</text></g>
+<g class="prop"><circle cx="1139.0" cy="6148.4" r="15" fill="#0e9384" stroke="#fff" stroke-width="2"/><text x="1139.0" y="6153.4" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">19</text></g>
+<rect x="1220" y="920.0" width="680" height="1022" rx="14" fill="#fff" stroke="#dfe4ea"/>
+<text x="1240" y="954.0" font-size="20" font-weight="800" fill="#14243d">Обозначения</text>
+<circle cx="1280" cy="990.0" r="18" fill="#c2185b"/><text x="1280" y="997.0" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Georgia,serif">М</text>
+<text x="1340" y="996.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Менеджер</text>
+<circle cx="1280" cy="1046.0" r="18" fill="#c2185b"/><text x="1280" y="1053.0" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Georgia,serif">К</text>
+<text x="1340" y="1052.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Клиент (техспециалист, снабжение, директор)</text>
+<circle cx="1280" cy="1102.0" r="18" fill="#c2185b"/><text x="1280" y="1109.0" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Georgia,serif">П</text>
+<text x="1340" y="1108.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Поставщик</text>
+<circle cx="1280" cy="1158.0" r="18" fill="#c2185b"/><text x="1280" y="1165.0" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" font-family="Georgia,serif">С</text>
+<text x="1340" y="1164.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Склад / логист</text>
+<rect x="1240" y="1196.0" width="80" height="36" rx="6" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
+<text x="1340" y="1220.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Источники клиентов</text>
+<rect x="1240" y="1252.0" width="80" height="36" rx="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<text x="1340" y="1276.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Каналы заявок</text>
+<ellipse cx="1280" cy="1326.0" rx="44" ry="18" fill="#dae8fc" stroke="#6c8ebf"/>
+<text x="1340" y="1332.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Задачи, которые нужно выполнить</text>
+<rect x="1240" y="1364.0" width="80" height="36" rx="6" fill="#fff2cc" stroke="#d6b656" stroke-width="1.4"/>
+<text x="1340" y="1388.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Этапы сделки</text>
+<rect x="1240" y="1420.0" width="80" height="36" rx="6" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.4"/>
+<text x="1340" y="1444.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">События и варианты событий</text>
+<polygon points="1280,1474.0 1312,1494.0 1280,1514.0 1248,1494.0" fill="#fff" stroke="#14243d" stroke-width="1.6"/>
+<text x="1340" y="1500.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Развилка (да / нет)</text>
+<rect x="1240" y="1532.0" width="80" height="36" rx="6" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+<text x="1340" y="1556.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Этап, закрывающий сделку</text>
+<rect x="1240" y="1588.0" width="80" height="36" rx="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.4"/>
+<text x="1340" y="1612.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Этап, успешно закрывающий сделку</text>
+<path d="M1240,1644.0 H1320 V1674.0 Q1300,1664.0 1280,1676.0 T1240,1676.0 Z" fill="#f5f5f5" stroke="#8a8a8a"/>
+<text x="1340" y="1668.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Документ из книги продаж</text>
+<rect x="1240" y="1700.0" width="80" height="36" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1.4"/>
+<text x="1340" y="1724.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Где теряем клиентов или время</text>
+<rect x="1240" y="1756.0" width="80" height="36" rx="8" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/><text x="1280" y="1781.0" text-anchor="middle" font-size="18">⚙</text>
+<text x="1340" y="1780.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Предложение: автоматизация в amoCRM</text>
+<rect x="1240" y="1812.0" width="80" height="36" rx="8" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/><text x="1280" y="1837.0" text-anchor="middle" font-size="18">✎</text>
+<text x="1340" y="1836.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Предложение: изменение процесса</text>
+<rect x="1240" y="1868.0" width="80" height="36" rx="8" fill="#e6f6f4" stroke="#0e9384" stroke-width="1.8" stroke-dasharray="7 4"/><text x="1280" y="1893.0" text-anchor="middle" font-size="18">🔌</text>
+<text x="1340" y="1892.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Предложение: интеграция</text>
+<line x1="1240" y1="1942.0" x2="1320" y2="1942.0" stroke="#f08a24" stroke-width="2.6" marker-end="url(#arO_sch1)"/><text x="1340" y="1948.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Кольцо повторных продаж</text>
+</svg>
+</div>
+<div id="vp5" class="vp" hidden>
+<svg id="sch5" class="sch" xmlns="http://www.w3.org/2000/svg" viewBox="0 -76 1930 8028.4" width="1930" height="8028.4" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif">
+<defs><marker id="ar_sch5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1c2430"/></marker><marker id="arO_sch5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f08a24"/></marker></defs>
 <rect x="0" y="-76" width="1930" height="8028.4" fill="#ffffff"/>
 <rect x="20" y="-46" width="300" height="70" fill="#f2f2f2"/>
 <path d="M20,6 V24 H40" fill="none" stroke="#2e7fb8" stroke-width="3"/><path d="M300,-46 H320 V-28" fill="none" stroke="#2e7fb8" stroke-width="3"/>
@@ -192,114 +711,114 @@ ul.plain{margin:0;padding-left:22px}ul.plain li{margin:4px 0}
 <path d="M1270,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
 <path d="M1540,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
 <path d="M1810,101.0 V150.0 H1500 V175.0" fill="none" stroke="#8fa8c8" stroke-width="2.2"/>
-<path d="M150,229.0 V265.0 H592.8 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M420,229.0 V265.0 H641.4 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,229.0 V265.0 H690.0 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M960,229.0 V265.0 H738.6 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M1500,229.0 V299.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M1500,411.6 V446.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M1500,558.8 V621.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M150,229.0 V265.0 H592.8 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M420,229.0 V265.0 H641.4 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,229.0 V265.0 H690.0 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M960,229.0 V265.0 H738.6 V301.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M1500,229.0 V299.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M1500,411.6 V446.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M1500,558.8 V621.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="1510" y="575.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
-<path d="M1592.0,502.8 H1665.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1592.0,502.8 H1665.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="1600.0" y="493.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
-<path d="M1500,679.0 V734.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M1395.0,765.2 H1230 V330 H795.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,359.0 V402.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,514.0 V550.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,608.6 V664.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,776.4 V811.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1500,679.0 V734.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M1395.0,765.2 H1230 V330 H795.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,359.0 V402.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,514.0 V550.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,608.6 V664.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,776.4 V811.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="700" y="793.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
-<path d="M782.0,720.4 H912.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M782.0,720.4 H912.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="790.0" y="711.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
-<path d="M690,923.6 V958.8000000000001" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,1070.8000000000002 V1106.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,923.6 V958.8000000000001" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,1070.8000000000002 V1106.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="700" y="1087.8000000000002" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
-<path d="M598.0,1014.8000000000001 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M598.0,1014.8000000000001 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="590.0" y="1005.8000000000001" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
-<path d="M690,1218.0 V1261.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,1319.0 V1355.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,1467.6 V1496.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,1608.4 V1643.6000000000001" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,1755.6000000000001 V1790.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,1218.0 V1261.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,1319.0 V1355.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,1467.6 V1496.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,1608.4 V1643.6000000000001" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,1755.6000000000001 V1790.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="700" y="1772.6000000000001" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
-<path d="M598.0,1699.6000000000001 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M598.0,1699.6000000000001 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="590.0" y="1690.6000000000001" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
-<path d="M690,1902.8 V1943.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,2005.8 V2053.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,2165.2 V2450.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,1902.8 V1943.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,2005.8 V2053.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,2165.2 V2450.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="700" y="2182.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
-<path d="M782.0,2109.2 H1230 V2168.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M782.0,2109.2 H1230 V2168.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="790.0" y="2100.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
-<path d="M1230,2280.4 V2309.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M1230,2421.2 V2506.0 H815.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,2562.0 V2609.3999999999996" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,2671.3999999999996 V2718.7999999999997" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,2830.7999999999997 V2859.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,2971.6 V3000.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,3112.4 V3155.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,3213.4 V3256.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,3368.4 V3417.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,3475.8 V3525.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,3637.2 V3686.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,3744.6 V3806.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,3918.8 V3981.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1230,2280.4 V2309.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M1230,2421.2 V2506.0 H815.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,2562.0 V2609.3999999999996" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,2671.3999999999996 V2718.7999999999997" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,2830.7999999999997 V2859.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,2971.6 V3000.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,3112.4 V3155.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,3213.4 V3256.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,3368.4 V3417.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,3475.8 V3525.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,3637.2 V3686.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,3744.6 V3806.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,3918.8 V3981.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="700" y="3935.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
-<path d="M782.0,3862.8 H1125.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M782.0,3862.8 H1125.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="790.0" y="3853.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
-<path d="M1230,3893.8 V3947.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M1230,4059.6 V4094.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M1230,4206.8 V4242.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M1138.0,4298.0 H690 V4382.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1230,3893.8 V3947.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M1230,4059.6 V4094.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M1230,4206.8 V4242.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M1138.0,4298.0 H690 V4382.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="1130.0" y="4289.0" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да — согласовали</text>
-<path d="M1322.0,4298.0 H1395.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1322.0,4298.0 H1395.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="1330.0" y="4289.0" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
-<path d="M690,4039.0 V4101.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M598.0,4157.2 H420 V4242.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,4039.0 V4101.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M598.0,4157.2 H420 V4242.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="590.0" y="4148.2" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
-<path d="M690,4213.2 V4382.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,4213.2 V4382.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="700" y="4230.2" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
-<path d="M420,4354.0 V4438.8 H565.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,4494.8 V4544.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,4602.2 V4645.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,4757.2 V4806.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,4864.6 V4920.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,5032.4 V5088.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,5146.2 V5220.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,5282.6 V5342.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M598.0,5398.8 H420 V5490.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M420,4354.0 V4438.8 H565.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,4494.8 V4544.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,4602.2 V4645.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,4757.2 V4806.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,4864.6 V4920.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,5032.4 V5088.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,5146.2 V5220.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,5282.6 V5342.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M598.0,5398.8 H420 V5490.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="590.0" y="5389.8" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">самовывоз</text>
-<path d="M782.0,5398.8 H960 V5490.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M782.0,5398.8 H960 V5490.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="790.0" y="5389.8" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">доставка</text>
-<path d="M420,5602.0 V5686.8 H585.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M960,5602.0 V5686.8 H795.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,5715.8 V5765.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,5877.2 V5931.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,5993.0 V6137.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M420,5602.0 V5686.8 H585.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M960,5602.0 V5686.8 H795.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,5715.8 V5765.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,5877.2 V5931.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,5993.0 V6137.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="700" y="6010.0" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">робот создаёт сделку в «Повторных»</text>
-<path d="M690,6195.8 V6251.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,6363.6 V6392.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,6504.4 V6539.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,6651.6 V6713.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,6195.8 V6251.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,6363.6 V6392.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,6504.4 V6539.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,6651.6 V6713.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="700" y="6668.6" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
-<path d="M598.0,6595.6 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M598.0,6595.6 H255.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="590.0" y="6586.6" text-anchor="end" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
-<path d="M690,6771.8 V6821.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,6933.2 V6968.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,7080.4 V7142.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M690,6771.8 V6821.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,6933.2 V6968.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,7080.4 V7142.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="700" y="7097.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">да</text>
-<path d="M782.0,7024.4 H1138.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M782.0,7024.4 H1138.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="790.0" y="7015.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">нет</text>
-<path d="M1230,7080.4 V7115.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1230,7080.4 V7115.6" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="1240" y="7097.4" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">65+</text>
-<path d="M1230,7227.6 V7283.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
+<path d="M1230,7227.6 V7283.8" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
 <text x="1240" y="7244.6" text-anchor="start" font-size="15" font-weight="600" fill="#1c2430" paint-order="stroke" stroke="#fff" stroke-width="5">180+</text>
-<path d="M468.0,7171.6 H585.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,7200.6 V7256.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,7368.4 V7424.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,7482.2 V7552.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,7610.2 V7680.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M690,7738.2 V7806.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar)" stroke-linejoin="round"/>
-<path d="M585.0,7837.2 H25 V6166.8 H585.0" fill="none" stroke="#f08a24" stroke-width="2.6" marker-end="url(#arO)" stroke-linejoin="round"/>
+<path d="M468.0,7171.6 H585.0" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,7200.6 V7256.4" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,7368.4 V7424.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,7482.2 V7552.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,7610.2 V7680.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M690,7738.2 V7806.2" fill="none" stroke="#1c2430" stroke-width="1.6" marker-end="url(#ar_sch5)" stroke-linejoin="round"/>
+<path d="M585.0,7837.2 H25 V6166.8 H585.0" fill="none" stroke="#f08a24" stroke-width="2.6" marker-end="url(#arO_sch5)" stroke-linejoin="round"/>
 <text x="33" y="7002.0" text-anchor="start" font-size="15" font-weight="600" fill="#f08a24" paint-order="stroke" stroke="#fff" stroke-width="5">кольцо: новая сделка по циклу клиента</text>
 <rect x="55.0" y="47.0" width="190" height="54" rx="8" fill="#dbe8fb" stroke="#6c8ebf" stroke-width="1.4"/>
 <foreignObject x="61.0" y="50.0" width="178" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="nt sm" style="color:#1c2430">Яндекс Директ → сайт</div></foreignObject>
@@ -743,7 +1262,7 @@ ul.plain{margin:0;padding-left:22px}ul.plain li{margin:4px 0}
 <text x="1340" y="1892.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Предложение: интеграция</text>
 <rect x="1241" y="1932.0" width="78" height="20" rx="10" fill="#f08a24"/><text x="1280" y="1946.0" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">изм. 20.11</text>
 <text x="1340" y="1948.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Изменено по встрече 20.11</text>
-<line x1="1240" y1="1998.0" x2="1320" y2="1998.0" stroke="#f08a24" stroke-width="2.6" marker-end="url(#arO)"/><text x="1340" y="2004.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Кольцо повторных продаж</text>
+<line x1="1240" y1="1998.0" x2="1320" y2="1998.0" stroke="#f08a24" stroke-width="2.6" marker-end="url(#arO_sch5)"/><text x="1340" y="2004.0" font-size="17" font-weight="600" fill="#1c2430" font-family="Georgia,serif">Кольцо повторных продаж</text>
 </svg>
 </div>
 <div id="p2" class="p2" hidden>
@@ -942,7 +1461,7 @@ ul.plain{margin:0;padding-left:22px}ul.plain li{margin:4px 0}
 </div></div>
 <div id="p4" class="p2" hidden><div class="p2w">
 <div class="p2head"><div class="logo"><span class="l1">SOLUTION</span><span class="l2">CRM</span></div>
-<div class="p2t"><h2>Воронки amoCRM</h2><div class="sub">Как процесс со схемы ложится на воронки: этапы, что заполняет менеджер и что делает amoCRM сама. Отдельно для показа клиенту — файл МеталлСервис_воронки_amoCRM_v2.html.</div></div></div>
+<div class="p2t"><h2>Воронки amoCRM</h2><div class="sub">Как процесс со схемы ложится на воронки: этапы, что заполняет менеджер и что делает amoCRM сама.</div></div></div>
 <div class="fnw">
 <section class="fblk"><h3>Как воронки связаны между собой</h3>
 <div class="map">
@@ -985,32 +1504,45 @@ ul.plain{margin:0;padding-left:22px}ul.plain li{margin:4px 0}
 </div></div>
 <script>
 (function(){
-  var W=1930,H=8028.4,svg=document.getElementById('sch'),vp=document.getElementById('vp'),zl=document.getElementById('zl'),s=1;
+  var N=5, HS=["#", "#kev", "#changes", "#funnels", "#v2"], cur=1, s={}, zl=document.getElementById('zl'), zc=document.getElementById('zoomctl');
+  function vp(){return document.getElementById(cur===1?'vp1':'vp'+cur)}
+  function sv(){return vp().querySelector('svg')}
+  function dims(g){var b=g.viewBox.baseVal;return [b.width,b.height]}
   function set(ns,cx,cy){
-    ns=Math.max(0.1,Math.min(2.5,ns));
-    var r=vp.getBoundingClientRect(); cx=cx==null?r.width/2:cx; cy=cy==null?r.height/2:cy;
-    var px=(vp.scrollLeft+cx)/s, py=(vp.scrollTop+cy)/s;
-    s=ns; svg.setAttribute('width',W*s); svg.setAttribute('height',H*s);
-    vp.scrollLeft=px*s-cx; vp.scrollTop=py*s-cy; zl.textContent=Math.round(s*100)+'%';
+    var v=vp(),g=sv(),d=dims(g),o=s[cur]||1; ns=Math.max(0.1,Math.min(2.5,ns));
+    var r=v.getBoundingClientRect(); cx=cx==null?r.width/2:cx; cy=cy==null?r.height/2:cy;
+    var px=(v.scrollLeft+cx)/o, py=(v.scrollTop+cy)/o;
+    s[cur]=ns; g.setAttribute('width',d[0]*ns); g.setAttribute('height',d[1]*ns);
+    v.scrollLeft=px*ns-cx; v.scrollTop=py*ns-cy; zl.textContent=Math.round(ns*100)+'%';
   }
-  function fitw(){var r=vp.getBoundingClientRect(); set(Math.min(1.2,(r.width-20)/W)); vp.scrollTop=0;}
-  document.getElementById('zi').onclick=function(){set(s*1.25)};
-  document.getElementById('zo').onclick=function(){set(s/1.25)};
+  function fitw(){var r=vp().getBoundingClientRect(); set(Math.min(1.2,(r.width-20)/dims(sv())[0])); vp().scrollTop=0;}
+  document.getElementById('zi').onclick=function(){set((s[cur]||1)*1.25)};
+  document.getElementById('zo').onclick=function(){set((s[cur]||1)/1.25)};
   document.getElementById('fitw').onclick=fitw;
-  document.getElementById('fit').onclick=function(){var r=vp.getBoundingClientRect(); set(Math.min(r.width/W,r.height/H)); vp.scrollTop=0;};
+  document.getElementById('fit').onclick=function(){var r=vp().getBoundingClientRect(),d=dims(sv()); set(Math.min(r.width/d[0],r.height/d[1])); vp().scrollTop=0;};
   document.getElementById('one').onclick=function(){set(1)};
-  vp.addEventListener('wheel',function(e){if(e.ctrlKey||e.metaKey){e.preventDefault();var r=vp.getBoundingClientRect();set(s*(e.deltaY<0?1.12:1/1.12),e.clientX-r.left,e.clientY-r.top);}},{passive:false});
   var d=null;
-  vp.addEventListener('mousedown',function(e){d={x:e.clientX,y:e.clientY,l:vp.scrollLeft,t:vp.scrollTop};vp.classList.add('drag');});
-  window.addEventListener('mousemove',function(e){if(!d)return;vp.scrollLeft=d.l-(e.clientX-d.x);vp.scrollTop=d.t-(e.clientY-d.y);});
-  window.addEventListener('mouseup',function(){d=null;vp.classList.remove('drag');});
-  var t1=document.getElementById('t1'),t2=document.getElementById('t2'),t3=document.getElementById('t3'),p2=document.getElementById('p2'),p3=document.getElementById('p3'),t4=document.getElementById('t4'),p4=document.getElementById('p4'),zc=document.getElementById('zoomctl');
-  function tab(n){ vp.hidden=n!==1; p2.hidden=n!==2; p3.hidden=n!==3; p4.hidden=n!==4; zc.style.display=n===1?'':'none'; [t1,t2,t3,t4].forEach(function(b,i){b.classList.toggle('on',i+1===n)}); try{history.replaceState(null,'',['#','#kev','#changes','#funnels'][n-1])}catch(e){} }
-  t1.onclick=function(){tab(1)}; t2.onclick=function(){tab(2)}; t3.onclick=function(){tab(3)}; t4.onclick=function(){tab(4)};
-  if(location.hash==='#kev') tab(2); if(location.hash==='#changes') tab(3); if(location.hash==='#funnels') tab(4);
-  var tp=document.getElementById('tp'); tp.onclick=function(){ var off=svg.classList.toggle('noprop'); tp.classList.toggle('on',!off); tp.textContent=off?'Предложения: скрыты':'Предложения: показаны'; };
+  document.querySelectorAll('.vp').forEach(function(v){
+    v.addEventListener('wheel',function(e){if(e.ctrlKey||e.metaKey){e.preventDefault();var r=v.getBoundingClientRect();set((s[cur]||1)*(e.deltaY<0?1.12:1/1.12),e.clientX-r.left,e.clientY-r.top);}},{passive:false});
+    v.addEventListener('mousedown',function(e){d={v:v,x:e.clientX,y:e.clientY,l:v.scrollLeft,t:v.scrollTop};v.classList.add('drag');});
+  });
+  window.addEventListener('mousemove',function(e){if(!d)return;d.v.scrollLeft=d.l-(e.clientX-d.x);d.v.scrollTop=d.t-(e.clientY-d.y);});
+  window.addEventListener('mouseup',function(){if(d)d.v.classList.remove('drag');d=null;});
+  function isSch(n){return n===1||n>4}
+  function tab(n){
+    cur=n;
+    document.querySelectorAll('.vp').forEach(function(v){v.hidden=v.id!==(n===1?'vp1':'vp'+n)});
+    ['p2','p3','p4'].forEach(function(id,i){document.getElementById(id).hidden=n!==i+2});
+    zc.style.display=isSch(n)?'':'none';
+    for(var i=1;i<=N;i++)document.getElementById('t'+i).classList.toggle('on',i===n);
+    try{history.replaceState(null,'',HS[n-1])}catch(e){}
+    if(isSch(n)){ if(!s[n]) fitw(); else zl.textContent=Math.round(s[n]*100)+'%'; var off=sv().classList.contains('noprop'); tp.classList.toggle('on',!off); tp.textContent=off?'Предложения: скрыты':'Предложения: показаны'; }
+  }
+  var tp=document.getElementById('tp');
+  tp.onclick=function(){ var off=sv().classList.toggle('noprop'); tp.classList.toggle('on',!off); tp.textContent=off?'Предложения: скрыты':'Предложения: показаны'; };
+  for(var i=1;i<=N;i++)(function(k){document.getElementById('t'+k).onclick=function(){tab(k)}})(i);
   document.querySelectorAll('.filt button').forEach(function(b){ b.onclick=function(){ document.querySelectorAll('.filt button').forEach(function(x){x.classList.toggle('on',x===b)}); var k=b.getAttribute('data-k'); document.querySelectorAll('table.pl tbody tr').forEach(function(tr){ tr.style.display=(!k||tr.classList.contains('k'+k))?'':'none'; }); }; });
-  fitw();
+  var h=HS.indexOf(location.hash); tab(h>0?h+1:1);
 })();
 </script>
 </body>
