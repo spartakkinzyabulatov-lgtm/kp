@@ -89,12 +89,16 @@
       var grid=el('div','ms-cards');
       defs.filter(function(f){return f.group===g[0]}).forEach(function(f){
         var card=el('article','ms-card');card.dataset.field=f.id;card.dataset.review=state.reviews[f.id]||'pending';
-        card.appendChild(el('div','ms-entity',f.entity));card.appendChild(el('h4',null,f.title));
-        var lab=el('label','ms-value-label','Пример значения');lab.htmlFor='ms-value-'+f.id;card.appendChild(lab);card.appendChild(buildControl(f));
-        card.appendChild(el('p','ms-why',f.why));
-        if(f.note)card.appendChild(el('p','ms-field-note',f.note));
-        var det=el('details');det.appendChild(el('summary',null,'Когда заполняем и откуда требование'));det.appendChild(el('p',null,'Когда: '+f.when));det.appendChild(el('p',null,'Основание: '+f.source));card.appendChild(det);
-        var review=el('div','ms-review');var rlab=el('label',null,'Решение по составу карточки');rlab.htmlFor='ms-review-'+f.id;review.appendChild(rlab);
+        var proposal=el('div','ms-proposal');
+        proposal.appendChild(el('div','ms-section-label','1 · Предлагаемое поле'));
+        proposal.appendChild(el('div','ms-entity',f.entity));proposal.appendChild(el('h4',null,f.title));
+        var lab=el('label','ms-value-label','Значение поля — попробуйте варианты');lab.htmlFor='ms-value-'+f.id;proposal.appendChild(lab);proposal.appendChild(buildControl(f));
+        proposal.appendChild(el('p','ms-why',f.why));
+        if(f.note)proposal.appendChild(el('p','ms-field-note',f.note));
+        var det=el('details');det.appendChild(el('summary',null,'Когда заполняем и откуда требование'));det.appendChild(el('p',null,'Когда: '+f.when));det.appendChild(el('p',null,'Основание: '+f.source));proposal.appendChild(det);
+        card.appendChild(proposal);
+        var review=el('div','ms-review');review.appendChild(el('div','ms-section-label','2 · Согласование поля'));
+        var rlab=el('label',null,'Нужно ли добавлять это поле в CRM?');rlab.htmlFor='ms-review-'+f.id;review.appendChild(rlab);
         var sel=el('select');sel.id=rlab.htmlFor;sel.setAttribute('aria-label',f.title+' — решение');
         [['pending','Пока не выбрано'],['accept','Согласовать поле'],['discuss','Нужно обсудить'],['omit','Не добавлять поле']].forEach(function(o){var opt=el('option',null,o[1]);opt.value=o[0];sel.appendChild(opt)});
         sel.value=state.reviews[f.id]||'pending';sel.addEventListener('change',function(){state.reviews[f.id]=sel.value;card.dataset.review=sel.value;save()});review.appendChild(sel);reviewControls[f.id]=sel;
