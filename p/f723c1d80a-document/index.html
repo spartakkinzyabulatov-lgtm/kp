@@ -5,19 +5,19 @@
 <title>Документ · SolutionCRM</title><link rel="icon" href="data:,">
 <style>
 *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:#eef4f5;color:#183443;font:16px/1.5 system-ui,-apple-system,sans-serif}button,input,a{font:inherit}button,a{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #62b8ae;outline-offset:3px}.card{max-width:440px;margin:14vh auto;padding:34px;background:#fff;border:1px solid #d8e4e7;border-radius:20px;box-shadow:0 14px 50px #132d3d08}.brand{font-weight:700;color:#007f79;font-size:14px}h1{font-size:29px;line-height:1.2;margin:18px 0 12px}p{color:#526875}label{display:block;margin:24px 0 8px;font-weight:600}input{width:100%;border:1px solid #9bafb9;border-radius:10px;padding:13px;background:#fff;color:#183443}button{border:0;border-radius:10px;background:#007f79;color:#fff;padding:13px 20px}.card button{width:100%;margin-top:16px;font-weight:600}button:disabled{opacity:.6;cursor:wait}.error{min-height:24px;color:#ab2337;font-size:14px;margin:12px 0 0}.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:14px 20px;background:#fff;border-bottom:1px solid #d8e4e7}.bar strong{margin-right:auto}.bar a{color:#007f79;text-decoration:none;border:1px solid #b7d4d1;border-radius:8px;padding:8px 12px}.bar button{background:#eef4f5;color:#183443;padding:9px 12px}#document{display:block;overflow:auto;border:0;width:100%;height:calc(100dvh - 80px);min-height:480px;background:#e8edef}.mobile{display:none;padding:12px 20px;margin:0;background:white;font-size:13px}@media(max-width:600px){.card{margin:9vh 16px;padding:26px}.bar{padding:12px;gap:8px}.bar strong{width:100%;font-size:14px}.bar a,.bar button{font-size:13px}.mobile{display:block}#document{height:calc(100dvh - 155px);min-height:420px}}
-#document img{display:block;width:100%;max-width:1000px;height:auto;margin:0 auto 16px;background:white;box-shadow:0 2px 12px #132d3d18}#document{padding:16px}</style>
+#document{padding:0;height:calc(100dvh - 73px);min-height:0;background:#f3f5f2}iframe{border:0}@media(max-width:600px){#document{height:calc(100dvh - 108px)}.bar strong{width:auto;margin-right:auto}.bar{min-height:106px}.bar a,.bar button{padding:8px 10px}}#document{height:auto;min-height:0;overflow:visible;padding:0}.bar{position:sticky;top:0;z-index:10}body{background:#f3f5f2}@media(max-width:600px){#document{height:auto}.bar{min-height:64px}.bar strong{font-size:12px}}@media print{.bar,#login{display:none!important}#document{height:auto;overflow:visible}body{background:white}}</style>
 <main id="login" class="card"><div class="brand">SolutionCRM</div><h1>Документ для вас</h1><p>Введите пароль, чтобы открыть материал.</p><form id="form"><label for="password">Пароль</label><input id="password" type="password" autocomplete="current-password" required autofocus><button id="submit" type="submit">Открыть документ</button><p id="error" class="error" role="alert" aria-live="polite"></p></form></main>
-<main id="reader" hidden><header class="bar"><strong>SolutionCRM · Документ</strong><a id="open" target="_blank" rel="noopener">Открыть PDF</a><a id="download" download="SolutionCRM_document.pdf">Скачать PDF</a><button id="lock" type="button">Закрыть</button></header><p class="mobile">Если просмотр не появился, нажмите «Открыть PDF».</p><div id="document" aria-label="Страницы документа"></div></main>
+<main id="reader" hidden><header class="bar"><strong>SolutionCRM</strong><button id="print" type="button">Сохранить PDF</button><button id="lock" type="button">Закрыть</button></header><div id="document" aria-label="Заметка Спартака"></div></main>
 <script>
 'use strict';
 const $=id=>document.getElementById(id),bytes=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
-let documentUrl=null;let urls=[];
+const reportRoot=$('document').attachShadow({mode:'open'});
 function lock(){
- $('document').replaceChildren();urls.forEach(URL.revokeObjectURL);urls=[];$('open').removeAttribute('href');$('download').removeAttribute('href');
- if(documentUrl)URL.revokeObjectURL(documentUrl);documentUrl=null;
+ reportRoot.replaceChildren();
  $('reader').hidden=true;$('login').hidden=false;$('password').value='';$('password').focus();
 }
 $('lock').addEventListener('click',lock);
+$('print').addEventListener('click',()=>window.print());
 $('form').addEventListener('submit',async event=>{
  event.preventDefault();$('submit').disabled=true;$('error').textContent='';
  try{
@@ -27,8 +27,10 @@ $('form').addEventListener('submit',async event=>{
   const material=await crypto.subtle.importKey('raw',new TextEncoder().encode($('password').value),'PBKDF2',false,['deriveKey']);$('password').value='';
   const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:bytes(envelope.salt),iterations:envelope.iterations,hash:'SHA-256'},material,{name:'AES-GCM',length:256},false,['decrypt']);
   const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:bytes(envelope.iv)},key,bytes(envelope.ciphertext));
-  const bundle=JSON.parse(new TextDecoder().decode(plain));documentUrl=URL.createObjectURL(new Blob([bytes(bundle.pdf)],{type:'application/pdf'}));for(const [i,page] of bundle.pages.entries()){const url=URL.createObjectURL(new Blob([bytes(page)],{type:'image/png'}));urls.push(url);const img=document.createElement('img');img.alt='Страница '+(i+1);img.src=url;$('document').append(img);}
-  $('open').href=documentUrl;$('download').href=documentUrl;
+  const bundle=JSON.parse(new TextDecoder().decode(plain));
+  const parsed=new DOMParser().parseFromString(bundle.html,'text/html');
+  const style=parsed.querySelector('style').textContent.replaceAll(':root',':host').replace(/\bbody\b/g,'.reportbody');
+  reportRoot.innerHTML='<style>'+style+'</style><div class="reportbody">'+parsed.body.innerHTML+'</div>';
   $('login').hidden=true;$('reader').hidden=false;
  }catch(error){$('password').value='';$('error').textContent=error.name==='OperationError'?'Неверный пароль. Попробуйте ещё раз.':error.message==='unsupported'?'Откройте ссылку в современном браузере по HTTPS.':'Не удалось открыть документ. Проверьте соединение и попробуйте ещё раз.';$('password').focus();}
  finally{$('submit').disabled=false;}
