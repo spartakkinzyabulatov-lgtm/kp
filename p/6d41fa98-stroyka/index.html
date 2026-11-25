@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Материалы по строительству · SolutionCRM</title>
+<link rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f8;color:#172239;font:16px/1.5 system-ui,-apple-system,sans-serif}button,input{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:12px 18px;background:#244fd6;color:white}button:disabled{opacity:.6;cursor:wait}button:focus-visible,input:focus-visible{outline:3px solid #8da8ff;outline-offset:3px}[hidden]{display:none!important}.login{max-width:440px;margin:12vh auto;padding:30px;background:white;border-radius:18px;border:1px solid #dbe2eb}.brand{font-size:13px;color:#66738b}h1{font-size:26px;line-height:1.2;margin:10px 0 14px}p{color:#66738b}label{display:block;margin:20px 0 6px}input{width:100%;padding:12px;border:1px solid #aebbd0;border-radius:10px}.login button{width:100%;margin-top:16px}.error{min-height:24px;color:#b12234;font-size:14px;margin:12px 0 0}.toolbar{padding:12px 18px;background:white;border-bottom:1px solid #dbe2eb;display:flex;flex-wrap:wrap;align-items:center;gap:8px}.toolbar strong{margin-right:auto}.tabs{display:flex;gap:8px;flex-wrap:wrap}.tabs button{background:#edf1fa;color:#244078;padding:9px 13px}.tabs button[aria-pressed=true]{background:#244fd6;color:white}.lock{background:#e9edf2;color:#33415b;padding:9px 13px}iframe{display:block;width:100%;height:calc(100dvh - 90px);min-height:500px;border:0;background:white}@media(max-width:600px){.login{margin:8vh 16px;padding:24px}.toolbar{padding:10px 12px}.toolbar strong{font-size:14px}.tabs{order:3;width:100%}.tabs button{font-size:13px;padding:8px 10px}iframe{height:calc(100dvh - 130px)}}
+</style>
+<main id="login" class="login">
+<div class="brand">SolutionCRM</div>
+<h1>Материалы по строительству</h1>
+<p>Финмодель, аналитика базы и исследование рынка. Введите пароль для просмотра.</p>
+<form id="form">
+<label for="password">Пароль</label>
+<input id="password" type="password" autocomplete="current-password" required autofocus>
+<button id="submit" type="submit">Открыть документы</button>
+<p id="error" class="error" role="alert" aria-live="polite"></p>
+</form>
+</main>
+<main id="reader" hidden>
+<header class="toolbar"><strong>SolutionCRM · Стройка</strong><button id="lock" class="lock" type="button">Закрыть доступ</button><nav id="tabs" class="tabs" aria-label="Документы"></nav></header>
+<iframe id="document" title="Документ" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox allow-downloads"></iframe>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+let urls=[];
+const bytes=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+function lock(){
+ $('document').src='about:blank';urls.forEach(URL.revokeObjectURL);urls=[];
+ $('tabs').replaceChildren();$('reader').hidden=true;$('login').hidden=false;$('password').value='';$('password').focus();
+}
+$('lock').addEventListener('click',lock);
+$('form').addEventListener('submit',async event=>{
+ event.preventDefault();$('submit').disabled=true;$('error').textContent='';
+ try{
+  if(!crypto.subtle)throw new Error('unsupported');
+  const response=await fetch('payload.json',{cache:'no-store'});
+  if(!response.ok)throw new Error('network');
+  const envelope=await response.json();
+  const material=await crypto.subtle.importKey('raw',new TextEncoder().encode($('password').value),'PBKDF2',false,['deriveKey']);
+  $('password').value='';
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:bytes(envelope.salt),iterations:envelope.iterations,hash:'SHA-256'},material,{name:'AES-GCM',length:256},false,['decrypt']);
+  const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:bytes(envelope.iv)},key,bytes(envelope.ciphertext));
+  const documents=JSON.parse(new TextDecoder().decode(plain));
+  for(const [i,doc] of documents.entries()){
+   urls.push(URL.createObjectURL(new Blob([doc.html],{type:'text/html;charset=utf-8'})));
+   const button=document.createElement('button');button.type='button';button.textContent=doc.label;button.setAttribute('aria-pressed','false');
+   button.addEventListener('click',()=>{
+    for(const tab of $('tabs').children)tab.setAttribute('aria-pressed','false');
+    button.setAttribute('aria-pressed','true');$('document').title=doc.label;$('document').src=urls[i];
+   });$('tabs').append(button);
+  }
+  $('login').hidden=true;$('reader').hidden=false;$('tabs').firstElementChild.click();
+ }catch(error){
+  $('password').value='';
+  $('error').textContent=error.name==='OperationError'?'Неверный пароль. Попробуйте ещё раз.':error.message==='unsupported'?'Откройте ссылку в современном браузере по HTTPS.':'Не удалось открыть документы. Проверьте соединение и попробуйте ещё раз.';
+  $('password').focus();
+ }finally{$('submit').disabled=false;}
+});
+</script>
+</html>
