@@ -170,7 +170,7 @@
     defs.forEach(function(f){state.values[f.id]=defaultValue(f);state.reviews[f.id]='pending';state.comments[f.id]=''});
     rootEl.replaceChildren();document.querySelector('.ms-group-nav').replaceChildren();render();save();
   });
-  fetch('fields-data.json?v=20261125-1').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(data){
+  fetch('fields-data.json?v=20261125-kb1').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(data){
     defs=data;defs.forEach(function(f){state.values[f.id]=defaultValue(f);state.reviews[f.id]='pending';state.comments[f.id]=''});restore();render();
     root.MSFields.ready=true;document.dispatchEvent(new Event('ms-fields-ready'));
     document.getElementById('ms-export').disabled=false;document.getElementById('ms-reset').disabled=false;
