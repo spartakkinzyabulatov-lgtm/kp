@@ -29,3 +29,6 @@
 .ms-color-key .ms-key-field{background:#edf5ff;border-color:#b7d0ed;color:#245789}
 .ms-color-key .ms-key-review{background:#fff4df;border-color:#e0c088;color:#87550c}
 @media(max-width:750px){.ms-card{padding:10px;gap:10px}.ms-proposal,.ms-review{padding:14px}.ms-card h4{font-size:18px}.ms-color-key{gap:7px}.ms-color-key span{width:100%}}
+.ms-shared-box{border:2px solid #9abbdc;background:#eef5ff}.ms-shared-box h3{color:#244e7a}.ms-shared-box [role='status']{font-weight:650;color:#244e7a}.ms-shared-box button[hidden]{display:none}.ms-card :disabled{opacity:.65}
+
+.ms-fill-badge{display:inline-block;font-size:11px;font-weight:700;line-height:1.5;padding:5px 8px;margin:0 0 10px;border-radius:6px;background:#fff;border:1px solid #abc4df;color:#31567e}.ms-fill-auto{background:#e2f3ee;border-color:#93c8b9;color:#205e4e}.ms-fill-mixed{background:#e9e9fa;border-color:#bbb9df;color:#53497c}.ms-card .ms-meeting-label{font-size:11px;color:#38628b;margin:8px 0}.ms-extra-detail{background:#f9fbff;border:1px solid #d4dfef;border-radius:7px;padding:9px;margin-top:12px!important}.ms-extra-detail input,.ms-extra-detail .ms-multi{margin-top:10px}.ms-extra-detail p{font-size:12px!important}
