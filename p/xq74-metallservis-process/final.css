@@ -72,3 +72,28 @@
 .fx-box.muted li{color:#5b6675}
 @media (max-width:900px){.amo-cardwrap,.fx-two{grid-template-columns:1fr}.amo-detail{position:static}}
 @media (max-width:520px){.fx h2{font-size:21px}.amo-f{grid-template-columns:1fr;gap:2px}.amo-col{flex-basis:180px;min-width:180px}}
+
+/* v2: метки, автополя, раскладка, таблица обязательности */
+.bd{display:inline-block;font-size:10.5px;font-weight:700;border-radius:3px;padding:1px 6px;margin-right:5px;white-space:nowrap;vertical-align:1px}
+.bd-auto{background:#2e7fb8;color:#fff}
+.bd-req{background:#fde3e3;color:#c0392b;border:1px solid #f5b5b5}
+.amo-f.is-auto{background:#eaf4fc;border-left:3px solid #2e7fb8;padding-left:15px}
+.amo-f.is-auto:hover,.amo-f.is-auto.sel{background:#dcecf9}
+.amo-f.is-req .l{color:#5b2b2b}
+.fx-legend .bd{margin-right:4px}
+.fx-layout{background:#fff;border-radius:14px;padding:14px 22px;margin-bottom:18px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.fx-layout .q{font-weight:700;color:#14243d}
+.fx-layout .seg{display:inline-flex;border:1px solid #c9d3e0;border-radius:8px;overflow:hidden}
+.fx-layout .seg button{border:0;background:#fff;padding:7px 14px;font:inherit;font-size:13.5px;cursor:pointer;color:#3d4654}
+.fx-layout .seg button+button{border-left:1px solid #c9d3e0}
+.fx-layout .seg button.on{background:#3e6a9c;color:#fff;font-weight:700}
+.fx-layout p{flex:1 1 100%;margin:0}
+.fx-layout p[hidden],.fx-l[hidden]{display:none}
+.amo-detail .row.req{background:#fdf1f1;border-radius:6px;padding:6px 10px;color:#7a2a2a}
+.fx-reqbox{margin-top:18px}
+.fx-reqbox h4{margin:8px 0 6px;color:#14243d;font-size:15px}
+.fx-rt{width:100%;border-collapse:collapse;font-size:13.5px}
+.fx-rt td{border-top:1px solid #edf0f2;padding:8px 6px;vertical-align:top}
+.fx-rt td.st{width:42%;font-weight:700;color:#313942}
+.fx-rt .rq{display:inline-block;background:#fde3e3;color:#7a2a2a;border-radius:10px;padding:1px 9px;margin:2px 4px 2px 0;font-size:12.5px}
+@media (max-width:520px){.fx-rt td.st{width:auto;display:block;border-top:1px solid #edf0f2;padding-bottom:0}.fx-rt td{display:block;border-top:0}.fx-layout .seg{width:100%}.fx-layout .seg button{flex:1;padding:7px 8px}}

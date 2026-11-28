@@ -2,11 +2,19 @@
   'use strict';
   var lead=document.getElementById('fx-lead'), det=document.getElementById('fx-detail');
   if(!lead||!det)return;
-  lead.querySelectorAll('.amo-tabs button').forEach(function(b){
+  var tl=lead.querySelector('.fx-l[data-ln="tabs"]');
+  if(tl)tl.querySelectorAll('.amo-tabs button').forEach(function(b){
     b.addEventListener('click',function(){
       var p=b.getAttribute('data-p');
-      lead.querySelectorAll('.amo-tabs button').forEach(function(x){x.classList.toggle('on',x===b)});
-      lead.querySelectorAll('.amo-pane').forEach(function(x){x.hidden=x.getAttribute('data-p')!==p});
+      tl.querySelectorAll('.amo-tabs button').forEach(function(x){x.classList.toggle('on',x===b)});
+      tl.querySelectorAll('.amo-pane').forEach(function(x){x.hidden=x.getAttribute('data-p')!==p});
+    });
+  });
+  document.querySelectorAll('#p9 .fx-layout .seg button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var l=b.getAttribute('data-l');
+      document.querySelectorAll('#p9 .fx-layout .seg button').forEach(function(x){x.classList.toggle('on',x===b)});
+      document.querySelectorAll('#p9 [data-ln]').forEach(function(x){x.hidden=x.getAttribute('data-ln')!==l});
     });
   });
   function el(t,c,txt){var e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e}
@@ -19,6 +27,7 @@
     det.appendChild(el('h3',null,d.n));
     det.appendChild(row('Тип поля',d.t));
     det.appendChild(row('Кто заполняет',d.m));
+    if(d.r){var rr=row('Обязательно',d.r);rr.className='row req';det.appendChild(rr);}
     if(d.s)det.appendChild(row('Когда',d.s));
     if(d.v&&d.v.length){
       var r=row('Значения',null),c=el('div','amo-chips');
